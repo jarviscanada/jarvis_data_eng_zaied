@@ -1,3 +1,4 @@
+--added the unique constraints afterwards
 CREATE TABLE IF NOT EXISTS PUBLIC.host_info 
 	(
 	id SERIAL PRIMARY KEY NOT NULL,
