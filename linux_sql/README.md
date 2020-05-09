@@ -29,7 +29,7 @@ This solution is a Cluster monitoring agent. It will monitor the hardware specif
 --> In command-line write:  bash scripts/host_usage.sh psql_host psql_port db_name psql_user psql_password (Sample Usage: bash scripts/host_usage.sh localhost 5432 host_agent postgres password
 The hardware usage data needs to be extracted continuously. To achieve that crontab needs to be set up.
 * How to setup crontab?\
---> In command-line write: crontab -e
+--> In command-line write: crontab -e\
 --> then add this to the opened file: * * * * * bash /home/centos/dev/jrvs/bootcamp/linux_sql/host_agent/scripts/host_usage.sh localhost 5432 host_agent postgres password > /tmp/host_usage.log
 
 ## Improvements
