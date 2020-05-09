@@ -10,11 +10,11 @@ This solution is a Cluster monitoring agent. It will monitor the hardware specif
 ## Architecture
 * A PostgreSQL instance is used to store all data
 * /scripts directory has all the neccessary scripts about hardware
- * host_info.sh: script to extract necessary hardware specifications and insert into the host_info table instance
- * host_usage.sh: script to extract real-time hardware usage info n insert into the host_usage table in the instance
- * psql_docker.sh: sctipt to create, start, stop the instance in a docker container
+	* host_info.sh: script to extract necessary hardware specifications and insert into the host_info table instance
+	* host_usage.sh: script to extract real-time hardware usage info n insert into the host_usage table in the instance
+	* psql_docker.sh: sctipt to create, start, stop the instance in a docker container
 * /sql directory has all the neccessary script to create database table and perform query
- * ddl.sql: creates both host_info and host_usage table in the database
- * queries.sql: consists some sample queries to perform on the stored data
+	* ddl.sql: creates both host_info and host_usage table in the database
+	* queries.sql: consists some sample queries to perform on the stored data
  
 
