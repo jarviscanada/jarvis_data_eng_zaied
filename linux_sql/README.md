@@ -9,12 +9,31 @@ This solution is a Cluster monitoring agent. It will monitor the hardware specif
 ![cluster image](./assets/cluster_image.png)  
 ## Architecture
 * A PostgreSQL instance is used to store all data
-* /scripts directory has all the neccessary scripts about hardware
+* ./scripts directory has all the neccessary scripts about hardware
 	* host_info.sh: script to extract necessary hardware specifications and insert into the host_info table instance
 	* host_usage.sh: script to extract real-time hardware usage info n insert into the host_usage table in the instance
 	* psql_docker.sh: sctipt to create, start, stop the instance in a docker container
-* /sql directory has all the neccessary script to create database table and perform query
+* ./sql directory has all the neccessary script to create database table and perform query
 	* ddl.sql: creates both host_info and host_usage table in the database
 	* queries.sql: consists some sample queries to perform on the stored data
- 
+## Usage
+* How to create the PostgreSQL instance?
+--> In command-line write:  bash scripts/psql_docker create db_username db_password (Sample Usage: bash scripts/psql_docker create postgres password) 
+* How to start the PostgreSQL instance?
+--> In command-line write:  bash scripts/psql_docker start
+* How to create tables?
+--> In command-line write:  psql -h localhost -U postgres -W -d host_agent -f sql/ddl.sql
+* How to insert hardware specifications into corresponding table?
+--> In command-line write:  bash scripts/host_info.sh psql_host psql_port db_name psql_user psql_password (Sample Usage: bash scripts/host_info.sh localhost 5432 host_agent postgres password
+* How to insert hardware usages into corresponding table?
+--> In command-line write:  bash scripts/host_usage.sh psql_host psql_port db_name psql_user psql_password (Sample Usage: bash scripts/host_usage.sh localhost 5432 host_agent postgres password
+The hardware usage data needs to be extracted continuously. To achieve that crontab needs to be set up.
+* How to setup crontab?
+--> In command-line write: crontab -e
+--> then add this to the opened file: * * * * * bash /home/centos/dev/jrvs/bootcamp/linux_sql/host_agent/scripts/host_usage.sh localhost 5432 host_agent postgres password > /tmp/host_usage.log
+
+## Improvements
+* Handle Hardware Update
+* Filter out unnecessary Hardware Usage data
+* Make the queries more performance efficient  
 
