@@ -7,6 +7,7 @@ db_name=$3
 psql_user=$4
 psql_password=$5
 
+export PGPASWORD=$psql_password
 ##usage data
 lscpu_out=`lscpu`
 hostname=$(hostname -f)
@@ -18,5 +19,10 @@ cpu_kernel=$(echo "$(vmstat -t)" | awk '{print $14}' | tail -1 | xargs)
 disk_io=$(echo "$(vmstat -d)" |  awk '{print $10}' | tail -1 | xargs)
 disk_available=$(echo "$(df -BM)" | awk '{print $4}' | head -6 | tail -1 | egrep -o '[0-9]+' | xargs)
 
+insert_statement="INSERT INTO host_usage (timestamp, host_id, memory_free, cpu_idle, cpu_kernel,disk_io, disk_available) VALUES ('$timestamp', '$host_id', '$memory_free', '$cpu_idle', '$cpu_kernel','$disk_io', '$disk_available');"
+
 ##executing insert command
-psql -h $psql_host -U $psql_user -d $db_name -c "INSERT INTO host_usage (timestamp, host_id, memory_free, cpu_idle, cpu_kernel,disk_io, disk_available) VALUES ('$timestamp', '$host_id', '$memory_free', '$cpu_idle', '$cpu_kernel','$disk_io', '$disk_available')";
+psql -h $psql_host -U $psql_user -d $db_name -c "$insert_statement"
+
+exit 0
+
