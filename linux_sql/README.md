@@ -17,8 +17,17 @@ This solution is a Cluster monitoring agent. It will monitor the hardware specif
 	* ddl.sql: creates both host_info and host_usage table in the database
 	* queries.sql: consists some sample queries to perform on the stored data
 ## Usage
-* How to create the PostgreSQL instance?\
---> In command-line write:  bash scripts/psql_docker create db_username db_password (Sample Usage: bash scripts/psql_docker create postgres password) 
+* Provisioning PostgreSQL instance
+Create and start the docker container which will run a PostgreSQL instance
+```
+./linux_sql/psql_docker.sh create db_username db_password
+./linux_sql/psql_docker.sh start
+```
+* Create `host_agent` database  using psql CLI 
+```
+psql -h localhost -U postgres -W
+postgres=# CREATE DATABASE host_agent;
+``` 
 * How to start the PostgreSQL instance?\
 --> In command-line write:  bash scripts/psql_docker start
 * How to create tables?\
