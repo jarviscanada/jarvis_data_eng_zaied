@@ -20,8 +20,8 @@ This solution is a Cluster monitoring agent. It will monitor the hardware specif
 		2. Find out the average memory used (over a 5 minute interval) for each of the nodes
 		3. Find faulty nodes (those nodes which were unsuccessfull to update hardware usage data for three times) 
 ## Database Tables
-Database `host_agent` has two tables.
-* `host_info` table:
+Database `host_agent` has two tables. All the fields in both of the tables have NOT NULL constraint. 
+* `host_info` table:\
 This table will have the necessary hardware specifications data. The current node machine will extract the following data and insert these datas in this table.
 	* `id`: Unique id representing each node. Assigned and auto-incremented by psql instance. This field is the primary key in this table.
 	* `hostname`: The hostname or machine name of the current node. This field has Unique constraint.
@@ -32,9 +32,8 @@ This table will have the necessary hardware specifications data. The current nod
 	* `L2_cache`: L2_cache size; measured in KB
 	* `total_mem`: Memory size in the current node; measured in KB
 	* `timestamp`: UTC timestamp when data was being collected
-* `host_usage` table:
-This table will have the continuous hardware usage data. The current node machine will extract the following data and insert these da
-tas in this table each and every minute.       
+* `host_usage` table:\
+This table will have the continuous hardware usage data. The current node machine will extract the following data and insert these datas in this table each and every minute.       
 	* `timestamp`: UTC timestamp when data was being collected
 	* `host_id`: The id of the current node. This field is a foreign key for this table and corresponds to the `id` of the `host_info` table. 	
 	* `cpu_number`: The number of cores in the cpu
@@ -45,33 +44,33 @@ tas in this table each and every minute.
 	* `disk_io`: The number of current disk I/O operations in progress
 	* `disk_available`: The available disk space; measured in MB
 ## Usage
-* Provisioning PostgreSQL instance
+* Provisioning PostgreSQL instance\
 Create and start the docker container which will run a PostgreSQL instance
 ```
 ./linux_sql/psql_docker.sh create db_username db_password
 ./linux_sql/psql_docker.sh start
 ```
-* Create `host_agent` database  using psql CLI 
+* Create `host_agent` database  using psql CLI\ 
 ```
 psql -h localhost -U postgres -W
 postgres=# CREATE DATABASE host_agent;
 ```
-* Create the `host_info` and `host_usage` tables
+* Create the `host_info` and `host_usage` tables\
 Executing the `ddl.sql` will create both the tables in the created database.
 ```
 psql -h localhost -U postgres -W -d host_agent -f ./linux_sql/sql/ddl.sql
 ```
-* Insert `host_info` data from current node to `host_info` table
+* Insert `host_info` data from current node to `host_info` table\
 Executing the `host_info` script will insert the hardware specifications data in the `host_info` table. We are assuming that the hardware specifications will be same during the time. So, this escripts needs to be run only once.
 ```
 ./linux_sql/scripts/host_usage.sh psql_host psql_port db_name psql_user psql_password
 ```
-* Insert `host_usage` data from current node to `host_usage` table
+* Insert `host_usage` data from current node to `host_usage` table\
 Executing the `host_usage` script will insert the hardware usage data in the `host_usage` table. This data needs to be updated continuously. Automating the execution of this script for each and every minute will be disussed in the next instruction.
 ```
 ./linux_sql/scripts/host_usage.sh psql_host psql_port db_name psql_user psql_password
 ```
-* Set up crontab to extract `host_usage` data continuously in the background
+* Set up crontab to extract `host_usage` data continuously in the background\
 A crontab job needs to be set up which will extract `host_usage` data continuously and update the `host_usage` table.
 ```
 crontab -e
