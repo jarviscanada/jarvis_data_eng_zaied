@@ -61,7 +61,7 @@ Executing the `ddl.sql` will create both the tables in the created database.
 psql -h localhost -U postgres -W -d host_agent -f ./linux_sql/sql/ddl.sql
 ```
 * Insert `host_info` data from current node to `host_info` table\
-Executing the `host_info` script will insert the hardware specifications data in the `host_info` table. We are assuming that the hardware specifications will be same during the time. So, this escripts needs to be run only once.
+executing the `host_info` script will insert the hardware specifications data in the `host_info` table. We are assuming that the hardware specifications will be same during the time. So, this scripts needs to be run only once.
 ```
 ./linux_sql/scripts/host_usage.sh psql_host psql_port db_name psql_user psql_password
 ```
@@ -81,7 +81,7 @@ crontab -e
 crontab -l
 ```
 ## Improvements
-* In this solution, it was assumed that hardware specifications will not change. Making the solution adaptable to the hardware change will ne be needed. Adding a  helper script to detect hardware changes will help us making the solution more adaptable.
+* In this solution, it was assumed that hardware specifications will not change. Making the solution adaptable to the hardware change will be needed. Adding a  helper script to detect hardware changes will help us making the solution more adaptable.
 * Adding a script to find the faulty nodes and send alerts to the faulty nodes will help troubleshoot the node's performance.
 * The `host_usage` data can grow very big. Adding a script to automatically filter out unnecessary old usage data can reduce storage usage.:w
 
