@@ -16,6 +16,31 @@ This solution is a Cluster monitoring agent. It will monitor the hardware specif
 * ./sql directory has all the neccessary script to create database table and perform query
 	* ddl.sql: creates both host_info and host_usage table in the database
 	* queries.sql: consists some sample queries to perform on the stored data
+## Database Tables
+Database `host_agent` has two tables.
+* `host_info` table:
+This table will have the necessary hardware specifications data. The current node machine will extract the following data and insert these datas in this table.
+	* `id`: Unique id representing each node. Assigned and auto-incremented by psql instance. This field is the primary key in this table.
+	* `hostname`: The hostname or machine name of the current node. This field has Unique constraint.
+	* `cpu_number`: The number of cores in the cpu
+	* `cpu_architecture`: The architecture of the cpu
+	* `cpu_model`: The model name of the cpu
+	* `cpu_mhz`: The speed of the cpu
+	* `L2_cache`: L2_cache size; measured in KB
+	* `total_mem`: Memory size in the current node; measured in KB
+	* `timestamp`: UTC timestamp when data was being collected
+* `host_usage` table:
+This table will have the continuous hardware usage data. The current node machine will extract the following data and insert these da
+tas in this table each and every minute.
+        * `timestamp`: UTC timestamp when data was being collected
+        * `host_id`: The id of the current node. This field is a foreign key for this table and corresponds to the `id` of the `host_info` table. 
+        * `cpu_number`: The number of cores in the cpu
+        * `memory_free`: The size of the idle memory; measured in MB
+        * `cpu_idle`: The time percentage of the cpu being idle
+        * `cpu_kernel`: The time percentage of the cpu running kernel codes/system codes
+        * `L2_cache`: L2_cache size; measured in kB
+        * `disk_io`: The number of current disk I/O operations in progress
+        * `disk_available`: The available disk space; measured in MB
 ## Usage
 * Provisioning PostgreSQL instance
 Create and start the docker container which will run a PostgreSQL instance
@@ -27,20 +52,32 @@ Create and start the docker container which will run a PostgreSQL instance
 ```
 psql -h localhost -U postgres -W
 postgres=# CREATE DATABASE host_agent;
-``` 
-* How to start the PostgreSQL instance?\
---> In command-line write:  bash scripts/psql_docker start
-* How to create tables?\
---> In command-line write:  psql -h localhost -U postgres -W -d host_agent -f sql/ddl.sql
-* How to insert hardware specifications into corresponding table?\
---> In command-line write:  bash scripts/host_info.sh psql_host psql_port db_name psql_user psql_password (Sample Usage: bash scripts/host_info.sh localhost 5432 host_agent postgres password
-* How to insert hardware usages into corresponding table?\
---> In command-line write:  bash scripts/host_usage.sh psql_host psql_port db_name psql_user psql_password (Sample Usage: bash scripts/host_usage.sh localhost 5432 host_agent postgres password
-The hardware usage data needs to be extracted continuously. To achieve that crontab needs to be set up.
-* How to setup crontab?\
---> In command-line write: crontab -e\
---> then add this to the opened file: * * * * * bash /home/centos/dev/jrvs/bootcamp/linux_sql/host_agent/scripts/host_usage.sh localhost 5432 host_agent postgres password > /tmp/host_usage.log
+```
+* Create the `host_info` and `host_usage` tables
+Executing the `ddl.sql` will create both the tables in the created database.
+```
+psql -h localhost -U postgres -W -d host_agent -f ./linux_sql/sql/ddl.sql
+```
+* Insert `host_info` data from current node to `host_info` table
+Executing the `host_info` script will insert the hardware specifications data in the `host_info` table. We are assuming that the hardware specifications will be same during the time. So, this escripts needs to be run only once.
+```
+./linux_sql/scripts/host_usage.sh psql_host psql_port db_name psql_user psql_password
+```
+* Insert `host_usage` data from current node to `host_usage` table
+Executing the `host_usage` script will insert the hardware usage data in the `host_usage` table. This data needs to be updated continuously. Automating the execution of this script for each and every minute will be disussed in the next instruction.
+```
+./linux_sql/scripts/host_usage.sh psql_host psql_port db_name psql_user psql_password
+```
+* Set up crontab to extract `host_usage` data continuously in the background
+A crontab job needs to be set up which will extract `host_usage` data continuously and update the `host_usage` table.
+```
+crontab -e
+#add this to the opened file
+* * * * * bash /home/centos/dev/jrvs/bootcamp/linux_sql/host_agent/scripts/host_usage.sh localhost 5432 host_agent postgres password > /tmp/host_usage.log
 
+#verify the job
+crontab -l
+```
 ## Improvements
 * Handle Hardware Update
 * Filter out unnecessary Hardware Usage data
