@@ -50,7 +50,7 @@ Create and start the docker container which will run a PostgreSQL instance
 ./linux_sql/psql_docker.sh create db_username db_password
 ./linux_sql/psql_docker.sh start
 ```
-* Create `host_agent` database  using psql CLI\ 
+* Create `host_agent` database  using psql CLI
 ```
 psql -h localhost -U postgres -W
 postgres=# CREATE DATABASE host_agent;
