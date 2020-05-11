@@ -16,6 +16,9 @@ This solution is a Cluster monitoring agent. It will monitor the hardware specif
 * ./sql directory has all the neccessary script to create database table and perform query
 	* ddl.sql: creates both host_info and host_usage table in the database
 	* queries.sql: consists some sample queries to perform on the stored data
+		1. Grouping nodes by `cpu_number` and `total_mem`
+		2. Find out the average memory used (over a 5 minute interval) for each of the nodes
+		3. Find faulty nodes (those nodes which were unsuccessfull to update hardware usage data for three times) 
 ## Database Tables
 Database `host_agent` has two tables.
 * `host_info` table:
@@ -31,16 +34,16 @@ This table will have the necessary hardware specifications data. The current nod
 	* `timestamp`: UTC timestamp when data was being collected
 * `host_usage` table:
 This table will have the continuous hardware usage data. The current node machine will extract the following data and insert these da
-tas in this table each and every minute.
-        * `timestamp`: UTC timestamp when data was being collected
-        * `host_id`: The id of the current node. This field is a foreign key for this table and corresponds to the `id` of the `host_info` table. 
-        * `cpu_number`: The number of cores in the cpu
-        * `memory_free`: The size of the idle memory; measured in MB
-        * `cpu_idle`: The time percentage of the cpu being idle
-        * `cpu_kernel`: The time percentage of the cpu running kernel codes/system codes
-        * `L2_cache`: L2_cache size; measured in kB
-        * `disk_io`: The number of current disk I/O operations in progress
-        * `disk_available`: The available disk space; measured in MB
+tas in this table each and every minute.       
+	* `timestamp`: UTC timestamp when data was being collected
+	* `host_id`: The id of the current node. This field is a foreign key for this table and corresponds to the `id` of the `host_info` table. 	
+	* `cpu_number`: The number of cores in the cpu
+	* `memory_free`: The size of the idle memory; measured in MB
+	* `cpu_idle`: The time percentage of the cpu being idle
+	* `cpu_kernel`: The time percentage of the cpu running kernel codes/system codes
+	* `L2_cache`: L2_cache size; measured in kB
+	* `disk_io`: The number of current disk I/O operations in progress
+	* `disk_available`: The available disk space; measured in MB
 ## Usage
 * Provisioning PostgreSQL instance
 Create and start the docker container which will run a PostgreSQL instance
