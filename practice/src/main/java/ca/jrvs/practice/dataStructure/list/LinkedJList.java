@@ -8,12 +8,12 @@ public class LinkedJList<E> implements JList<E>  {
   transient int size = 0;
 
   /** Node declaration **/
-  private static class Node<E> {
-    E item;
-    Node<E> next;
-    Node<E> prev;
+  public static class Node<E> {
+    public E item;
+    public Node<E> next;
+    public Node<E> prev;
 
-    Node(Node<E> prev, E element, Node<E> next) {
+    public Node(Node<E> prev, E element, Node<E> next) {
       this.item = element;
       this.next = next;
       this.prev = prev;
@@ -42,7 +42,7 @@ public class LinkedJList<E> implements JList<E>  {
 
   void linkLast(E e) {
     final Node<E> l = last;
-    final Node<E> newNode = new Node<>(l, e, null);
+    final Node<E> newNode = new Node<E>(l, e, null);
     last = newNode;
     if (l == null)
       first = newNode;
