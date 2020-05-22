@@ -1,38 +1,16 @@
 package ca.jrvs.practice.dataStructure.list;
 
-import java.util.AbstractSequentialList;
-import java.util.LinkedList;
-
-public class LinkedJList<E> implements JList<E>  {
+public class LinkedJList<E> implements JList<E> {
 
   transient int size = 0;
-
-  /** Node declaration **/
-  public static class Node<E> {
-    public E item;
-    public Node<E> next;
-    public Node<E> prev;
-
-    public Node(Node<E> prev, E element, Node<E> next) {
-      this.item = element;
-      this.next = next;
-      this.prev = prev;
-    }
-  }
-
-
-
   /**
-   * Pointer to first node.
-   * Invariant: (first == null && last == null) ||
-   *            (first.prev == null && first.item != null)
+   * Pointer to first node. Invariant: (first == null && last == null) || (first.prev == null &&
+   * first.item != null)
    */
   transient Node<E> first;
-
   /**
-   * Pointer to last node.
-   * Invariant: (first == null && last == null) ||
-   *            (last.next == null && last.item != null)
+   * Pointer to last node. Invariant: (first == null && last == null) || (last.next == null &&
+   * last.item != null)
    */
   transient Node<E> last;
 
@@ -44,10 +22,11 @@ public class LinkedJList<E> implements JList<E>  {
     final Node<E> l = last;
     final Node<E> newNode = new Node<E>(l, e, null);
     last = newNode;
-    if (l == null)
+    if (l == null) {
       first = newNode;
-    else
+    } else {
       l.next = newNode;
+    }
     size++;
   }
 
@@ -61,8 +40,9 @@ public class LinkedJList<E> implements JList<E>  {
   public Object[] toArray() {
     Object[] result = new Object[size];
     int i = 0;
-    for (Node<E> x = first; x != null; x = x.next)
+    for (Node<E> x = first; x != null; x = x.next) {
       result[i++] = x.item;
+    }
     return result;
   }
 
@@ -81,14 +61,16 @@ public class LinkedJList<E> implements JList<E>  {
     int index = 0;
     if (o == null) {
       for (Node<E> x = first; x != null; x = x.next) {
-        if (x.item == null)
+        if (x.item == null) {
           return index;
+        }
         index++;
       }
     } else {
       for (Node<E> x = first; x != null; x = x.next) {
-        if (o.equals(x.item))
+        if (o.equals(x.item)) {
           return index;
+        }
         index++;
       }
     }
@@ -104,10 +86,10 @@ public class LinkedJList<E> implements JList<E>  {
     return index >= 0 && index < size;
   }
 
-
   private void checkElementIndex(int index) {
-    if (!isElementIndex(index))
+    if (!isElementIndex(index)) {
       throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+    }
   }
 
   Node<E> node(int index) {
@@ -115,28 +97,29 @@ public class LinkedJList<E> implements JList<E>  {
 
     if (index < (size >> 1)) {
       Node<E> x = first;
-      for (int i = 0; i < index; i++)
+      for (int i = 0; i < index; i++) {
         x = x.next;
+      }
       return x;
     } else {
       Node<E> x = last;
-      for (int i = size - 1; i > index; i--)
+      for (int i = size - 1; i > index; i--) {
         x = x.prev;
+      }
       return x;
     }
   }
 
   private String outOfBoundsMsg(int index) {
-    return "Index: "+index+", Size: "+size;
+    return "Index: " + index + ", Size: " + size;
   }
 
   @Override
-  public E get (int index) {
-      if(index >= size)
-      {
-        return null;
-      }
-      return node(index).item;
+  public E get(int index) {
+    if (index >= size) {
+      return null;
+    }
+    return node(index).item;
   }
 
   E unlink(Node<E> x) {
@@ -163,11 +146,11 @@ public class LinkedJList<E> implements JList<E>  {
     size--;
     return element;
   }
+
   @Override
   public E remove(int index) {
-    if(index <= size)
-    {
-      int idx=0;
+    if (index <= size) {
+      int idx = 0;
       for (Node<E> x = first; x != null; x = x.next) {
         if (idx == index) {
           unlink(x);
@@ -190,5 +173,21 @@ public class LinkedJList<E> implements JList<E>  {
     }
     first = last = null;
     size = 0;
+  }
+
+  /**
+   * Node declaration
+   **/
+  public static class Node<E> {
+
+    public E item;
+    public Node<E> next;
+    public Node<E> prev;
+
+    public Node(Node<E> prev, E element, Node<E> next) {
+      this.item = element;
+      this.next = next;
+      this.prev = prev;
+    }
   }
 }

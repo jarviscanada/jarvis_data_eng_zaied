@@ -2,10 +2,9 @@ package ca.jrvs.practice.dataStructure.stackQueue;
 
 import ca.jrvs.practice.dataStructure.list.LinkedJList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
-public class LinkedJListDeque<E> extends LinkedJList<E>  implements JDeque<E> {
+public class LinkedJListDeque<E> extends LinkedJList<E> implements JDeque<E> {
 
   transient int size = 0;
   /**
@@ -19,7 +18,7 @@ public class LinkedJListDeque<E> extends LinkedJList<E>  implements JDeque<E> {
    * @param e the element to add
    * @return {@code true} (as specified by {@link Collection#add})
    * @throws NullPointerException if the specified element is null and this deque does not permit
-   *                              null elements
+   * null elements
    */
   transient Node<E> first;
   transient Node<E> last;
@@ -28,16 +27,19 @@ public class LinkedJListDeque<E> extends LinkedJList<E>  implements JDeque<E> {
     final Node<E> l = last;
     final Node<E> newNode = new Node<E>(l, e, null);
     last = newNode;
-    if (l == null)
+    if (l == null) {
       first = newNode;
-    else
+    } else {
       l.next = newNode;
+    }
     size++;
   }
 
   @Override
   public boolean add(E e) {
-    if(e==null) throw new NullPointerException();
+    if (e == null) {
+      throw new NullPointerException();
+    }
     linkLast(e);
     return true;
   }
@@ -59,24 +61,28 @@ public class LinkedJListDeque<E> extends LinkedJList<E>  implements JDeque<E> {
     f.item = null;
     f.next = null; // help GC
     first = next;
-    if (next == null)
+    if (next == null) {
       last = null;
-    else
+    } else {
       next.prev = null;
+    }
     size--;
     return element;
   }
 
   public E removeFirst() {
     final Node<E> f = first;
-    if (f == null)
+    if (f == null) {
       throw new NoSuchElementException();
+    }
     return unlinkFirst(f);
   }
 
   @Override
   public E remove() {
-    if(size == 0) throw new NoSuchElementException();
+    if (size == 0) {
+      throw new NoSuchElementException();
+    }
     return removeFirst();
   }
 
@@ -90,7 +96,9 @@ public class LinkedJListDeque<E> extends LinkedJList<E>  implements JDeque<E> {
    */
   @Override
   public E pop() {
-    if(size == 0) throw new NoSuchElementException();
+    if (size == 0) {
+      throw new NoSuchElementException();
+    }
     return removeFirst();
   }
 
@@ -107,16 +115,19 @@ public class LinkedJListDeque<E> extends LinkedJList<E>  implements JDeque<E> {
     final Node<E> f = first;
     final Node<E> newNode = new Node<>(null, e, f);
     first = newNode;
-    if (f == null)
+    if (f == null) {
       last = newNode;
-    else
+    } else {
       f.prev = newNode;
+    }
     size++;
   }
 
   @Override
   public void push(E e) {
-    if(e==null) throw new NullPointerException();
+    if (e == null) {
+      throw new NullPointerException();
+    }
     linkFirst(e);
   }
 
@@ -128,14 +139,17 @@ public class LinkedJListDeque<E> extends LinkedJList<E>  implements JDeque<E> {
    */
   public E getFirst() {
     final Node<E> f = first;
-    if (f == null)
+    if (f == null) {
       throw new NoSuchElementException();
+    }
     return f.item;
   }
 
   @Override
   public E peek() {
-    if(size == 0) return null;
+    if (size == 0) {
+      return null;
+    }
     return getFirst();
   }
 }

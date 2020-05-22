@@ -1,13 +1,12 @@
 package ca.jrvs.practice.dataStructure.set;
 
-import java.util.AbstractSet;
-import java.util.*;
-import java.util.HashSet;
+import java.util.HashMap;
 
 public class JHashSet<E> implements JSet<E> {
 
-  private transient HashMap<E, Object> map;
   private static final Object PRESENT = new Object();
+  private transient HashMap<E, Object> map;
+
   public JHashSet() {
     map = new HashMap<>();
   }
@@ -56,7 +55,7 @@ public class JHashSet<E> implements JSet<E> {
    */
   @Override
   public boolean add(E e) {
-    return map.put(e,PRESENT)==null;
+    return map.put(e, PRESENT) == null;
   }
 
   /**
@@ -74,7 +73,7 @@ public class JHashSet<E> implements JSet<E> {
    */
   @Override
   public boolean remove(Object o) {
-    return map.remove(o)==PRESENT;
+    return map.remove(o) == PRESENT;
   }
 
   /**

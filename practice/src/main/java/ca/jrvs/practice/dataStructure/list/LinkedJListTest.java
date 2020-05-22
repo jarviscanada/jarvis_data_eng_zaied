@@ -1,6 +1,6 @@
 package ca.jrvs.practice.dataStructure.list;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,43 +11,43 @@ public class LinkedJListTest {
   public void add() {
     JList<String> testLinked = new LinkedJList<String>();
     testLinked.add("first");
-    Assert.assertEquals(testLinked.get(0),"first");
+    Assert.assertEquals(testLinked.get(0), "first");
   }
 
   @Test
   public void toArray() {
     JList<String> testLinked = new LinkedJList<String>();
     testLinked.add("first");
-    String[] actualArr= {"first"};
-    Assert.assertArrayEquals(testLinked.toArray(),actualArr);
+    String[] actualArr = {"first"};
+    Assert.assertArrayEquals(testLinked.toArray(), actualArr);
   }
 
   @Test
   public void size() {
     JList<String> testLinked = new LinkedJList<String>();
     testLinked.add("first");
-    Assert.assertEquals(testLinked.size(),1);
+    Assert.assertEquals(testLinked.size(), 1);
   }
 
   @Test
   public void isEmpty() {
     JList<String> testLinked = new LinkedJList<String>();
-    Assert.assertEquals(testLinked.size(),0);
+    Assert.assertEquals(testLinked.size(), 0);
   }
 
   @Test
   public void indexOf() {
     JList<String> testLinked = new LinkedJList<String>();
     testLinked.add("first");
-    Assert.assertEquals(testLinked.indexOf("first"),0);
+    Assert.assertEquals(testLinked.indexOf("first"), 0);
   }
 
   @Test
   public void contains() {
     JList<String> testLinked = new LinkedJList<String>();
     testLinked.add("first");
-    Assert.assertEquals(testLinked.contains("first"),true);
-    Assert.assertEquals(testLinked.contains("second"),false);
+    Assert.assertEquals(testLinked.contains("first"), true);
+    Assert.assertEquals(testLinked.contains("second"), false);
   }
 
   @Test
@@ -70,6 +70,6 @@ public class LinkedJListTest {
     JList<String> testLinked = new LinkedJList<String>();
     testLinked.add("first");
     testLinked.clear();
-    assertEquals(testLinked.size(),0);
+    assertEquals(testLinked.size(), 0);
   }
 }

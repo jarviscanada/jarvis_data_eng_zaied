@@ -1,9 +1,6 @@
 package ca.jrvs.practice.dataStructure.tree;
 
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.Objects;
 
 /**
@@ -14,11 +11,22 @@ import java.util.Objects;
 public class JBSTree<E> implements JTree<E> {
 
   /**
-   * The comparator used to maintain order in this tree map
-   * Comparator cannot be null
+   * The comparator used to maintain order in this tree map Comparator cannot be null
    */
   private Comparator<E> comparator;
-  private int size=0;
+  private int size = 0;
+  /**
+   * Insert an object into the BST. Please review the BST property.
+   *
+   * @param object item to be inserted
+   * @return inserted item
+   * @throws IllegalArgumentException if the object already exists
+   */
+
+  private Node root = null;
+  private int inCount = 0;
+  private int postCount = 0;
+
   /**
    * Create a new BST
    *
@@ -29,61 +37,40 @@ public class JBSTree<E> implements JTree<E> {
     this.comparator = comparator;
   }
 
-  /**
-   * Insert an object into the BST.
-   * Please review the BST property.
-   *
-   * @param object item to be inserted
-   * @return inserted item
-   * @throws IllegalArgumentException if the object already exists
-   */
-
-  private Node root=null;
-
   //method to get root
-  public Node<E> getRoot()
-  {
+  public Node<E> getRoot() {
     return root;
   }
 
   //recursive helper to insert
-  private Node<E> insertHelper(Node root, Node parent, E object)
-  {
-    if(root==null)
-    {
-      return new Node<E>(object,parent);
+  private Node<E> insertHelper(Node root, Node parent, E object) {
+    if (root == null) {
+      return new Node<E>(object, parent);
     }
-    int cmp = comparator.compare((E) root.getValue(),object);
-    if(cmp == 0)
-    {
+    int cmp = comparator.compare((E) root.getValue(), object);
+    if (cmp == 0) {
       return null;
     }
-    if(cmp < 0)
-    {
-      root.setLeft(insertHelper(root.getLeft(),root,object));
-    }
-    else if (cmp > 0)
-    {
-      root.setRight(insertHelper(root.getRight(),root, object));
+    if (cmp < 0) {
+      root.setLeft(insertHelper(root.getLeft(), root, object));
+    } else if (cmp > 0) {
+      root.setRight(insertHelper(root.getRight(), root, object));
     }
     return root;
   }
+
   @Override
   public E insert(E object) {
-    if(size == 0)
-    {
-      Node<E> temp = new Node<E>(object,null);
+    if (size == 0) {
+      Node<E> temp = new Node<E>(object, null);
       root = temp;
-    }
-    else
-    {
+    } else {
       //handle root
-      Node<E> temp = insertHelper(root,null,object);
-      if(temp==null)
-      {
+      Node<E> temp = insertHelper(root, null, object);
+      if (temp == null) {
         throw new IllegalArgumentException();
       }
-      root=temp;
+      root = temp;
     }
     size++;
     return object;
@@ -97,70 +84,58 @@ public class JBSTree<E> implements JTree<E> {
    */
 
   //recursive helper function to search
-  private E searchHelper(Node<E> root, E object)
-  {
-    if(root==null)
-    {
+  private E searchHelper(Node<E> root, E object) {
+    if (root == null) {
       return null;
     }
-    if(comparator.compare((E) root.getValue(),object) == 0)
-    {
+    if (comparator.compare((E) root.getValue(), object) == 0) {
       return object;
     }
     E res;
-    res = searchHelper(root.getLeft(),object);
-    res= searchHelper(root.getRight(),object);
+    res = searchHelper(root.getLeft(), object);
+    res = searchHelper(root.getRight(), object);
     return res;
   }
+
   @Override
   public E search(E object) {
     return (E) searchHelper(root, object);
   }
 
   //recursive funtion to help delete helper
-  private void removeHelperHelper(Node<E> orig, Node<E> toSet)
-  {
-    if(orig.getLeft()==null)
-    {
+  private void removeHelperHelper(Node<E> orig, Node<E> toSet) {
+    if (orig.getLeft() == null) {
       orig.setLeft(toSet);
       return;
     }
-    removeHelperHelper(orig.getLeft(),toSet);
+    removeHelperHelper(orig.getLeft(), toSet);
   }
+
   //recursive helper function to remove
-  private Node<E> removeHelper(Node<E> root, E object)
-  {
-    if(root==null)
-    {
+  private Node<E> removeHelper(Node<E> root, E object) {
+    if (root == null) {
       return null;
     }
-    if(comparator.compare(root.getValue(),object)==0)
-    {
+    if (comparator.compare(root.getValue(), object) == 0) {
 
-      if(root.getLeft()==null && root.getRight()==null)
-      {
+      if (root.getLeft() == null && root.getRight() == null) {
         return null;
       }
-      if(root.getLeft()!=null && root.getRight()==null)
-      {
+      if (root.getLeft() != null && root.getRight() == null) {
         return root.getLeft();
       }
-      if(root.getLeft()!=null)
-      {
-        removeHelperHelper(root.getRight(),root.getLeft());
+      if (root.getLeft() != null) {
+        removeHelperHelper(root.getRight(), root.getLeft());
       }
       return root.getRight();
-    }
-    else if(comparator.compare(root.getValue(),object) > 0)
-    {
-      root.setRight(removeHelper(root.getRight(),object));
-    }
-    else
-    {
-      root.setLeft(removeHelper(root.getLeft(),object));
+    } else if (comparator.compare(root.getValue(), object) > 0) {
+      root.setRight(removeHelper(root.getRight(), object));
+    } else {
+      root.setLeft(removeHelper(root.getLeft(), object));
     }
     return root;
   }
+
   /**
    * Remove an object from the tree.
    *
@@ -170,22 +145,19 @@ public class JBSTree<E> implements JTree<E> {
    */
   @Override
   public E remove(E object) {
-    if(removeHelper(root,object) == null)
-    {
+    if (removeHelper(root, object) == null) {
       return null;
     }
     return object;
   }
 
-  private void preorderHelper(Node<E> root, E[] preArr, int k)
-  {
-    if(root==null)
-    {
+  private void preorderHelper(Node<E> root, E[] preArr, int k) {
+    if (root == null) {
       return;
     }
-    preArr[k]=root.getValue();
-    preorderHelper(root.getLeft(),preArr,k+1);
-    preorderHelper(root.getRight(),preArr,k+2);
+    preArr[k] = root.getValue();
+    preorderHelper(root.getLeft(), preArr, k + 1);
+    preorderHelper(root.getRight(), preArr, k + 2);
   }
 
   /**
@@ -196,23 +168,20 @@ public class JBSTree<E> implements JTree<E> {
 
   @Override
   public E[] preOrder() {
-    E[] preArr= (E[]) new Object[size];
-    preorderHelper(root,preArr,0);
+    E[] preArr = (E[]) new Object[size];
+    preorderHelper(root, preArr, 0);
     return preArr;
   }
 
-  private int inCount=0;
-  private void inorderHelper(Node<E> root, E[] inArr)
-  {
-    if(root==null)
-    {
+  private void inorderHelper(Node<E> root, E[] inArr) {
+    if (root == null) {
       return;
     }
     //System.out.print(root.getValue());
-    inorderHelper(root.getLeft(),inArr);
-    inArr[inCount]=root.getValue();
-    inCount=inCount+1;
-    inorderHelper(root.getRight(),inArr);
+    inorderHelper(root.getLeft(), inArr);
+    inArr[inCount] = root.getValue();
+    inCount = inCount + 1;
+    inorderHelper(root.getRight(), inArr);
   }
 
   /**
@@ -222,23 +191,21 @@ public class JBSTree<E> implements JTree<E> {
    */
   @Override
   public E[] inOrder() {
-    E[] inArr= (E[]) new Object[size];
-    inorderHelper(root,inArr);
+    E[] inArr = (E[]) new Object[size];
+    inorderHelper(root, inArr);
     return inArr;
   }
 
-  private int postCount=0;
-  private void postorderHelper(Node<E> root, E[] postArr)
-  {
-    if(root==null)
-    {
+  private void postorderHelper(Node<E> root, E[] postArr) {
+    if (root == null) {
       return;
     }
-    postorderHelper(root.getLeft(),postArr);
-    postorderHelper(root.getRight(),postArr);
-    postArr[postCount]=root.getValue();
-    postCount=postCount+1;
+    postorderHelper(root.getLeft(), postArr);
+    postorderHelper(root.getRight(), postArr);
+    postArr[postCount] = root.getValue();
+    postCount = postCount + 1;
   }
+
   /**
    * traverse the tree recursively
    *
@@ -246,22 +213,22 @@ public class JBSTree<E> implements JTree<E> {
    */
   @Override
   public E[] postOrder() {
-    E[] postArr= (E[]) new Object[size];
-    postorderHelper(root,postArr);
+    E[] postArr = (E[]) new Object[size];
+    postorderHelper(root, postArr);
     return postArr;
   }
 
   //recursive function to help findHeight
-  private int findheightHelper(Node<E> root)
-  {
-    if(root==null)
-    {
+  private int findheightHelper(Node<E> root) {
+    if (root == null) {
       return 0;
     }
-    return 1+Math.max(findheightHelper(root.getLeft()),findheightHelper(root.getRight()));
+    return 1 + Math.max(findheightHelper(root.getLeft()), findheightHelper(root.getRight()));
   }
+
   /**
    * traverse through the tree and find out the tree height
+   *
    * @return height
    * @throws NullPointerException if the BST is empty
    */

@@ -1,15 +1,16 @@
 package ca.jrvs.practice.dataStructure.set;
 
-import java.util.NavigableMap;
 import java.util.TreeMap;
 
 public class JTreeSet<E> implements JSet<E> {
 
-  private transient TreeMap<E,Object> m;
   private static final Object PRESENT = new Object();
+  private transient TreeMap<E, Object> m;
+
   public JTreeSet() {
     m = new TreeMap<>();
   }
+
   /**
    * Returns the number of elements in this set (its cardinality).  If this set contains more than
    * <tt>Integer.MAX_VALUE</tt> elements, returns
@@ -54,7 +55,7 @@ public class JTreeSet<E> implements JSet<E> {
    */
   @Override
   public boolean add(E e) {
-    return m.put(e, PRESENT)==null;
+    return m.put(e, PRESENT) == null;
   }
 
   /**
@@ -72,7 +73,7 @@ public class JTreeSet<E> implements JSet<E> {
    */
   @Override
   public boolean remove(Object o) {
-    return m.remove(o)==PRESENT;
+    return m.remove(o) == PRESENT;
   }
 
   /**

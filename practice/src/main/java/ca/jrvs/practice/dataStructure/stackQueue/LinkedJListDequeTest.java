@@ -1,6 +1,6 @@
 package ca.jrvs.practice.dataStructure.stackQueue;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
