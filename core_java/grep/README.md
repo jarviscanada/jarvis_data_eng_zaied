@@ -15,7 +15,7 @@ We will automate this procedure with this Java app where user will give the patt
 
 To execute the app we need to call the app with following arguments:
 
-````
+````Bash
 JavaGrep regex rootPath outFile
 ````
 
@@ -28,30 +28,30 @@ Here is one sample usage:
 The app will traverse the /grep/src and it's subdirectories and reads all the text files within.
 Then it will output those lines containing the regex pattern *.IllegalArgumentException.*
 
-##Methods, Classes and Interfaces
+##***Methods, Classes and Interfaces***
 
 Our app consists of following parts:
 
- * `JaveGrep`: This is the interface which our class will implement. It declares
+ * *`JaveGrep`*: This is the interface which our class will implement. It declares
  following variables and methods:
-     * `regex`: user provided regex pattern string
-     * `rootPath`: user provided root directory. The directory from which the search will start.
-     * `outFile`: user provided output file path. The app will output the matched lines in this 
+     * *`regex`*: user provided regex pattern string
+     * *`rootPath`*: user provided root directory. The directory from which the search will start.
+     * *`outFile`*: user provided output file path. The app will output the matched lines in this 
      file
-     * `listFiles`: This method will recursively traverse the root and it's subdirectories and 
+     * *`listFiles`*: This method will recursively traverse the root and it's subdirectories and 
      output a list of files
-     * `readLines`: This method will read a file line by line and output a list of string
-     * `containsPattern`: This method will return true if the line contains the provided
+     * *`readLines`*: This method will read a file line by line and output a list of string
+     * *`containsPattern`*: This method will return true if the line contains the provided
      `regex` pattern.
-     * `writeTofile`: This method will write the matched lines in provided `outFile`
-     * `process`: This method will call the `listFiles` method to get the file list, then read those
+     * *`writeTofile`*: This method will write the matched lines in provided `outFile`
+     * *`process`*: This method will call the `listFiles` method to get the file list, then read those
      files using the `readLines` method and if the lines contain the regex pattern write them 
      in provided `outFile`
-     * `Main`: This method will set the private fields utilizing the CLI arguments and call
+     * *`Main`*: This method will set the private fields utilizing the CLI arguments and call
      `process` method. This is the starting point of execution of our app
      * `getters` and `setters` for the private fields
  
- * `JavaGrepImp`: This is our class which implements the JavaGrep interface. It implements all
+ * *`JavaGrepImp`*: This is our class which implements the JavaGrep interface. It implements all
  the declared methods.
  
  * `JavaGrepLambdaImp`: This is another class which is a subclass of `JavaGrepImp` class. It
@@ -60,7 +60,7 @@ Our app consists of following parts:
       
 We have used `self4j` for logging purpose and handled all the required exceptions.
 
-##`process` method pseudocode:
+##***`process` method pseudocode***:
 ````
 matchedlines = []
 for file in listFilesRecursively(rootDir)
@@ -70,7 +70,7 @@ for file in listFilesRecursively(rootDir)
 writeToFile(matchedLines)                
 ````
 
-##Performance Issues:
+##***Performance Issues***:
 
 There are a couple of performance issues in this app:
 
@@ -88,7 +88,7 @@ can be loosely termed of `O(n)` complexity where `n` means the input size. The m
 an implicit stack. If the directory tree is large enough we might encounter a `stackOverFlow`
 exception.
 
-##*Improvements*:
+##***Improvements***:
 
 * As this is an MVP (Most Viable Product) soluion, we have implemented a solution which can be
 safely called a "brute-force" implementation. We will try to write a more time optimized and
