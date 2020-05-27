@@ -44,11 +44,10 @@ public class JavaGrepImp implements JavaGrep {
    */
   @Override
   public void process() throws IOException {
-    List<String> fileNames = listFiles(rootPath);
+    List<File> files = listFiles(rootPath);
     List<String> containedLines = new ArrayList<String>();
-    for (int i = 0; i < fileNames.size(); i++) {
-      File file = new File(fileNames.get(i));
-      List<String> lines = readLines(file);
+    for (int i = 0; i < files.size(); i++) {
+      List<String> lines = readLines(files.get(i));
       for (int line_idx = 0; line_idx < lines.size(); line_idx++) {
         if (containsPattern(lines.get(line_idx))) {
           containedLines.add(lines.get(line_idx));
@@ -58,16 +57,16 @@ public class JavaGrepImp implements JavaGrep {
     writeToFile(containedLines);
   }
 
-  public List<String> listfilesHelper(File[] fileList) {
-    List<String> fileNames = new ArrayList<String>();
+  public List<File> listfilesHelper(File[] fileList) {
+    List<File> files = new ArrayList<File>();
     for (File file : fileList) {
       if (file.isDirectory()) {
-        fileNames = listfilesHelper(file.listFiles());
+        files = listfilesHelper(file.listFiles());
       } else {
-        fileNames.add(file.getAbsolutePath());
+        files.add(file);
       }
     }
-    return fileNames;
+    return files;
   }
 
   /**
@@ -106,12 +105,12 @@ public class JavaGrepImp implements JavaGrep {
    * @return files under the rootDir
    */
   @Override
-  public List<String> listFiles(String rootDir) {
+  public List<File> listFiles(String rootDir) throws IOException {
     //System.out.println(rootDir);
-    File[] files = new File(rootDir).listFiles();
-    List<String> fileNames = new ArrayList<String>();
-    fileNames = listfilesHelper(files);
-    return fileNames;
+    File[] root_files = new File(rootDir).listFiles();
+    List<File> files = new ArrayList<File>();
+    files = listfilesHelper(root_files);
+    return files;
   }
 
   /**
