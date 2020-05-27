@@ -1,4 +1,4 @@
- <center> <h1><b> Java Text Search App</b></h1></center>
+ # ***Java Text Search App***
  
  ## ***Introduction***
  We often need to search for a pattern in a text file in various tasks. It is a cumbersome job to do this manually. 
