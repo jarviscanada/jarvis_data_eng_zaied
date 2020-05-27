@@ -1,6 +1,6 @@
  # ***Java Text Search App***
  
- * ## ***Introduction***
+ ## ***Introduction***
  We often need to search for a pattern in a text file in various tasks. It is a cumbersome job to do this manually. 
  Automating the procedure will spare us some manual labour and save our precious time. In this app,
  we aim to automate this task. Formally, this app will traverse a directory tree rooted from the root given 
@@ -11,7 +11,7 @@
  ````
 We will automate this procedure with this Java app where user will give the pattern, root path and output file path.
 
-* ## ***USAGE***:
+## ***USAGE***:
 
 To execute the app we need to call the app with following arguments:
 
@@ -28,7 +28,7 @@ Here is one sample usage:
 The app will traverse the /grep/src and it's subdirectories and reads all the text files within.
 Then it will output those lines containing the regex pattern \*.IllegalArgumentException.\*
 
-* ## ***Methods, Classes and Interfaces***
+## ***Methods, Classes and Interfaces***
 
 Our app consists of following parts:
 
@@ -60,7 +60,7 @@ Our app consists of following parts:
       
 We have used `self4j` for logging purpose and handled all the required exceptions.
 
-* ## ***`process` method pseudocode***:
+## ***`process` method pseudocode***:
 ````
 matchedlines = []
 for file in listFilesRecursively(rootDir)
@@ -70,7 +70,7 @@ for file in listFilesRecursively(rootDir)
 writeToFile(matchedLines)                
 ````
 
-* ## ***Performance Issues***:
+## ***Performance Issues***:
 
 There are a couple of performance issues in this app:
 
