@@ -4,7 +4,7 @@
  We often need to search for a pattern in a text file in various tasks. It is a cumbersome job to do this manually. 
  Automating the procedure will spare us some manual labour and save our precious time. In this app,
  we aim to automate this task. Formally, this app will traverse a directory tree rooted from the root given 
- by user and will search for a pattern given by user and output save the matched lines in a file. We can do 
+ by user and will search for a pattern given by user and output the matched lines in a file. We can do 
  the same manually in grep using following command:
  ````
  grep search_string file_path
@@ -15,7 +15,7 @@ We will automate this procedure with this Java app where user will give the patt
 
 To execute the app we need to call the app with following arguments:
 
-````Bash
+````
 JavaGrep regex rootPath outFile
 ````
 
@@ -26,9 +26,9 @@ Here is one sample usage:
 ````
 
 The app will traverse the /grep/src and it's subdirectories and reads all the text files within.
-Then it will output those lines containing the regex pattern *.IllegalArgumentException.*
+Then it will output those lines containing the regex pattern \*.IllegalArgumentException.\*
 
-##***Methods, Classes and Interfaces***
+## ***Methods, Classes and Interfaces***
 
 Our app consists of following parts:
 
@@ -48,7 +48,7 @@ Our app consists of following parts:
      files using the `readLines` method and if the lines contain the regex pattern write them 
      in provided `outFile`
      * *`Main`*: This method will set the private fields utilizing the CLI arguments and call
-     `process` method. This is the starting point of execution of our app
+     `process` method. This is the starting point of execution for our app
      * `getters` and `setters` for the private fields
  
  * *`JavaGrepImp`*: This is our class which implements the JavaGrep interface. It implements all
@@ -60,7 +60,7 @@ Our app consists of following parts:
       
 We have used `self4j` for logging purpose and handled all the required exceptions.
 
-##***`process` method pseudocode***:
+## ***`process` method pseudocode***:
 ````
 matchedlines = []
 for file in listFilesRecursively(rootDir)
@@ -70,25 +70,25 @@ for file in listFilesRecursively(rootDir)
 writeToFile(matchedLines)                
 ````
 
-##***Performance Issues***:
+## ***Performance Issues***:
 
 There are a couple of performance issues in this app:
 
-* Memory Usage issue: In `readLines` method we are reading the whole file and storing all the
+* *Memory Usage issue*: In `readLines` method we are reading the whole file and storing all the
 text. If we encounter a large enough file, we could encounter an `outOfMemory` exception.
 Even for smaller files, storing all the lines results in huge memory consumption.
 
-* Time consumption issue: Timewise the app can be improved as well. We recursively traverse 
+* *Time consumption issue*: Timewise the app can be improved as well. We recursively traverse 
 the subdirectories to list all files using `listFiles`. This might take a huge time if 
 directory tree is substantially large. Except the `listFile` method, all the other methods
 can be loosely termed of `O(n)` complexity where `n` means the input size. The methods are 
 "looking at" every input at least once.
 
-* Directory depth issue: As we are recursively traversing the directories, we are maintaining
+* *Directory depth issue*: As we are recursively traversing the directories, we are maintaining
 an implicit stack. If the directory tree is large enough we might encounter a `stackOverFlow`
 exception.
 
-##***Improvements***:
+## ***Improvements***:
 
 * As this is an MVP (Most Viable Product) soluion, we have implemented a solution which can be
 safely called a "brute-force" implementation. We will try to write a more time optimized and
