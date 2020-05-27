@@ -1,6 +1,6 @@
  # Java Text Search App
  
- ## Introduction
+ ## ***Introduction***
  We often need to search for a pattern in a text file in various tasks. It is a cumbersome job to do this manually. 
  Automating the procedure will spare us some manual labour and save our precious time. In this app,
  we aim to automate this task. Formally, this app will traverse a directory tree rooted from the root given 
@@ -11,7 +11,7 @@
  ````
 We will automate this procedure with this Java app where user will give the pattern, root path and output file path.
 
-## *USAGE*:
+## ***USAGE***:
 
 To execute the app we need to call the app with following arguments:
 
