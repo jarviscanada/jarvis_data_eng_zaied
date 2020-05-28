@@ -1,4 +1,4 @@
-package ca.jrvs.apps.twitter.dao;
+package ca.jrvs.apps.twitter;
 
 public interface CrdDao<T, ID> {
 

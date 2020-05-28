@@ -27,7 +27,6 @@ public class TwitterApiTest{
   public static void main(String[] args)
       throws IOException, OAuthCommunicationException, OAuthExpectationFailedException, OAuthMessageSignerException {
 
-    System.out.println(System.getenv("PATH"));
     //setup oauth
     OAuthConsumer consumer = new CommonsHttpOAuthConsumer(CONSUMER_KEY,CONSUMER_SECRET);
     consumer.setTokenWithSecret(ACCESS_TOKEN,TOKEN_SECRET);
