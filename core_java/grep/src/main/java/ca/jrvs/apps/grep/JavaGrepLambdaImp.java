@@ -8,24 +8,25 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JavaGrepLambdaImp extends JavaGrepImp {
 
   public static void main(String[] args) {
+
+    final Logger logger = LoggerFactory.getLogger(JavaGrep.class);
+
     if (args.length != 3) {
-      //creating JavaGrepLambdaImp instead of JavaGrepImp
-      //JavaGrepLambdaImp inherits all methods except two override methods
       JavaGrepLambdaImp javaGrepLambdaImp = new JavaGrepLambdaImp();
       javaGrepLambdaImp.setRegex(args[0]);
       javaGrepLambdaImp.setRootPath(args[1]);
       javaGrepLambdaImp.setOutFile(args[2]);
 
       try {
-        //calling parent method
-        //but it will override method (in this class)
         javaGrepLambdaImp.process();
       } catch (Exception ex) {
-        ex.printStackTrace();
+        javaGrepLambdaImp.logger.error(ex.getMessage(), ex);
       }
     }
   }

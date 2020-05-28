@@ -106,7 +106,6 @@ public class JavaGrepImp implements JavaGrep {
    */
   @Override
   public List<File> listFiles(String rootDir) throws IOException {
-    //System.out.println(rootDir);
     File[] root_files = new File(rootDir).listFiles();
     List<File> files = new ArrayList<File>();
     files = listfilesHelper(root_files);
