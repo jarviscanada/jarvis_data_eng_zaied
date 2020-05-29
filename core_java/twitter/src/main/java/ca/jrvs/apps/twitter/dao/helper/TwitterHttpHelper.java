@@ -1,4 +1,4 @@
-package ca.jrvs.apps.twitter;
+package ca.jrvs.apps.twitter.dao.helper;
 
 import com.google.gdata.util.common.base.PercentEscaper;
 import java.io.IOException;
@@ -10,6 +10,7 @@ import oauth.signpost.exception.OAuthExpectationFailedException;
 import oauth.signpost.exception.OAuthMessageSignerException;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
@@ -71,7 +72,24 @@ public class TwitterHttpHelper implements HttpHelper {
    */
   @Override
   public HttpResponse httpGet(URI uri) {
-    return null;
+    HttpGet request = new HttpGet(uri);
+    try {
+      consumer.sign(request);
+    } catch (OAuthMessageSignerException | OAuthExpectationFailedException | OAuthCommunicationException e) {
+      e.printStackTrace();
+    }
+    HttpResponse response = null;
+    try {
+      response = httpClient.execute(request);
+    } catch (IOException ioException) {
+      ioException.printStackTrace();
+    }
+    try {
+      System.out.println(EntityUtils.toString((response.getEntity())));
+    } catch (IOException ioException) {
+      ioException.printStackTrace();
+    }
+    return response;
   }
 
 
@@ -86,8 +104,11 @@ public class TwitterHttpHelper implements HttpHelper {
     String status = "today is good day";
     PercentEscaper percentEscaper = new PercentEscaper("",false);
     TwitterHttpHelper twitterHttpHelper = new TwitterHttpHelper(CONSUMER_KEY,CONSUMER_SECRET, ACCESS_TOKEN,TOKEN_SECRET);
-    HttpResponse response = twitterHttpHelper.httpPost(URI.create(
-        "https://api.twitter.com/1.1/statuses/update.json?status="+percentEscaper.escape(status)));
+    //HttpResponse postResponse = twitterHttpHelper.httpPost(URI.create(
+        //"https://api.twitter.com/1.1/statuses/update.json?status="+percentEscaper.escape(status)));
+    HttpResponse getResponse = twitterHttpHelper.httpGet(URI.create(
+        "https://api.twitter.com/1.1/statuses/show.json?id=210462857140252672"));
+
   }
 
 
