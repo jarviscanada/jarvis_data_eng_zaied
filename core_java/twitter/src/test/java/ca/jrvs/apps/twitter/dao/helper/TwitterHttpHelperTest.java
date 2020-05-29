@@ -13,7 +13,8 @@ public class TwitterHttpHelperTest {
   String CONSUMER_SECRET = System.getenv("consumerSecret");
   String ACCESS_TOKEN = System.getenv("accessToken");
   String TOKEN_SECRET = System.getenv("tokenSecret");
-  TwitterHttpHelper twitterHttpHelper = new TwitterHttpHelper(CONSUMER_KEY,CONSUMER_SECRET, ACCESS_TOKEN,TOKEN_SECRET);
+  TwitterHttpHelper twitterHttpHelper = new TwitterHttpHelper(
+      CONSUMER_KEY,CONSUMER_SECRET, ACCESS_TOKEN,TOKEN_SECRET);
 
   @Test
   public void httpPost() {
@@ -21,7 +22,7 @@ public class TwitterHttpHelperTest {
     String status = "today is good day";
     PercentEscaper percentEscaper = new PercentEscaper("",false);
     HttpResponse postResponse = twitterHttpHelper.httpPost(URI.create(
-    "https://api.twitter.com/1.1/statuses/update.json?status="+percentEscaper.escape(status)));
+        "https://api.twitter.com/1.1/statuses/update.json?status="+percentEscaper.escape(status)));
 
   }
 
