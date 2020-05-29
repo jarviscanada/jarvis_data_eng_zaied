@@ -92,24 +92,4 @@ public class TwitterHttpHelper implements HttpHelper {
     return response;
   }
 
-
-
-  public static void main(String[] args) {
-
-    String CONSUMER_KEY = System.getenv("consumerKey");
-    String CONSUMER_SECRET = System.getenv("consumerSecret");
-    String ACCESS_TOKEN = System.getenv("accessToken");
-    String TOKEN_SECRET = System.getenv("tokenSecret");
-
-    String status = "today is good day";
-    PercentEscaper percentEscaper = new PercentEscaper("",false);
-    TwitterHttpHelper twitterHttpHelper = new TwitterHttpHelper(CONSUMER_KEY,CONSUMER_SECRET, ACCESS_TOKEN,TOKEN_SECRET);
-    //HttpResponse postResponse = twitterHttpHelper.httpPost(URI.create(
-        //"https://api.twitter.com/1.1/statuses/update.json?status="+percentEscaper.escape(status)));
-    HttpResponse getResponse = twitterHttpHelper.httpGet(URI.create(
-        "https://api.twitter.com/1.1/statuses/show.json?id=210462857140252672"));
-
-  }
-
-
 }
