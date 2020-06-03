@@ -1,4 +1,4 @@
-# ***Java Text Search App***
+# ***Java JDBC App***
  
  ## ***Introduction***
  Accessing Database, retrieving data through performing queries and manipulating data as needed is  
@@ -35,7 +35,7 @@ The fields inside each table and relationship between can be understood in the E
 Diagram
 
 ## ***E-R Diagram***:
-[E-R Diagram](./assets/jdbc_er.png_)
+![E-R Diagram](./assets/jdbc_er.png_)
 
 ## ***Dao and Repositories Pattern*** :
 `Dao` and `Repositories` are two different ways to implement `Data Access Layer (DAL)`. Applications
