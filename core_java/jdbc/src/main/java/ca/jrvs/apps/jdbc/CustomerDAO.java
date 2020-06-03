@@ -18,6 +18,8 @@ public class CustomerDAO extends DataAccessObject<Customer> {
           + "values (?,?,?,?,?,?,?,?)";
   private String findById = "select * from customer where customer_id=?";
   private String DELETE = "delete from customer where customer_id=?";
+  private String UPDATE = "update customer set first_name = ?, last_name = ?, email = ?, phone = ?,"
+      + "address = ?, city = ?, state = ?, zipcode = ? where customer_id = ?";
 
 
   public CustomerDAO(Connection connection) {
@@ -43,7 +45,7 @@ public class CustomerDAO extends DataAccessObject<Customer> {
 
     } catch (SQLException e) {
       this.logger.error(e.getMessage(), e);
-      throw new RuntimeException();
+      throw new RuntimeException("Create Failed", e);
     }
   }
 
@@ -55,6 +57,7 @@ public class CustomerDAO extends DataAccessObject<Customer> {
       ResultSet resultSet = preparedStatement.executeQuery();
       List<OrderLines> orderLinesList = new ArrayList<OrderLines>();
       while (resultSet.next()) {
+        customer.setCustomer_id(resultSet.getLong("customer_id"));
         customer.setFirst_name(resultSet.getString("first_name"));
         customer.setLast_name(resultSet.getString("last_name"));
         customer.setEmail(resultSet.getString("email"));
@@ -66,6 +69,47 @@ public class CustomerDAO extends DataAccessObject<Customer> {
       }
     } catch (SQLException e) {
       this.logger.error(e.getMessage(), e);
+      throw new RuntimeException("findById Failed", e);
+    }
+    return customer;
+  }
+
+  @Override
+  public Customer update(Customer dto) {
+
+    Customer customer = null;
+
+    try {
+      this.connection.setAutoCommit(false);
+    } catch (SQLException e) {
+      this.logger.error(e.getMessage(), e);
+      throw new RuntimeException("SetAutoCommit Failed", e);
+    }
+
+    try (PreparedStatement preparedStatement = this.connection.prepareStatement(UPDATE)) {
+      preparedStatement.setString(1, dto.getFirst_name());
+      preparedStatement.setString(2, dto.getLast_name());
+      preparedStatement.setString(3, dto.getEmail());
+      preparedStatement.setString(4, dto.getPhone());
+      preparedStatement.setString(5, dto.getAddress());
+      preparedStatement.setString(6, dto.getCity());
+      preparedStatement.setString(7, dto.getState());
+      preparedStatement.setString(8, dto.getZipcode());
+      preparedStatement.setLong(9, dto.getId());
+
+      preparedStatement.execute();
+      this.connection.commit();
+      customer = this.findById(dto.getId());
+
+    } catch (SQLException e) {
+      try {
+        this.connection.rollback();
+      } catch (SQLException eroll) {
+        this.logger.error(e.getMessage(), eroll);
+        throw new RuntimeException("Rollback Failed", eroll);
+      }
+      this.logger.error(e.getMessage(), e);
+      throw new RuntimeException("Update Failed", e);
     }
     return customer;
   }
@@ -77,6 +121,7 @@ public class CustomerDAO extends DataAccessObject<Customer> {
       preparedStatement.execute();
     } catch (SQLException e) {
       this.logger.error(e.getMessage(), e);
+      throw new RuntimeException("Delete Failed", e);
     }
   }
 }

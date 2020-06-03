@@ -14,10 +14,6 @@ public class Customer implements DataTransferObject {
   private String state;
   private String zipcode;
 
-  public long getCustomer_id() {
-    return customer_id;
-  }
-
   public void setCustomer_id(long customer_id) {
     this.customer_id = customer_id;
   }
@@ -89,6 +85,6 @@ public class Customer implements DataTransferObject {
 
   @Override
   public long getId() {
-    return 0;
+    return this.customer_id;
   }
 }

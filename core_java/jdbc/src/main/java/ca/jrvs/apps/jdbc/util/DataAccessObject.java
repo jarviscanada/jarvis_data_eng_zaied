@@ -22,6 +22,8 @@ public abstract class DataAccessObject<T extends DataTransferObject> {
 
   public abstract T findById(long id);
 
+  public abstract T update(T dto);
+
   public abstract void delete(long id);
 
   protected int getLastVal(String col) {
@@ -35,6 +37,7 @@ public abstract class DataAccessObject<T extends DataTransferObject> {
 
     } catch (SQLException e) {
       this.logger.error(e.getMessage(), e);
+      throw new RuntimeException("getLastVal Failed", e);
     }
     return 0;
   }

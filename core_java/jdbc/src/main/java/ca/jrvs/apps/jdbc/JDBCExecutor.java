@@ -20,20 +20,25 @@ public class JDBCExecutor {
       //ol = order.getOrderLines();
       //System.out.print(ol.size());
       CustomerDAO customerDAO = new CustomerDAO(connection);
-      Customer customer = new Customer();
-      customer.setFirst_name("zaied");
-      customer.setLast_name("zaman");
-      customer.setEmail("zzaman2");
-      customer.setPhone("1122");
-      customer.setAddress("cccc");
-      customer.setCity("gg");
-      customer.setState("hh");
-      customer.setZipcode("0000");
+      //Customer customer = new Customer();
+      //customer.setFirst_name("zaied");
+      //customer.setLast_name("zaman");
+      //customer.setEmail("zzaman2");
+      //customer.setPhone("1122");
+      //customer.setAddress("cccc");
+      //customer.setCity("gg");
+      //customer.setState("hh");
+      //customer.setZipcode("0000");
       //Customer returnedCustomer = customerDAO.create(customer);
       //System.out.println(returnedCustomer.getFirst_name());
-      customerDAO.delete(10009);
+      //customerDAO.delete(10009);
+      Customer customer = customerDAO.findById(1000);
+      customer.setFirst_name("updated _name");
+      customer = customerDAO.update(customer);
+      System.out.println(customer.getFirst_name());
     } catch (SQLException e) {
       logger.error(e.getMessage(), e);
+      throw new RuntimeException("JDBCExecutor Failed", e);
     }
   }
 
