@@ -1,10 +1,10 @@
 # ***Java JDBC App***
  
  ## ***Introduction***
- Accessing Database, retrieving data through performing queries and manipulating data as needed is  
- necessary to all Web-Applications or any kind of large-scale systems in general. In this app, 
- we aim to interact with a PostGreSQL database instance using Java, more precisely, using JDBC driver.
- We will utilize DAO access pattern and Perform CRUD operations and also perform complex queries on 
+ Accessing Database, retrieving data through performing queries and manipulating data as needed is 
+ extremely necessary to all Web-Applications or any kind of large-scale systems in general. In this app, 
+ we aim to interact with a `PostGreSQL` database instance using `Java`, more precisely, using `JDBC driver`.
+ We will utilize DAO access pattern, perform CRUD operations and also perform complex queries on 
  data. Furthermore, we will also parse the response from the database and populate our generic 
  data object. 
 
@@ -24,32 +24,32 @@ As we are using `DataObjectAccess(DAO)` pattern, we will create our different `D
 CRUD or perform queries on the database.
 
 ## ***Database Tables***:
-Our database consists of following tables:
+Our database `hplussport` consists of following tables:
 * `customer`
 * `orders`
 * `product`
 * `salesperson`
 * `order_item`
 
-The fields inside each table and relationship between can be understood in the E-R
+The fields inside each table and relationship between them can be demonstrated in the E-R
 Diagram
 
 ## ***E-R Diagram***:
 ![E-R Diagram](./assets/jdbc_er.png)
 
 ## ***Dao and Repositories Pattern*** :
-`Dao` and `Repositories` are two different ways to implement `Data Access Layer (DAL)`. Applications
+`Dao` and `Repository` are two different ways to implement `Data Access Layer (DAL)`. Applications
 need some kind of logic to interact with database. The layer which handles the database access 
 and retrieval is `DAL`. It keeps the data access separate from rest of the application layers
-and abstract away the data access and persistence of data. in `DAO` pattern, each domain
-entity(To simplify, each database table) has a separate `DAO` class which deals with the access,
+and abstract away the data access and persistence of data. In `DAO` pattern, each domain
+entity (to simplify, each database table) has a separate `DAO` class which deals with the access,
 retrieval and query on that respective domain. In `DAO` pattern, joins are done in database and
 sometimes, this pattern is termed as database-centric as well. We chose `DAO` pattern as our tables
-are in `3NF`, so the joins will not be very complex. `Repositories` pattern adds another 
-abstraction layer on top. `Repositories` are nothing but a bunch of methods which can be 
-applied to collection of objects. In `Repositories` pattern, joins are handles in Code not in 
-Database. As our database is not very big, keeping the structure simple was our choice. However,
-for large databases, `Repositories` pattern might be a suitable choice. 
+are in `3NF`, so the joins will not be very complex. `Repository` pattern adds another 
+abstraction layer on top. `Repository` are nothing but a bunch of methods which can be 
+applied to collection of objects. In `Repository` pattern, joins are handled in Code not in 
+Database. As our database is not very big, keeping a simple structure was our priority. However,
+for large databases, `Repository` pattern might be a suitable choice. 
 
 ## ***Methods, Classes and Interfaces***
 
@@ -60,7 +60,7 @@ Our app consists of following parts:
  models
  * *`Customer`*: Customer class which will implement `DataTransferObject` and will
  have all the instance variables corresponding to the `Customer` table fields
- * *`Order`*: Customer class which will implement `DataTransferObject` and will
+ * *`Order`*: Order class which will implement `DataTransferObject` and will
   have all the instance variables corresponding to the `Order` table fields
   * *`CustomerDAO`*: CustomerDAO class will extend `DataAccessObject` and will
   implement all abstract methods to perform CRUD operations
@@ -69,16 +69,6 @@ Our app consists of following parts:
       
 We have used `self4j` for logging purpose and handled all the required exceptions.
 
-## ***`process` method pseudocode***:
-````
-matchedlines = []
-for file in listFilesRecursively(rootDir)
-    for line in readLines(file)
-        if containsPattern(line)
-            matchedLines.add(line)
-writeToFile(matchedLines)                
-````
-
 ## ***Performance Issues***:
 
 There are a couple of performance issues in this app:
@@ -86,8 +76,8 @@ There are a couple of performance issues in this app:
 * *Database size issue*: As we discussed, our solution is not scalabale to database size
 because of using `DAO` pattern.
 
-* *Memory consumption issue*: Our queries are not time or memory optimized, utilizing 
-brute-force approach of combining multiple joins which can result in a huge table after 
+* *Memory consumption issue*: Our queries are not time or memory optimized. We utilized a 
+brute-force approach of combining multiple joins. This can result in a huge table after 
 joins. Then we are searching through that table which can result in huge time and memory 
 consumption if database size is huge.
 
