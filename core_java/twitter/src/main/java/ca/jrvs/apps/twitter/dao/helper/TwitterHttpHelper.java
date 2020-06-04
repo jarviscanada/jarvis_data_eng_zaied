@@ -84,11 +84,11 @@ public class TwitterHttpHelper implements HttpHelper {
     } catch (IOException ioException) {
       ioException.printStackTrace();
     }
-    try {
-      System.out.println(EntityUtils.toString((response.getEntity())));
-    } catch (IOException ioException) {
-      ioException.printStackTrace();
-    }
+    //try {
+      //System.out.println(EntityUtils.toString((response.getEntity())));
+   //} catch (IOException ioException) {
+    //  ioException.printStackTrace();
+   // }
     return response;
   }
 
