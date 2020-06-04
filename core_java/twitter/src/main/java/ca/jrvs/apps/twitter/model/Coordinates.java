@@ -6,25 +6,25 @@ import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "hashtags",
-    "usermentions",
+    "coordinates",
+    "type",
 })
 
 public class Coordinates {
 
   @JsonProperty("coordinates")
-  private List<Integer> coordinates;
+  private List<Double> coordinates;
 
   @JsonProperty("type")
   private String type;
 
   @JsonProperty("coordinates")
-  public List<Integer> getCoordinates() {
+  public List<Double> getCoordinates() {
     return coordinates;
   }
 
   @JsonProperty("coordinates")
-  public void setCoordinates(List<Integer> coordinates) {
+  public void setCoordinates(List<Double> coordinates) {
     this.coordinates = coordinates;
   }
 

@@ -6,8 +6,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.google.gdata.util.common.base.PercentEscaper;
 import java.io.IOException;
 import java.net.URI;
+import javax.validation.constraints.Null;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import java.lang.Object.*;
@@ -19,6 +21,7 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
   private static final String POST_PATH = "/1.1/statuses/update.json";
   private static final String SHOW_PATH = "/1.1/statuses/show.json";
   private static final String DELETE_PATH = "/1.1/statuses/destroy";
+  private static final PercentEscaper escaper = new PercentEscaper("",false);
 
   private static final String QUERY_SYM = "?";
   private static final String AMPERSAND = "&";
@@ -40,15 +43,21 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
    */
   @Override
   public Tweet create(Tweet entity) {
-    return null;
-  }
 
-  private URI getShowUri(String s)
-  {
-    URI uri = URI.create(API_BASE_URI+SHOW_PATH+QUERY_SYM+"id"+EQUAL+s);
-    return uri;
-  }
+    URI uri = null;
 
+    try {
+
+      uri = getPostUri(entity);
+    }catch (NullPointerException e)
+    {
+     e.printStackTrace();
+    }
+
+    HttpResponse httpResponse = httpHelper.httpPost(uri);
+    Tweet tweet = this.parseResponseBody(httpResponse,HTTP_OK);
+    return tweet;
+  }
   /**
    * Find an entity(Tweet) by its id
    *
@@ -81,6 +90,22 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
   @Override
   public Tweet deleteById(String s) {
     return null;
+  }
+
+  //utility functions
+
+  private URI getShowUri(String s)
+  {
+    URI uri = URI.create(API_BASE_URI+SHOW_PATH+QUERY_SYM+"id"+EQUAL+s);
+    return uri;
+  }
+
+  private URI getPostUri(Tweet entity)
+  {
+    URI uri = URI.create(API_BASE_URI+POST_PATH+QUERY_SYM+"status"+EQUAL+escaper.escape(entity.getText())+
+        AMPERSAND+"long"+ EQUAL+ escaper.escape(String.valueOf(entity.getCoordinates().getCoordinates().get(0))) +AMPERSAND+"lat"+
+        EQUAL+ escaper.escape(String.valueOf(entity.getCoordinates().getCoordinates().get(1))));
+    return uri;
   }
 
   protected static String toJson(Object object, boolean prettyJson, boolean includeNullValues)
