@@ -4,6 +4,7 @@ import static ca.jrvs.apps.twitter.dao.TwitterDAO.toJson;
 
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
 import ca.jrvs.apps.twitter.dao.helper.TwitterHttpHelper;
+import ca.jrvs.apps.twitter.service.TwitterService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.net.URI;
 import java.util.List;
@@ -17,6 +18,7 @@ public class TwitterDAOTester {
     TwitterHttpHelper twitterHttpHelper = new TwitterHttpHelper(System.getenv("consumerKey"),System.getenv("consumerSecret")
         ,System.getenv("accessToken"), System.getenv("tokenSecret"));
     TwitterDAO twitterDAO = new TwitterDAO(twitterHttpHelper);
+    TwitterService twitterService = new TwitterService(twitterDAO);
     //Tweet srcTweet = new Tweet();
     //srcTweet.setText("hello repeat");
     //Coordinates coordinates = new Coordinates();
@@ -25,9 +27,9 @@ public class TwitterDAOTester {
     //l.add(50.0);
     //coordinates.setCoordinates(l);
     //srcTweet.setCoordinates(coordinates);
-    //Tweet tweet = twitterDAO.create(srcTweet);
-    Tweet tweet = twitterDAO.deleteById("1268604663718383619e");
-    //Tweet tweet = twitterDAO.findById("210462857140252672");
+    //Tweet tweet = twitterService.postTweet(srcTweet);
+    Tweet tweet = twitterService.deleteTweet("1268630150939381761");
+    //Tweet tweet = twitterService.showTweet("1268630150939381761");
    System.out.println(TwitterDAO.toJson(tweet,true,false));
   }
 
