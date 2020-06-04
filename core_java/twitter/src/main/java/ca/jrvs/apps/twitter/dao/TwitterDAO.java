@@ -20,7 +20,7 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
   private static final String API_BASE_URI = "https://api.twitter.com";
   private static final String POST_PATH = "/1.1/statuses/update.json";
   private static final String SHOW_PATH = "/1.1/statuses/show.json";
-  private static final String DELETE_PATH = "/1.1/statuses/destroy";
+  private static final String DELETE_PATH = "/1.1/statuses/destroy.json";
   private static final PercentEscaper escaper = new PercentEscaper("",false);
 
   private static final String QUERY_SYM = "?";
@@ -77,6 +77,11 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
     }
 
     HttpResponse httpResponse = httpHelper.httpGet(uri);
+    //try {
+    //  System.out.println(EntityUtils.toString(httpResponse.getEntity()));
+    //} catch (IOException ioException) {
+     // ioException.printStackTrace();
+    //}
     Tweet tweet = this.parseResponseBody(httpResponse,HTTP_OK);
     return tweet;
   }
@@ -89,7 +94,17 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
    */
   @Override
   public Tweet deleteById(String s) {
-    return null;
+    URI uri = null;
+    try{
+      uri = getDeleteUri(s);
+    }catch (NullPointerException e)
+    {
+      e.printStackTrace();
+    }
+
+    HttpResponse httpResponse = httpHelper.httpPost(uri);
+    Tweet tweet = parseResponseBody(httpResponse,HTTP_OK);
+    return tweet;
   }
 
   //utility functions
@@ -97,6 +112,12 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
   private URI getShowUri(String s)
   {
     URI uri = URI.create(API_BASE_URI+SHOW_PATH+QUERY_SYM+"id"+EQUAL+s);
+    return uri;
+  }
+
+  private URI getDeleteUri(String s)
+  {
+    URI uri = URI.create(API_BASE_URI+DELETE_PATH+QUERY_SYM+"id"+EQUAL+s);
     return uri;
   }
 
