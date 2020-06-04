@@ -3,6 +3,8 @@ package ca.jrvs.apps.twitter.service;
 import ca.jrvs.apps.twitter.dao.CrdDao;
 import ca.jrvs.apps.twitter.model.Tweet;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TwitterService implements Service {
 
@@ -20,23 +22,27 @@ public class TwitterService implements Service {
     try {
       validatedTweet = (Tweet) dao.create(tweet);
     } catch (IOException e) {
-      throw new RuntimeException("Tweet could not be validated", e);
+      throw new IllegalArgumentException("Tweet could not be validated", e);
     }
     return validatedTweet;
   }
 
-  public Tweet showTweet(String id)
+  public Tweet showTweet(String id, String[] printFields)
   {
     validateId(id);
-    Tweet validatedTweet =  validatedTweet = (Tweet) dao.findById(id);
+    Tweet validatedTweet = (Tweet) dao.findById(id);
     return validatedTweet;
   }
 
-  public Tweet deleteTweet(String id)
+  public List<Tweet> deleteTweets(String[] ids)
   {
-    validateId(id);
-    Tweet validatedTweet  = validatedTweet = (Tweet) dao.deleteById(id);
-    return validatedTweet;
+    List<Tweet> deletedTweets = new ArrayList<Tweet>();
+    int idNum = ids.length;
+    for(int i=0;i<idNum;i++) {
+      validateId(ids[i]);
+      deletedTweets.add((Tweet) dao.deleteById(ids[i]));
+    }
+    return deletedTweets;
   }
 
   //utility functions
@@ -48,15 +54,15 @@ public class TwitterService implements Service {
 
     if(text.length() > 140)
     {
-      throw new RuntimeException("Tweet text size too large (need to be <= 140)");
+      throw new IllegalArgumentException("Tweet text size too large (need to be <= 140)");
     }
     if(latitude < -90.0d || latitude > 90.0d)
     {
-      throw new RuntimeException("latitude out of bound (need to be >= -90.0 and <= 90.0)");
+      throw new IllegalArgumentException("latitude out of bound (need to be >= -90.0 and <= 90.0)");
     }
     if(longitude < -180.0d || longitude > 180.0d)
     {
-      throw new RuntimeException("longitude out of bound (need to be >= -180.0 and <= 180.0)");
+      throw new IllegalArgumentException("longitude out of bound (need to be >= -180.0 and <= 180.0)");
     }
   }
 
@@ -64,7 +70,7 @@ public class TwitterService implements Service {
   {
     if(!id.matches("\\d+"))
     {
-      throw new RuntimeException("id contains non digit characters)");
+      throw new IllegalArgumentException("id contains non digit characters)");
     }
     compareMinMax(id);
   }
@@ -77,7 +83,7 @@ public class TwitterService implements Service {
     int length = id.length();
     if(length > 19)
     {
-      throw new RuntimeException("id out of bound");
+      throw new IllegalArgumentException("id out of bound");
     }
     if(sign.equals("-"))
     {
@@ -101,7 +107,7 @@ public class TwitterService implements Service {
       }
       if(idDig>lminDig)
       {
-        throw new RuntimeException("id out of specified range");
+        throw new IllegalArgumentException("id out of specified range");
       }
     }
   }

@@ -77,11 +77,6 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
     }
 
     HttpResponse httpResponse = httpHelper.httpGet(uri);
-    //try {
-    //  System.out.println(EntityUtils.toString(httpResponse.getEntity()));
-    //} catch (IOException ioException) {
-     // ioException.printStackTrace();
-    //}
     Tweet tweet = this.parseResponseBody(httpResponse,HTTP_OK);
     return tweet;
   }
