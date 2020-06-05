@@ -1,6 +1,5 @@
 package ca.jrvs.apps.twitter.dao;
 
-import static ca.jrvs.apps.twitter.dao.TwitterDAO.toJson;
 
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
 import ca.jrvs.apps.twitter.dao.helper.TwitterHttpHelper;
@@ -31,7 +30,7 @@ public class TwitterDAOTester {
     //Tweet tweet = twitterService.postTweet(srcTweet);
     //Tweet tweet = twitterService.deleteTweet("1268630150939381761");
     //Tweet tweet = twitterService.showTweet("1268630150939381761");
-   System.out.println(TwitterDAO.toJson(tweet,true,false));
+   //System.out.println(TwitterDAO.toJson(tweet,true,false));
   }
 
 }

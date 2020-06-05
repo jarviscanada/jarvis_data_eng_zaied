@@ -11,6 +11,9 @@ import ca.jrvs.apps.twitter.service.TwitterService;
 import ca.jrvs.apps.twitter.model.*;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.*;
 
 public class TwitterCLIApp {
@@ -50,21 +53,56 @@ public class TwitterCLIApp {
     if(command.equals("post"))
     {
       Tweet createdTweet = controller.postTweet(args);
+      try {
+        System.out.println(this.toJson(createdTweet,true,false));
+      } catch (JsonProcessingException e) {
+        e.printStackTrace();
+      }
     }
     else if(command.equals("show"))
     {
       Tweet showedTweet = controller.showTweet(args);
+      try {
+        System.out.println(this.toJson(showedTweet,true,false));
+      } catch (JsonProcessingException e) {
+        e.printStackTrace();
+      }
 
     }
     else if(command.equals("delete"))
     {
       List<Tweet> deletedTweets = new ArrayList<Tweet>();
       deletedTweets = controller.deleteTweet(args);
+      try {
+        for(Tweet deletedTweet:deletedTweets)
+        {
+          System.out.println(toJson(deletedTweet,true,false));
+        }
+      } catch (JsonProcessingException e) {
+        e.printStackTrace();
+      }
     }
     else
     {
       throw new IllegalArgumentException("Usage: TwitterCLI post|show|delete [options]");
     }
+  }
+
+  //utility function
+  protected static String toJson(Object object, boolean prettyJson, boolean includeNullValues)
+      throws JsonProcessingException {
+    ObjectMapper objectMapper = new ObjectMapper();
+
+    if(!includeNullValues)
+    {
+      objectMapper.setSerializationInclusion(Include.NON_NULL);
+    }
+
+    if(prettyJson)
+    {
+      objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+    }
+    return objectMapper.writeValueAsString(object);
   }
 
 }

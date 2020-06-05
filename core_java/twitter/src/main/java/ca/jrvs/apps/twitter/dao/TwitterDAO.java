@@ -124,22 +124,6 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
     return uri;
   }
 
-  protected static String toJson(Object object, boolean prettyJson, boolean includeNullValues)
-      throws JsonProcessingException {
-    ObjectMapper objectMapper = new ObjectMapper();
-
-    if(!includeNullValues)
-    {
-      objectMapper.setSerializationInclusion(Include.NON_NULL);
-    }
-
-    if(prettyJson)
-    {
-      objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-    }
-    return objectMapper.writeValueAsString(object);
-  }
-
   private Tweet parseResponseBody(HttpResponse httpResponse, Integer HTTP_OK)
   {
     Tweet tweet = null;
