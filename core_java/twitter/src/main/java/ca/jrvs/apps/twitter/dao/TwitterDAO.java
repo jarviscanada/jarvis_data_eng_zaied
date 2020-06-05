@@ -124,7 +124,7 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
     return uri;
   }
 
-  private Tweet parseResponseBody(HttpResponse httpResponse, Integer HTTP_OK)
+  protected Tweet parseResponseBody(HttpResponse httpResponse, Integer HTTP_OK)
   {
     Tweet tweet = null;
 

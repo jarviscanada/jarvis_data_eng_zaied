@@ -44,10 +44,10 @@ public class Tweet {
       private String favorite_count;
 
       @JsonProperty("favorited")
-      private boolean favorited;
+      private Boolean favorited;
 
       @JsonProperty("retweeted")
-      private boolean retweeted;
+      private Boolean retweeted;
 
       @JsonProperty("created_at")
       public String getCreated_at() {
@@ -130,22 +130,22 @@ public class Tweet {
       }
 
       @JsonProperty("favorited")
-      public boolean isFavorited() {
+      public Boolean isFavorited() {
             return favorited;
       }
 
       @JsonProperty("favorited")
-      public void setFavorited(boolean favorited) {
+      public void setFavorited(Boolean favorited) {
             this.favorited = favorited;
       }
 
       @JsonProperty("retweeted")
-      public boolean isRetweeted() {
+      public Boolean isRetweeted() {
             return retweeted;
       }
 
       @JsonProperty("retweeted")
-      public void setRetweeted(boolean retweeted) {
+      public void setRetweeted(Boolean retweeted) {
             this.retweeted = retweeted;
       }
 }

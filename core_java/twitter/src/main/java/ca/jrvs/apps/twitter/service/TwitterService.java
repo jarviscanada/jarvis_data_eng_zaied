@@ -1,10 +1,14 @@
 package ca.jrvs.apps.twitter.service;
 
 import ca.jrvs.apps.twitter.dao.CrdDao;
+import ca.jrvs.apps.twitter.model.Hashtag;
 import ca.jrvs.apps.twitter.model.Tweet;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.OptionalInt;
 
 public class TwitterService implements Service {
 
@@ -31,7 +35,7 @@ public class TwitterService implements Service {
   {
     validateId(id);
     Tweet validatedTweet = (Tweet) dao.findById(id);
-    return validatedTweet;
+    return filterFields(printFields,validatedTweet);
   }
 
   public List<Tweet> deleteTweets(String[] ids)
@@ -110,5 +114,58 @@ public class TwitterService implements Service {
         throw new IllegalArgumentException("id out of specified range");
       }
     }
+  }
+
+  private Tweet filterFields(String[] printFields, Tweet srcTweet)
+  {
+    if(printFields==null) return srcTweet;
+    HashSet<String> hm = new HashSet<String>();
+    for (String printField : printFields) {
+      hm.add(printField);
+      System.out.println(printField);
+    }
+    if(!hm.contains("created_at"))
+    {
+      srcTweet.setCreated_at(null);
+    }
+    if(!hm.contains("id"))
+    {
+      srcTweet.setId((Integer) (null));
+    }
+    if(!hm.contains("id_str"))
+    {
+      srcTweet.setId_str(null);
+    }
+    if(!hm.contains("text"))
+    {
+      srcTweet.setText(null);
+    }
+    if(!hm.contains("entities"))
+    {
+      srcTweet.setEntities(null);
+    }
+    if(!hm.contains("coordinates"))
+    {
+      srcTweet.setCoordinates(null);
+    }
+    if(!hm.contains("retweet_count"))
+    {
+      srcTweet.setRetweet_count(null);
+    }
+    if(!hm.contains("favorite_count"))
+    {
+      srcTweet.setFavorite_count(null);
+    }
+    if(!hm.contains("retweeted"))
+    {
+      Boolean b=null;
+      srcTweet.setRetweeted(b);
+    }
+    if(!hm.contains("favorited"))
+    {
+      Boolean b=null;
+      srcTweet.setFavorited(b);
+    }
+    return srcTweet;
   }
 }
