@@ -50,7 +50,7 @@ public class TwitterService implements Service {
   }
 
   //utility functions
-  private void validatePostTweet(Tweet tweet)
+  protected void validatePostTweet(Tweet tweet)
   {
     String text = tweet.getText();
     Double latitude = tweet.getCoordinates().getCoordinates().get(0);
@@ -70,7 +70,7 @@ public class TwitterService implements Service {
     }
   }
 
-  private void validateId(String id)
+  protected void validateId(String id)
   {
     if(!id.matches("\\d+"))
     {
