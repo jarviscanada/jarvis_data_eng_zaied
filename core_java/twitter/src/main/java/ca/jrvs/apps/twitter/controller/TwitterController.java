@@ -53,7 +53,7 @@ public class TwitterController implements Controller {
   }
 
   //utility function
-  private Tweet makeTweet(String text, String[] coordinates)
+  protected Tweet makeTweet(String text, String[] coordinates)
   {
     Double latitude = Double.parseDouble(coordinates[0]);
     Double longitude = Double.parseDouble(coordinates[1]);
