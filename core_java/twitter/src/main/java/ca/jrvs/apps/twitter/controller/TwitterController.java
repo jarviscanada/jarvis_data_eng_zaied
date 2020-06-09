@@ -4,12 +4,15 @@ import ca.jrvs.apps.twitter.model.Coordinates;
 import ca.jrvs.apps.twitter.model.Tweet;
 import ca.jrvs.apps.twitter.service.*;
 import java.util.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
+@org.springframework.stereotype.Controller
 public class TwitterController implements Controller {
 
 
   private Service service;
 
+  @Autowired
   public TwitterController(Service service) {
     this.service = service;
   }

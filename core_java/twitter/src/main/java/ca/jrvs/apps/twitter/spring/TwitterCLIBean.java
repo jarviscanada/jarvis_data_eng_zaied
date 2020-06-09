@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ca.jrvs.apps.twitter.controller.Controller;
 
-@Configuration
+//@Configuration
 public class TwitterCLIBean {
 
   public static void main(String[] args) {

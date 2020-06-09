@@ -14,7 +14,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import java.lang.Object.*;
 import ca.jrvs.apps.twitter.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
+@org.springframework.stereotype.Repository
 public class TwitterDAO implements CrdDao<Tweet, String> {
 
   private static final String API_BASE_URI = "https://api.twitter.com";
@@ -31,6 +33,7 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
 
   private HttpHelper httpHelper;
 
+  @Autowired
   public TwitterDAO(HttpHelper httpHelper) {
     this.httpHelper = httpHelper;
   }
