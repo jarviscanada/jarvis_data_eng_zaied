@@ -41,7 +41,7 @@ public class TwitterCLIApp {
     twitterCLIApp.run(args);
   }
 
-  private void run (String[] args)
+  public void run(String[] args)
   {
     if(args.length < 1)
     {
