@@ -130,7 +130,7 @@ public class TwitterService implements Service {
     }
     if(!hm.contains("id"))
     {
-      srcTweet.setId((Integer) (null));
+      srcTweet.setId((Long) (null));
     }
     if(!hm.contains("id_str"))
     {
