@@ -14,6 +14,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -29,6 +31,7 @@ public class TwitterHttpHelper implements HttpHelper {
    */
   private OAuthConsumer consumer;
   private HttpClient httpClient = HttpClientBuilder.create().build();;
+  protected final Logger logger = LoggerFactory.getLogger(TwitterHttpHelper.class);
 
   /**Constructor
    * Setup dependencies using secrets
@@ -40,11 +43,6 @@ public class TwitterHttpHelper implements HttpHelper {
    */
 
 
-  String consumerKey = System.getenv("consumerKey");
-  String consumerSecret = System.getenv("consumerSecret");
-  String accessToken = System.getenv("accessToken");
-  String tokenSecret = System.getenv("tokenSecret");
-
   @Autowired
   public TwitterHttpHelper(@Value("${consumerKey}") String consumerKey, @Value("${consumerSecret}")
       String consumerSecret, @Value("${accessToken}") String accessToken, @Value("${tokenSecret}") String tokenSecret){
@@ -52,12 +50,11 @@ public class TwitterHttpHelper implements HttpHelper {
     consumer.setTokenWithSecret(accessToken,tokenSecret);
   }
 
-  public TwitterHttpHelper(){
+  //public TwitterHttpHelper(){
 
-
-    consumer = new CommonsHttpOAuthConsumer(consumerKey,consumerSecret);
-    consumer.setTokenWithSecret(accessToken,tokenSecret);
-  }
+    //consumer = new CommonsHttpOAuthConsumer(consumerKey,consumerSecret);
+    //consumer.setTokenWithSecret(accessToken,tokenSecret);
+  //}
 
   /**
    * Execute a HTTP Post call
