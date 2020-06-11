@@ -14,6 +14,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TwitterHttpHelper implements HttpHelper {
 
@@ -21,7 +23,8 @@ public class TwitterHttpHelper implements HttpHelper {
    * Dependencies are specified as private member variables
    */
   private OAuthConsumer consumer;
-  private HttpClient httpClient = HttpClientBuilder.create().build();;
+  private HttpClient httpClient = HttpClientBuilder.create().build();
+  protected final Logger logger = LoggerFactory.getLogger(TwitterHttpHelper.class);
 
   /**Constructor
    * Setup dependencies using secrets
@@ -48,18 +51,16 @@ public class TwitterHttpHelper implements HttpHelper {
     try {
       consumer.sign(request);
     } catch (OAuthMessageSignerException | OAuthExpectationFailedException | OAuthCommunicationException e) {
-      e.printStackTrace();
+      logger.error(e.getMessage(),e);
+      throw new RuntimeException("OAuthMessageSignerException | OAuthExpectationFailedException | OAuthCommunicationException",e)
+
     }
     HttpResponse response = null;
     try {
       response = httpClient.execute(request);
     } catch (IOException ioException) {
-      ioException.printStackTrace();
-    }
-    try {
-      System.out.println(EntityUtils.toString((response.getEntity())));
-    } catch (IOException ioException) {
-      ioException.printStackTrace();
+      logger.error(ioException.getMessage(),ioException);
+      throw new RuntimeException("no response",ioException);
     }
     return response;
   }
@@ -76,18 +77,15 @@ public class TwitterHttpHelper implements HttpHelper {
     try {
       consumer.sign(request);
     } catch (OAuthMessageSignerException | OAuthExpectationFailedException | OAuthCommunicationException e) {
-      e.printStackTrace();
+      logger.error(e.getMessage(),e);
+      throw new RuntimeException("OAuthMessageSignerException | OAuthExpectationFailedException | OAuthCommunicationException",e)
     }
     HttpResponse response = null;
     try {
       response = httpClient.execute(request);
     } catch (IOException ioException) {
-      ioException.printStackTrace();
-    }
-    try {
-      System.out.println(EntityUtils.toString((response.getEntity())));
-    } catch (IOException ioException) {
-      ioException.printStackTrace();
+      logger.error(ioException.getMessage(),ioException);
+      throw new RuntimeException("no response",ioException);
     }
     return response;
   }
