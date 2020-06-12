@@ -10,25 +10,23 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication(scanBasePackages = "ca.jrvs.apps.twitter")
 public class TwitterCLISpringBoot implements CommandLineRunner {
 
-  private TwitterCLIApp app;
+    private TwitterCLIApp app;
 
-  @Autowired
-  public TwitterCLISpringBoot(TwitterCLIApp twitterCLIApp)
-  {
-    this.app = twitterCLIApp;
-  }
+    @Autowired
+    public TwitterCLISpringBoot(TwitterCLIApp twitterCLIApp) {
+        this.app = twitterCLIApp;
+    }
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    SpringApplication springApplication = new SpringApplication(TwitterCLISpringBoot.class);
-    springApplication.setWebApplicationType(WebApplicationType.NONE);
-    springApplication.run(args);
-  }
+        SpringApplication springApplication = new SpringApplication(TwitterCLISpringBoot.class);
+        springApplication.setWebApplicationType(WebApplicationType.NONE);
+        springApplication.run(args);
+    }
 
-  @Override
-  public void run(String... args)
-  {
-    app.run(args);
-  }
+    @Override
+    public void run(String... args) {
+        app.run(args);
+    }
 
 }

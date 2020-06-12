@@ -2,17 +2,16 @@
 ## Introduction
 Twitter is currently one of the most, if not the most used social media platform.
 Users can post, delete, view and use various other features provided by twitter 
-Twitter Graphical User Interface (GUI). In this app, we want to make a command line
+Twitter Graphical User Interface (GUI). In this app, we want to make a command-line
 app which can perform basic twitter functionalities given appropriate user input
 using Java. To simplify, our app will automate the basic functionalities. We will
-interact with Twitter API endpoints using our own REST APIs. We will utilize the
+interact with Twitter API endpoints using our REST APIs. We will utilize the
 MVC (Module View Controller) architecture without the View layer while building
-our app. Being an MVP (Most Viable Product) solution we have automated post, show 
-and delete feature to get us started.
+our app. Being an MVP (Most Viable Product) solution we have automated post, show, and delete features to get us started.
 
 ## Usage
 
-We can invoke our app with following program arguments:
+We can invoke our app with the following program arguments:
 
 * To `post` a tweet: The app will build a `Tweet` object based on the provided text and
 latitude and longitude and post using Twitter API end-point and return the posted tweet in 
@@ -31,7 +30,7 @@ Example Usage:
 TwitterCLI "post" "test post" "0:0"
 ````
 
-* To `show` a tweet: The app get the JSON reponse object based on the provided tweet_id 
+* To `show` a tweet: The app gets the JSON response object based on the provided tweet_id 
 using Twitter API end-point and parse and show the appropriate fields according to the optional
 parameters.
 ```
@@ -63,7 +62,7 @@ TwitterCLI delete 1200145224103841792
 
 ## Packaging and Building
 
-We have used `Maven` to build the project. So, in order to 
+We have used `Maven` to build the project. So, to 
 manage building dependencies a `pom.xml` file needs to be written.
 
 We have used `Java 8` as our `JDK`. To use the same add following
@@ -75,7 +74,7 @@ lines in the file.
     <maven.compiler.target>1.8</maven.compiler.target>
 </properties>
 ````
-Follwing dependencies needs to be added in the file:
+Following dependencies needs to be added in the file:
 
 In order to `user authorization` and `signing request` add the 
 following,
@@ -140,10 +139,7 @@ To add `Spring` framework add following,
 
 * ### Classes, Interfaces, Methods:
 
-    * `TwitterCLIApp`: This is the main entry-point for our app. This class has
-    a `Main` method that will set the authorization keys and tokens to interact
-    with twitter API end-points.This method will create all the dependencies 
-    and pass them to the appropriate classes to instantiate.
+    * `TwitterCLIApp`: This is the main entry-point for our app. This class has a `Main` method that will set the authorization keys and tokens to interact with twitter API end-points. This method will create all the dependencies and pass them to the appropriate classes to instantiate.
      
     `Main` method will invoke the `run` 
     method that will decide the appropriate method from program arguments e.g. 
@@ -156,10 +152,9 @@ To add `Spring` framework add following,
   if arg = delete:
     call controller.delete()
     ```` 
-    * `TwitterController`: This class implements the  `Controller` interface. It implements
-    primarily three methods named as `post`,`show`,`delete` alongside some utility functions.
+    * `TwitterController`: This class implements the  `Controller` interface. It implements primarily three methods named as `post`,`show`,`delete` alongside some utility functions.
     This class deals with the expected and actual number of program arguments provided
-    by user and assigns them and calls the appropriate `service` module methods.
+    by the user and assigns them and calls the appropriate `service` module methods.
     Following is the pseudocode:
     
      ````
@@ -236,9 +231,7 @@ To add `Spring` framework add following,
             throw appropriate runtime exception
             call CrDao.delete(args)
      ````
-   * `TwitterDAO`: We have used `DAO` pattern for data retrieval access and processing. This module deals
-        with all the data related functions.This class implements the  `CrdDao` interface and it accepts
-        the `Tweet` class as  a parameter. This class specifies all the necessary API end-points and 
+   * `TwitterDAO`: We have used `DAO` pattern for data retrieval access and processing. This module deals with all the data related functions. This class implements the  `CrdDao` interface and it accepts the `Tweet` class as a parameter. This class specifies all the necessary API endpoints and 
         build appropriate `URI` to interact with Twitter API's and perform appropriate tasks using 
         `HttpHelper` module.
         
@@ -269,7 +262,7 @@ To add `Spring` framework add following,
         HttpResponse_object = HttpClient_object.get(http_get_request_object)
   
      ````
-  * `Tweet`: The official Tweet model is huge and consists of lots of exciting functionalites.
+  * `Tweet`: The official Tweet model is huge and consists of lots of exciting functionalities.
   Being an MVP solution we considered a simplified tweet model. A sample simplified `Tweet`
   is following,
   
@@ -295,7 +288,7 @@ To add `Spring` framework add following,
      2. `id`: Twitter provided tweet id
      3. `id_str`: Tweet id in `String` format
      4. `text`: User provided tweet text
-     5. `entities`: this field consist all the user_mentions and hashtags
+     5. `entities`: this field consists of all the user_mentions and hashtags
      included in the tweet text
      6. `favorite_count`: self-explanatory
      7. `retweet_count`: self-explanatory
@@ -307,22 +300,20 @@ To add `Spring` framework add following,
 
 We have used `Mockito` and `Junit 4` to write tests for both 
 `Unit test` and `Integration test`. Properly logging is maintained
-using `self4j` framework. Appropriate Exceptions have been thrown as
+using the `self4j` framework. Appropriate Exceptions have been thrown as
 required.
 
 
 ##Performance Issues:
 
-1. In this app, the number of classes and interfaces are fairly low. But if 
-the number of classes grows, it will be almost impossible for us to manage
+1. In this app, the number of classes and interfaces are fairly low. But if the number of classes grows, it will be almost impossible for us to manage
 and inject the dependencies manually. 
 2. For large scale applications, the `DAO` pattern is not suitable for data
 access and retrieval.
 
 ## Improvements:
-1. We have already addressed the first performance issue and attempted to 
-solve in an updated version of this solution as well. Three different
-solutions are inclueded in the `Spring` module.
+1. We have already addressed the first performance issue and attempted to solve it in an updated version of this solution as well. Three different
+solutions are included in the `Spring` module.
     * Using the `Bean` approach in `Spring` framework:
     We have used the `Spring` framework to facilitate our dependency 
     management. We have annotated all the modules with `Bean` 
@@ -330,7 +321,7 @@ solutions are inclueded in the `Spring` module.
     them as `Bean` object and construct them automatically utilizing
     automatic dependency injection. This approach solves some of
     our problem but still we need to manually declare those `Beans`
-    in the entry-point which might be uncotrollable if `Bean` number
+    in the entry-point which might be uncontrollable if `Bean` number
     grows.
     
     * Using the `Component` approach in `Spring` framework: In this
@@ -343,7 +334,7 @@ solutions are inclueded in the `Spring` module.
     injection finding `Autowired` annotation. This will solve our 
     first issue.
     
-    * Transfroming the app to a `SpringBootApplication`:
+    * Transforming the app to a `SpringBootApplication`:
     We have added another abstract layer on top of our entry-point
     class and transformed this newly added class to a 
     `SpringBootAppplication`. We get the automatic dependency
@@ -351,15 +342,6 @@ solutions are inclueded in the `Spring` module.
     injection here as well.
  
  2. To solve the second issue and make our app adaptable to 
- growing number of classes we can use the `Repository` data
+ the growing number of classes we can use the `Repository` data
  access pattern.
     
-    
-    
-    
-    
-  
-    
-
-
-
