@@ -5,7 +5,7 @@ Users can post, delete, view and use various other features provided by twitter
 Twitter Graphical User Interface (GUI). In this app, we want to make a command-line
 app which can perform basic twitter functionalities given appropriate user input
 using Java. To simplify, our app will automate the basic functionalities. We will
-interact with Twitter API endpoints using our REST APIs. We will utilize the
+interact with Twitter API endpoints. We will utilize the
 MVC (Module View Controller) architecture without the View layer while building
 our app. Being an MVP (Most Viable Product) solution we have automated post, show, and delete features to get us started.
 
@@ -304,7 +304,7 @@ using the `self4j` framework. Appropriate Exceptions have been thrown as
 required.
 
 
-##Performance Issues:
+## Performance Issues:
 
 1. In this app, the number of classes and interfaces are fairly low. But if the number of classes grows, it will be almost impossible for us to manage
 and inject the dependencies manually. 
