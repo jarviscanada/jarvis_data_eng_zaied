@@ -15,9 +15,7 @@
       <artifactId>slf4j-log4j12</artifactId>
       <version>1.7.28</version>
     </dependency>
-    <dependency>
 
-  <dependencies>
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>

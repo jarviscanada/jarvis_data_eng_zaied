@@ -1,4 +1,4 @@
-# ***Java JDBC App***
+# Java JDBC App
  
  ## ***Introduction***
  Accessing Database, retrieving data through performing queries and manipulating data as needed is 
