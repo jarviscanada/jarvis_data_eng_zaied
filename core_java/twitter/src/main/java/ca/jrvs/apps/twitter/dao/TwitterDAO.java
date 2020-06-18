@@ -53,7 +53,7 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
 
             uri = getPostUri(entity);
         } catch (NullPointerException ex) {
-            logger.error(ex.getMessage(), ex);
+            logger.error("nullptr found on create TwitterDAO", ex);
             throw new RuntimeException("could not build post uri", ex);
         }
 
@@ -76,7 +76,7 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
         try {
             uri = getShowUri(s);
         } catch (NullPointerException ex) {
-            logger.error(ex.getMessage(), ex);
+            logger.error("nullptr found on findById TwitterDAO", ex);
             throw new RuntimeException("could not build show uri", ex);
         }
 
@@ -97,7 +97,7 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
         try {
             uri = getDeleteUri(s);
         } catch (NullPointerException ex) {
-            logger.error(ex.getMessage(), ex);
+            logger.error("nullptr found on deleteById TwitterDAO", ex);
             throw new RuntimeException("could not build delete uri", ex);
         }
 
@@ -141,7 +141,7 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
             str = EntityUtils.toString(httpResponse.getEntity());
         } catch (IOException ex) {
 
-            logger.error(ex.getMessage());
+            logger.error("Could not covert to string parseResponseBody TwitterDAO");
             throw new RuntimeException("Could not convert to string", ex);
         }
 
@@ -151,7 +151,7 @@ public class TwitterDAO implements CrdDao<Tweet, String> {
             tweet = (Tweet) m.readValue(str, Tweet.class);
         } catch (IOException ex) {
 
-            logger.error(ex.getMessage());
+            logger.error("Could not covert to Tweet Object parseResponseBody TwitterDAO");
             throw new RuntimeException("Could not convert to tweet object", ex);
         }
         return tweet;

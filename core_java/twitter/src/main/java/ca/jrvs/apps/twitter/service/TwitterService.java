@@ -29,7 +29,7 @@ public class TwitterService implements Service {
         try {
             validatedTweet = (Tweet) dao.create(tweet);
         } catch (IOException ex) {
-            logger.error(ex.getMessage(), ex);
+            logger.error("Tweet could not be validated posTweet TwitterService", ex);
             throw new IllegalArgumentException("Tweet could not be validated", ex);
         }
         return validatedTweet;
@@ -108,7 +108,6 @@ public class TwitterService implements Service {
         HashSet<String> hm = new HashSet<String>();
         for (String printField : printFields) {
             hm.add(printField);
-            System.out.println(printField);
         }
         if (!hm.contains("created_at")) {
             srcTweet.setCreated_at(null);

@@ -73,6 +73,7 @@ public class TwitterCLIApp {
             throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
 
+
         if (!includeNullValues) {
             objectMapper.setSerializationInclusion(Include.NON_NULL);
         }

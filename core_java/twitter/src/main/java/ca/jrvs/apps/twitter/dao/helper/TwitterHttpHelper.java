@@ -9,6 +9,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,20 +60,7 @@ public class TwitterHttpHelper implements HttpHelper {
     @Override
     public HttpResponse httpPost(URI uri) {
         HttpPost request = new HttpPost(uri);
-        try {
-            consumer.sign(request);
-        } catch (OAuthMessageSignerException | OAuthExpectationFailedException | OAuthCommunicationException ex) {
-            logger.error(ex.getMessage(), ex);
-            throw new RuntimeException("OAuthMessageSignerException | OAuthExpectationFailedException | OAuthCommunicationException", ex);
-        }
-        HttpResponse response = null;
-        try {
-            response = httpClient.execute(request);
-        } catch (IOException ex) {
-            logger.error(ex.getMessage(), ex);
-            throw new RuntimeException("could not get post response", ex);
-        }
-        return response;
+        return signAndExecute(request);
     }
 
     /**
@@ -84,17 +72,22 @@ public class TwitterHttpHelper implements HttpHelper {
     @Override
     public HttpResponse httpGet(URI uri) {
         HttpGet request = new HttpGet(uri);
+        return signAndExecute(request);
+    }
+
+    //utility function
+    private HttpResponse signAndExecute(HttpRequestBase request) {
         try {
             consumer.sign(request);
         } catch (OAuthMessageSignerException | OAuthExpectationFailedException | OAuthCommunicationException ex) {
-            logger.error(ex.getMessage(), ex);
+            logger.error("signAndExecute Failed", ex);
             throw new RuntimeException("OAuthMessageSignerException | OAuthExpectationFailedException | OAuthCommunicationException", ex);
         }
         HttpResponse response = null;
         try {
             response = httpClient.execute(request);
         } catch (IOException ex) {
-            logger.error(ex.getMessage(), ex);
+            logger.error("signAndExecute Failed", ex);
             throw new RuntimeException("could not get post response", ex);
         }
         return response;

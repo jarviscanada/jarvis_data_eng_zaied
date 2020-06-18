@@ -49,7 +49,6 @@ public class TwitterCLIBean {
         String consumerSecret = System.getenv("consumerSecret");
         String accessToken = System.getenv("accessToken");
         String tokenSecret = System.getenv("tokenSecret");
-
         return new TwitterHttpHelper(consumerKey, consumerSecret, accessToken, tokenSecret);
     }
 }
