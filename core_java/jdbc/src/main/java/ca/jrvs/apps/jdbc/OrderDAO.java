@@ -59,7 +59,7 @@ public class OrderDAO extends DataAccessObject<Order> {
       }
       order.setOrderLines(orderLinesList);
     } catch (SQLException e) {
-      this.logger.error(e.getMessage(), e);
+      logger.error(e.getMessage(), e);
       throw new RuntimeException("findById Failed");
     }
     return order;

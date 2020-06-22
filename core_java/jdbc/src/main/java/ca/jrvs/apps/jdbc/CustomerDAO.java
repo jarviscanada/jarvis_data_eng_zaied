@@ -40,11 +40,11 @@ public class CustomerDAO extends DataAccessObject<Customer> {
       preparedStatement.setString(8, dto.getZipcode());
 
       preparedStatement.execute();
-      int lastId = this.getLastVal(CUSTOMER_SEQ);
-      return this.findById(lastId);
+      int lastId = getLastVal(CUSTOMER_SEQ);
+      return findById(lastId);
 
     } catch (SQLException e) {
-      this.logger.error(e.getMessage(), e);
+      logger.error(e.getMessage(), e);
       throw new RuntimeException("Create Failed", e);
     }
   }
@@ -68,7 +68,7 @@ public class CustomerDAO extends DataAccessObject<Customer> {
         customer.setZipcode(resultSet.getString("zipcode"));
       }
     } catch (SQLException e) {
-      this.logger.error(e.getMessage(), e);
+      logger.error(e.getMessage(), e);
       throw new RuntimeException("findById Failed", e);
     }
     return customer;
@@ -80,9 +80,9 @@ public class CustomerDAO extends DataAccessObject<Customer> {
     Customer customer = null;
 
     try {
-      this.connection.setAutoCommit(false);
+      connection.setAutoCommit(false);
     } catch (SQLException e) {
-      this.logger.error(e.getMessage(), e);
+      logger.error(e.getMessage(), e);
       throw new RuntimeException("SetAutoCommit Failed", e);
     }
 
@@ -98,17 +98,17 @@ public class CustomerDAO extends DataAccessObject<Customer> {
       preparedStatement.setLong(9, dto.getId());
 
       preparedStatement.execute();
-      this.connection.commit();
+      connection.commit();
       customer = this.findById(dto.getId());
 
     } catch (SQLException e) {
       try {
-        this.connection.rollback();
+        connection.rollback();
       } catch (SQLException eroll) {
-        this.logger.error(e.getMessage(), eroll);
+        logger.error(e.getMessage(), eroll);
         throw new RuntimeException("Rollback Failed", eroll);
       }
-      this.logger.error(e.getMessage(), e);
+      logger.error(e.getMessage(), e);
       throw new RuntimeException("Update Failed", e);
     }
     return customer;
@@ -120,7 +120,7 @@ public class CustomerDAO extends DataAccessObject<Customer> {
       preparedStatement.setLong(1, id);
       preparedStatement.execute();
     } catch (SQLException e) {
-      this.logger.error(e.getMessage(), e);
+      logger.error(e.getMessage(), e);
       throw new RuntimeException("Delete Failed", e);
     }
   }
