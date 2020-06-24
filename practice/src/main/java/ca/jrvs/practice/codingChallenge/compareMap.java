@@ -29,5 +29,9 @@ public class compareMap {
                                            Map<?, ? extends Object> m2 ){
         return m1.equals(m2);
     }
+    public static boolean compareMapRunnerWithStream(Map<?, ? extends Object> m1,
+                                                       Map<?, ? extends Object> m2 ){
+        return m1.entrySet().stream().allMatch(k->m1.get(k).equals(m2.get(k)));
+    }
 
 }

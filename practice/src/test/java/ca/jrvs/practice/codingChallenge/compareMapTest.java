@@ -32,4 +32,16 @@ public class compareMapTest {
         assertTrue(compareMap.compareMapRunner(m1,m2));
         assertFalse(compareMap.compareMapRunner(m1,m3));
     }
+
+    @Test
+    public void compareMapRunnerWithStream() {
+        Map<Integer, Integer> m1 = new HashMap<>();
+        m1.put(1,1);
+        Map<Integer, Integer> m2 = new HashMap<>();
+        m2.put(1,1);
+        Map<Integer, Integer> m3 = new HashMap<>();
+        m3.put(2,1);
+        assertTrue(compareMap.compareMapRunner(m1,m2));
+        assertFalse(compareMap.compareMapRunner(m1,m3));
+    }
 }
