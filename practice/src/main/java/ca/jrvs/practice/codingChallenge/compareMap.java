@@ -20,16 +20,16 @@ public class compareMap {
      * the maximum total entry in both of the maps in n. then complexity will be
      * O(n). checking each of the key and value is a constant time operation.
      */
-    public static boolean compareMapRunner(Map<?, ? extends Object> m1,
+    public static final boolean compareMapRunner(Map<?, ? extends Object> m1,
                                            Map<?, ? extends Object> m2 ){
         return m1.equals(m2);
     };
 
-    public static boolean compareMapRunnerWithHashJMap(Map<?, ? extends Object> m1,
+    public static final boolean compareMapRunnerWithHashJMap(Map<?, ? extends Object> m1,
                                            Map<?, ? extends Object> m2 ){
         return m1.equals(m2);
     }
-    public static boolean compareMapRunnerWithStream(Map<?, ? extends Object> m1,
+    public static final boolean compareMapRunnerWithStream(Map<?, ? extends Object> m1,
                                                        Map<?, ? extends Object> m2 ){
         return m1.entrySet().stream().allMatch(k->m1.get(k).equals(m2.get(k)));
     }
