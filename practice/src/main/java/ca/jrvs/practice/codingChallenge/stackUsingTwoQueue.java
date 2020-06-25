@@ -15,6 +15,12 @@ public class stackUsingTwoQueue<T> {
         this.q2.clear();
     }
 
+    /***
+     * time complexity: 0(q1 size + 1)
+     * space complexity: 0(q1 size + 1)
+     * @param val
+     */
+
     public void push(T val)
     {
         q2.add(val);
@@ -27,16 +33,31 @@ public class stackUsingTwoQueue<T> {
         q2 = temp;
     }
 
+    /***
+     * time complexity: 0(1)
+     * space complexity: 0(1)
+     * @return
+     */
     public T pop()
     {
         return q1.remove();
     }
 
+    /***
+     * time complexity: 0(1)
+     * space complexity: 0(1)
+     * @return
+     */
     public T top()
     {
         return q1.peek();
     }
 
+    /***
+     * time complexity: 0(1)
+     * space complexity: 0(1)
+     * @return
+     */
     public boolean empty()
     {
         return q1.isEmpty();
