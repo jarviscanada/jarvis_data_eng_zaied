@@ -1,7 +1,5 @@
 package ca.jrvs.practice.codingChallenge;
 
-import javax.print.attribute.standard.NumberUp;
-
 public class str2int {
 
     /***
@@ -10,19 +8,14 @@ public class str2int {
      * @param string
      * @return
      */
-    public static final int str2intWithAPI(String string)
-    {
+    public static final int str2intWithAPI(String string) {
         int n = string.length();
         StringBuilder afterWhitespace = new StringBuilder();
         boolean changed = false;
-        for(int i=0;i<n;i++)
-        {
-            if(!changed && string.charAt(i) == ' ')
-            {
+        for (int i = 0; i < n; i++) {
+            if (!changed && string.charAt(i) == ' ') {
                 continue;
-            }
-            else
-            {
+            } else {
                 afterWhitespace.append(string.charAt(i));
                 changed = true;
             }
@@ -30,36 +23,28 @@ public class str2int {
         StringBuilder removedAfter = new StringBuilder();
         int sign = 0;
         changed = false;
-        for(int i=0;i<afterWhitespace.length();i++)
-        {
-            if(!changed && (afterWhitespace.charAt(i) == '+' || afterWhitespace.charAt(i) == '-'))
-            {
-                if(afterWhitespace.charAt(i) == '-') sign =-1;
+        for (int i = 0; i < afterWhitespace.length(); i++) {
+            if (!changed && (afterWhitespace.charAt(i) == '+' || afterWhitespace.charAt(i) == '-')) {
+                if (afterWhitespace.charAt(i) == '-') sign = -1;
                 removedAfter.append(afterWhitespace.charAt(i));
                 changed = true;
-            }
-            else if(afterWhitespace.charAt(i) >= '0' && afterWhitespace.charAt(i) <= '9')
-            {
+            } else if (afterWhitespace.charAt(i) >= '0' && afterWhitespace.charAt(i) <= '9') {
                 removedAfter.append(afterWhitespace.charAt(i));
                 changed = true;
-            }
-            else if(!changed || (afterWhitespace.charAt(i) < '0' || afterWhitespace.charAt(i) > '9')) {
+            } else if (!changed || (afterWhitespace.charAt(i) < '0' || afterWhitespace.charAt(i) > '9')) {
                 break;
             }
         }
         String resStr = removedAfter.toString();
-        if(resStr.length() <= 0) return 0;
-        if(resStr.length() == 1 && (resStr.charAt(0) == '+' || resStr.charAt(0) == '-')) return 0;
+        if (resStr.length() <= 0) return 0;
+        if (resStr.length() == 1 && (resStr.charAt(0) == '+' || resStr.charAt(0) == '-')) return 0;
         int res = 0;
-        try
-        {
+        try {
             res = Integer.parseInt(resStr);
-        }catch (NumberFormatException ex)
-        {
-            if(sign == -1) res = Integer.MIN_VALUE;
+        } catch (NumberFormatException ex) {
+            if (sign == -1) res = Integer.MIN_VALUE;
             else res = Integer.MAX_VALUE;
-        }
-        finally {
+        } finally {
             return res;
         }
 
@@ -81,21 +66,17 @@ public class str2int {
             if (ns && (string.charAt(i) < '0' || string.charAt(i) > '9')) {
                 break;
             } else if (!ns && (string.charAt(i) == '-' || string.charAt(i) == '+')) {
-                if(string.charAt(i) == '-')
-                {
+                if (string.charAt(i) == '-') {
                     sign = -1;
                 }
                 ns = true;
             } else if (string.charAt(i) >= '0' && string.charAt(i) <= '9') {
                 temp = temp * 10 + string.charAt(i) - '0';
                 ns = true;
-                if(sign == -1)
-                {
-                    if((-1)*temp < Integer.MIN_VALUE) return Integer.MIN_VALUE;
-                }
-                else
-                {
-                    if(temp > Integer.MAX_VALUE) return Integer.MAX_VALUE;
+                if (sign == -1) {
+                    if ((-1) * temp < Integer.MIN_VALUE) return Integer.MIN_VALUE;
+                } else {
+                    if (temp > Integer.MAX_VALUE) return Integer.MAX_VALUE;
                 }
                 res = temp.intValue();
             } else if (!ns && string.charAt(i) != ' ') {

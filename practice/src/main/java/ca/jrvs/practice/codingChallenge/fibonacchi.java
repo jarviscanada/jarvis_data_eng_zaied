@@ -1,15 +1,12 @@
 package ca.jrvs.practice.codingChallenge;
 
-import java.lang.reflect.Array;
-import java.util.*;
-import java.util.stream.Stream;
+import java.util.Arrays;
 
 public class fibonacchi {
 
-    private static Integer[] memo  = new Integer[33];
+    private static Integer[] memo = new Integer[33];
 
-    public static final void init()
-    {
+    public static final void init() {
         Integer[] temp = Arrays.stream(memo).map(val -> -1).toArray(Integer[]::new);
         memo = temp;
     }
@@ -21,11 +18,10 @@ public class fibonacchi {
      * @param n
      * @return
      */
-    public static final int fibonacchiWithRecursion(int n)
-    {
-        if(n < 1) return 0;
-        if(n == 1) return 1;
-        return fibonacchiWithRecursion(n-1) + fibonacchiWithRecursion(n-2);
+    public static final int fibonacchiWithRecursion(int n) {
+        if (n < 1) return 0;
+        if (n == 1) return 1;
+        return fibonacchiWithRecursion(n - 1) + fibonacchiWithRecursion(n - 2);
     }
 
     /***
@@ -36,17 +32,16 @@ public class fibonacchi {
      * @return
      */
     private static boolean initialized = false;
-    public static final int fibonacchiWithBackwarddp(int n)
-    {
-        if(!initialized)
-        {
+
+    public static final int fibonacchiWithBackwarddp(int n) {
+        if (!initialized) {
             init();
             initialized = true;
         }
-        if(n < 1) return 0;
-        if(n == 1) return 1;
-        if(memo[n] != -1) return memo[n];
-        memo[n] = fibonacchiWithBackwarddp(n-1) + fibonacchiWithBackwarddp(n-2);
+        if (n < 1) return 0;
+        if (n == 1) return 1;
+        if (memo[n] != -1) return memo[n];
+        memo[n] = fibonacchiWithBackwarddp(n - 1) + fibonacchiWithBackwarddp(n - 2);
         return memo[n];
     }
 
@@ -57,14 +52,12 @@ public class fibonacchi {
      * @param n
      * @return
      */
-    public static final int fibonacchiWithForwarddp(int n)
-    {
-        int[] memo = new int[n+1];
+    public static final int fibonacchiWithForwarddp(int n) {
+        int[] memo = new int[n + 1];
         memo[0] = 0;
         memo[1] = 1;
-        for(int i=2;i<=n;i++)
-        {
-            memo[i] = memo[i-1]+memo[i-2];
+        for (int i = 2; i <= n; i++) {
+            memo[i] = memo[i - 1] + memo[i - 2];
         }
         return memo[n];
     }
@@ -76,15 +69,13 @@ public class fibonacchi {
      * @param n
      * @return
      */
-    public static final int fibonacchiWithAnotherApproach(int n)
-    {
+    public static final int fibonacchiWithAnotherApproach(int n) {
         int prev1 = 0;
         int prev2 = 1;
-        if(n < 1) return prev1;
-        if(n == 1) return prev2;
+        if (n < 1) return prev1;
+        if (n == 1) return prev2;
         int res = 0;
-        for(int i=2;i<=n;i++)
-        {
+        for (int i = 2; i <= n; i++) {
             res = prev2 + prev1;
             prev1 = prev2;
             prev2 = res;

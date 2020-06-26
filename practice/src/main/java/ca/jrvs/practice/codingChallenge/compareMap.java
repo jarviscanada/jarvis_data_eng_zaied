@@ -3,7 +3,6 @@ package ca.jrvs.practice.codingChallenge;
 import java.util.Map;
 
 
-
 public class compareMap {
 
     /***
@@ -21,17 +20,20 @@ public class compareMap {
      * O(n). checking each of the key and value is a constant time operation.
      */
     public static final boolean compareMapRunner(Map<?, ? extends Object> m1,
-                                           Map<?, ? extends Object> m2 ){
-        return m1.equals(m2);
-    };
-
-    public static final boolean compareMapRunnerWithHashJMap(Map<?, ? extends Object> m1,
-                                           Map<?, ? extends Object> m2 ){
+                                                 Map<?, ? extends Object> m2) {
         return m1.equals(m2);
     }
+
+    ;
+
+    public static final boolean compareMapRunnerWithHashJMap(Map<?, ? extends Object> m1,
+                                                             Map<?, ? extends Object> m2) {
+        return m1.equals(m2);
+    }
+
     public static final boolean compareMapRunnerWithStream(Map<?, ? extends Object> m1,
-                                                       Map<?, ? extends Object> m2 ){
-        return m1.entrySet().stream().allMatch(k->m1.get(k).equals(m2.get(k)));
+                                                           Map<?, ? extends Object> m2) {
+        return m1.entrySet().stream().allMatch(k -> m1.get(k).equals(m2.get(k)));
     }
 
 }

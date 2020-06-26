@@ -1,16 +1,14 @@
 package ca.jrvs.practice.codingChallenge;
 
-import ca.jrvs.practice.dataStructure.list.LinkedJList;
-
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class stackUsingTwoQueue<T> {
 
     private Queue<T> q1 = new LinkedList<>(); // utility
     private Queue<T> q2 = new LinkedList<>(); // will hold
 
-    public stackUsingTwoQueue()
-    {
+    public stackUsingTwoQueue() {
         this.q1.clear();
         this.q2.clear();
     }
@@ -21,11 +19,9 @@ public class stackUsingTwoQueue<T> {
      * @param val
      */
 
-    public void push(T val)
-    {
+    public void push(T val) {
         q2.add(val);
-        while(!q1.isEmpty())
-        {
+        while (!q1.isEmpty()) {
             q2.add(q1.remove());
         }
         Queue<T> temp = q1;
@@ -38,8 +34,7 @@ public class stackUsingTwoQueue<T> {
      * space complexity: 0(1)
      * @return
      */
-    public T pop()
-    {
+    public T pop() {
         return q1.remove();
     }
 
@@ -48,8 +43,7 @@ public class stackUsingTwoQueue<T> {
      * space complexity: 0(1)
      * @return
      */
-    public T top()
-    {
+    public T top() {
         return q1.peek();
     }
 
@@ -58,8 +52,7 @@ public class stackUsingTwoQueue<T> {
      * space complexity: 0(1)
      * @return
      */
-    public boolean empty()
-    {
+    public boolean empty() {
         return q1.isEmpty();
     }
 

@@ -8,7 +8,7 @@ public class QueueTwoStack2<T> {
     Deque<T> s1 = new LinkedList<>();
     Deque<T> s2 = new LinkedList<>();
 
-    public QueueTwoStack2(){
+    public QueueTwoStack2() {
 
         this.s1.clear();
         this.s2.clear();
@@ -19,16 +19,13 @@ public class QueueTwoStack2<T> {
      * space complexity: 0(1)
      * @param val
      */
-    public void add (T val)
-    {
+    public void add(T val) {
         s1.push(val);
     }
 
-    private void doIf()
-    {
-        if(s2.isEmpty())
-        {
-            while(!s1.isEmpty()) s2.push(s1.pop());
+    private void doIf() {
+        if (s2.isEmpty()) {
+            while (!s1.isEmpty()) s2.push(s1.pop());
         }
     }
 
@@ -37,8 +34,7 @@ public class QueueTwoStack2<T> {
      * space complexity: 0(s1 size)
      * @return
      */
-    public T remove()
-    {
+    public T remove() {
         doIf();
         return s2.pop();
     }
@@ -48,8 +44,7 @@ public class QueueTwoStack2<T> {
      * space complexity: 0(s1 size)
      * @return
      */
-    public T peek()
-    {
+    public T peek() {
         doIf();
         return s2.peek();
     }
@@ -59,8 +54,7 @@ public class QueueTwoStack2<T> {
      * space complexity: 0(s1 size)
      * @return
      */
-    public boolean empty()
-    {
+    public boolean empty() {
         doIf();
         return s2.isEmpty();
     }
