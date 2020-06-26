@@ -5,6 +5,12 @@ import java.util.LinkedList;
 
 public class validParentheses<T> {
 
+    /***
+     * time complexity: 0(n); n string length; maximum n (push+pop)
+     * space complexity: 0(n) because of stack
+     * @param s
+     * @return
+     */
     public static final boolean isValidStack(String s) {
         int n = s.length();
         Deque<Character> stack = new LinkedList<Character>();
