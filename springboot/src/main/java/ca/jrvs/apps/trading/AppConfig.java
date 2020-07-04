@@ -1,4 +1,4 @@
 package ca.jrvs.apps.trading;
 
-public class Application {
+public class AppConfig {
 }
