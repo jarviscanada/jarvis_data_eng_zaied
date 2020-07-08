@@ -1,4 +1,22 @@
 package ca.jrvs.apps.trading;
 
-public class Application {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+public class Application implements CommandLineRunner {
+
+    private static Logger logger = LoggerFactory.getLogger(Application.class);
+
+    public static void main(String[] args) {
+        SpringApplication springBootApplication = new SpringApplication(Application.class);
+        springBootApplication.run(args);
+    }
+
+    public void run(String... args){
+    };
 }

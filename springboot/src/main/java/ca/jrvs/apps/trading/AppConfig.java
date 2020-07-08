@@ -1,4 +1,68 @@
 package ca.jrvs.apps.trading;
 
+import ca.jrvs.apps.trading.controller.QuoteController;
+import ca.jrvs.apps.trading.dao.MarketDataDao;
+import ca.jrvs.apps.trading.dao.QuoteDao;
+import ca.jrvs.apps.trading.model.domain.MarketDataConfig;
+import ca.jrvs.apps.trading.service.QuoteService;
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.http.conn.HttpClientConnectionManager;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import javax.sql.DataSource;
+
+@Configuration
 public class AppConfig {
+
+    private static final Logger logger = LoggerFactory.getLogger(AppConfig.class);
+
+    @Bean
+    public MarketDataConfig marketDataConfig(){
+        MarketDataConfig marketDataConfig = new MarketDataConfig();
+        marketDataConfig.setHost("https://cloud.iexapis.com/v1/");
+        marketDataConfig.setToken("pk_7d126699746b47089ffc453a938c1eb3");
+        return marketDataConfig;
+    }
+
+    @Bean
+    public HttpClientConnectionManager httpClientConnectionManager() {
+        PoolingHttpClientConnectionManager poolingHttpClientConnectionManager = new PoolingHttpClientConnectionManager();
+        poolingHttpClientConnectionManager.setMaxTotal(50);
+        poolingHttpClientConnectionManager.setDefaultMaxPerRoute(50);
+        return poolingHttpClientConnectionManager;
+    }
+
+    @Bean
+    public MarketDataDao marketDataDao(HttpClientConnectionManager httpClientConnectionManager,
+                                       MarketDataConfig marketDataConfig){
+        return new MarketDataDao(httpClientConnectionManager,marketDataConfig);
+    }
+
+    @Bean
+    public QuoteService quoteService(MarketDataDao marketDataDao, QuoteDao quoteDao){
+        return new QuoteService(marketDataDao,quoteDao);
+    }
+
+    @Bean
+    public QuoteController quoteController(QuoteService quoteService){
+        return new QuoteController(quoteService);
+    }
+
+    @Bean
+    public DataSource dataSource() {
+        String url = System.getenv("PSQL_URL");
+        String user = System.getenv("PSQL_USER");
+        String password = System.getenv("PSQL_PASSWORD");
+        //Never log your credentials/secrets. Use debugger instead
+        BasicDataSource basicDataSource = new BasicDataSource();
+        basicDataSource.setUrl(url);
+        basicDataSource.setUsername(user);
+        basicDataSource.setPassword(password);
+        return basicDataSource;
+    }
+
 }

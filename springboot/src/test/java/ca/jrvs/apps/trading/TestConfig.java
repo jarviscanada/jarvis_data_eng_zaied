@@ -1,11 +1,13 @@
+package ca.jrvs.apps.trading;
+
 import ca.jrvs.apps.trading.model.domain.MarketDataConfig;
+import ca.jrvs.apps.trading.model.domain.Quote;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 
@@ -23,9 +25,9 @@ public class TestConfig {
 
     @Bean
     public DataSource dataSource() {
-        String url = System.getenv("PSQL_URL");
-        String user = System.getenv("PSQL_USER");
-        String password = System.getenv("PSQL_PASSWORD");
+        String url = "jdbc:postgresql://localhost:5432/jrvstrading_test";
+        String user = "postgres";
+        String password = "password";
         //Never log your credentials/secrets. Use debugger instead
         BasicDataSource basicDataSource = new BasicDataSource();
         basicDataSource.setUrl(url);
@@ -40,5 +42,10 @@ public class TestConfig {
         poolingHttpClientConnectionManager.setMaxTotal(50);
         poolingHttpClientConnectionManager.setDefaultMaxPerRoute(50);
         return poolingHttpClientConnectionManager;
+    }
+
+    @Bean
+    public Quote quote(){
+        return new Quote();
     }
 }

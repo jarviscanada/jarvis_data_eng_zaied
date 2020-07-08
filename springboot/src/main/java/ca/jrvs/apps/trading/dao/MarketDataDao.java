@@ -17,14 +17,17 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import javax.swing.text.html.parser.Entity;
 import java.io.IOException;
 import java.net.URI;
 import java.util.*;
 
+@Repository
 public class MarketDataDao implements CrudRepository<IexQuote, String> {
 
     private static final String IEX_BATCH_PATH = "stock/market/batch?symbols=%s&types=quote&token=";
@@ -33,6 +36,7 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
     private Logger logger = LoggerFactory.getLogger(MarketDataDao.class);
     private HttpClientConnectionManager httpClientConnectionManager;
 
+    @Autowired
     public MarketDataDao(HttpClientConnectionManager httpClientConnectionManager, MarketDataConfig marketDataConfig)
     {
         this.httpClientConnectionManager = httpClientConnectionManager;
@@ -69,11 +73,11 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
         List<IexQuote> res = new ArrayList<IexQuote>();
         while(it.hasNext())
         {
-            String fullBatchPath = String.format(IEX_BATCH_URL,it.next());
+            String ticker = it.next();
+            String fullBatchPath = String.format(IEX_BATCH_URL,ticker);
             Optional<String> curr = executeHttpGet(fullBatchPath);
             JSONObject jsonObject = new JSONObject(curr.get());
-            System.out.println(curr.get());
-            String res2 = jsonObject.getJSONObject("AAPL").getJSONObject("quote").toString();
+            String res2 = jsonObject.getJSONObject(ticker).getJSONObject("quote").toString();
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
             try {
