@@ -12,6 +12,7 @@ public class Trader implements Entity<Integer>{
     private String country;
     private String email;
 
+
     @Override
     public Integer getId() {
         return id;

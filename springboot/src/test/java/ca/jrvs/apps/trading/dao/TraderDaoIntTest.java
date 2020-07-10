@@ -2,6 +2,7 @@ package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.TestConfig;
 import ca.jrvs.apps.trading.model.domain.Quote;
+import ca.jrvs.apps.trading.model.domain.Trader;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,42 +11,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {TestConfig.class})
 @Sql({"classpath:schema.sql"})
-public class QuoteDaoIntTest {
+public class TraderDaoIntTest {
 
     @Autowired
-    private QuoteDao quoteDao;
+    private TraderDao traderDao;
 
-    private final Quote savedQuote = new Quote();
+    private final Trader savedTrader = new Trader();
 
     @Before
     public void insertOne(){
-        savedQuote.setTicker("aapl");
-        savedQuote.setAskPrice(10d);
-        savedQuote.setAskSize(10L);
-        savedQuote.setBidPrice(10.2d);
-        savedQuote.setBidSize(10L);
-        savedQuote.setLastPrice(10.1d);
-        quoteDao.save(savedQuote);
+        //savedTrader.setId(1);
+        savedTrader.setFirstName("zaied");
+        savedTrader.setLastName("zaman");
+        savedTrader.setCountry("CAN");
+        savedTrader.setEmail("zzaman2");
+        savedTrader.setDob(new Date());
+        traderDao.save(savedTrader);
     }
 
     @Test
     public void findOne(){
-        quoteDao.findById("aapl");
+        traderDao.findById(1);
     }
 
-    @Test
-    public void updateTest()
-    {
-        assertEquals(quoteDao.updateOne(savedQuote),1);
-    }
-
-    @After
+    //@After
     public void deleteOne(){
-        quoteDao.deleteById("aapl");
+        traderDao.deleteById(1);
     }
 }

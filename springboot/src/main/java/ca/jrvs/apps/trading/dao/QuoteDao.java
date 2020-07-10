@@ -61,7 +61,6 @@ public class QuoteDao implements CrudRepository<Quote, String> {
     private void addOne(Quote s)
     {
         SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(s);
-        String[] res = parameterSource.getParameterNames();
         int row = simpleJdbcInsert.execute(parameterSource);
         if (row != 1) {
             throw new IncorrectResultSizeDataAccessException("Failed to insert", 1, row);
@@ -102,7 +101,7 @@ public class QuoteDao implements CrudRepository<Quote, String> {
             t = jdbcTemplate.queryForObject(selectSql, BeanPropertyRowMapper.newInstance(Quote.class),s);
         } catch (EmptyResultDataAccessException ex)
         {
-            logger.debug("Can't find trader id:" + s,ex);
+            logger.debug("Can't find quote id:" + s,ex);
         }
         return Optional.ofNullable(t);
     }
