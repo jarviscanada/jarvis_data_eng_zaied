@@ -7,9 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 
+@Repository
 public class AccountDao extends JdbcCrudDao<Account> {
 
     private static final Logger logger = LoggerFactory.getLogger(TraderDao.class);
@@ -56,7 +58,7 @@ public class AccountDao extends JdbcCrudDao<Account> {
 
     private Object[] makeUpdateValues(Account entity)
     {
-        Object[] res = new Object[6];
+        Object[] res = new Object[3];
         res[0] = entity.getTrader_id();
         res[1] = entity.getAmount();
         res[2] = entity.getId();
@@ -65,15 +67,17 @@ public class AccountDao extends JdbcCrudDao<Account> {
 
     public Account findByTraderId(Integer Id)
     {
-        String getSql = "SELECT * FROM "+ TABLE_NAME + " WHERE trader_id " + "=?";
+        String getSql = "SELECT * FROM "+ TABLE_NAME + " WHERE " + ID_COLUMN + "=?";
         return jdbcTemplate.queryForObject(getSql, BeanPropertyRowMapper.newInstance(Account.class),Id);
     }
 
-    public void updateAmountById(Integer Id, Double amount)
+    public Account updateAmountById(Integer Id, Double amount)
     {
         Account account = findByTraderId(Id);
+        account.setId(Id);
         account.setAmount(account.getAmount()+amount);
         updateOne(account);
+        return account;
     }
 
     @Override

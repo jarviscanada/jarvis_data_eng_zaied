@@ -27,6 +27,11 @@ public class TraderDao extends JdbcCrudDao<Trader> {
     private SimpleJdbcInsert simpleInsert;
     private final String TABLE_NAME = "trader";
     private final String ID_COLUMN = "id";
+    private final String FIRST_NAME_COLUMN = "first_name";
+    private final String LAST_NAME_COLUMN = "last_name";
+    private final String COUNTRY_COLUMN = "country";
+    private final String DOB_COLUMN = "dob";
+    private final String EMAIL_COLUMN = "email";
 
     public TraderDao(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -60,7 +65,9 @@ public class TraderDao extends JdbcCrudDao<Trader> {
 
     @Override
     public int updateOne(Trader entity) {
-        String update_sql = "UPDATE trader SET first_name=?, last_name=?, dob=?, country=?, email=? WHERE id=?";
+        String update_sql = "UPDATE "+TABLE_NAME+" SET "+
+                FIRST_NAME_COLUMN + "=?, " +LAST_NAME_COLUMN+ "=?, " + COUNTRY_COLUMN + "=?, " + DOB_COLUMN + "=?, "+
+                EMAIL_COLUMN + "=? WHERE "+ID_COLUMN+"=?";
         return jdbcTemplate.update(update_sql,makeUpdateValues(entity));
     }
 
@@ -84,7 +91,7 @@ public class TraderDao extends JdbcCrudDao<Trader> {
             int updatedRowNo= updateOne(s);
             if(updatedRowNo != 1)
             {
-                throw new DataRetrievalFailureException("Unable to update quote");
+                throw new DataRetrievalFailureException("Unable to update trader");
             }
         }
         else
@@ -94,13 +101,10 @@ public class TraderDao extends JdbcCrudDao<Trader> {
         return s;
     }
 
-    private void addOne(Trader s)
-    {
+    private void addOne(Trader s) {
         SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(s);
-        int row = simpleInsert.execute(parameterSource);
-        if (row != 1) {
-            throw new IncorrectResultSizeDataAccessException("Failed to insert", 1, row);
-        }
+        int trader_id = simpleInsert.executeAndReturnKey(parameterSource).intValue();
+        s.setId(trader_id);
     }
 
     @Override

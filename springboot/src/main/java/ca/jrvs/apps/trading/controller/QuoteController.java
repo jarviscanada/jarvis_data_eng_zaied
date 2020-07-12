@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequestMapping("/quote")
-//@Controller
+@Controller
 public class QuoteController {
 
     private final QuoteService quoteService;
 
-    //@Autowired
+    @Autowired
     public QuoteController(QuoteService quoteService) {
         this.quoteService = quoteService;
     }

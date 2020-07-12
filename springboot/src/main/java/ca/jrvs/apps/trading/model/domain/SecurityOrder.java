@@ -6,7 +6,7 @@ public class SecurityOrder {
     private Integer account_id;
     private String status;
     private String ticker;
-    private String size;
+    private Integer size;
     private Double price;
     private String notes;
 
@@ -42,11 +42,11 @@ public class SecurityOrder {
         this.ticker = ticker;
     }
 
-    public String getSize() {
+    public Integer getSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSize(Integer size) {
         this.size = size;
     }
 

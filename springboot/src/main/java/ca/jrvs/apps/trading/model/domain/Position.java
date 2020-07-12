@@ -10,6 +10,18 @@ public class Position {
         return account_id;
     }
 
+    public void setAccount_id(Integer account_id) {
+        this.account_id = account_id;
+    }
+
+    public void setTicker(String ticker) {
+        this.ticker = ticker;
+    }
+
+    public void setPosition(Integer position) {
+        this.position = position;
+    }
+
     public String getTicker() {
         return ticker;
     }

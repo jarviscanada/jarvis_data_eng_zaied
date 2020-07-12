@@ -9,12 +9,12 @@ public class Account implements Entity<Integer> {
 
     @Override
     public Integer getId() {
-        return null;
+        return this.id;
     }
 
     @Override
     public void setId(Integer integer) {
-
+        this.id = integer;
     }
 
     public Integer getTrader_id() {

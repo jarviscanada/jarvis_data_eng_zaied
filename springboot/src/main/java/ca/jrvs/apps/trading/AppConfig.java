@@ -37,31 +37,12 @@ public class AppConfig {
     }
 
     @Bean
-    public MarketDataDao marketDataDao(HttpClientConnectionManager httpClientConnectionManager,
-                                       MarketDataConfig marketDataConfig){
-        return new MarketDataDao(httpClientConnectionManager,marketDataConfig);
-    }
-
-    @Bean
-    public QuoteService quoteService(MarketDataDao marketDataDao, QuoteDao quoteDao){
-        return new QuoteService(marketDataDao,quoteDao);
-    }
-
-    @Bean
-    public QuoteController quoteController(QuoteService quoteService){
-        return new QuoteController(quoteService);
-    }
-
-    @Bean
     public DataSource dataSource() {
-        String url = System.getenv("PSQL_URL");
-        String user = System.getenv("PSQL_USER");
-        String password = System.getenv("PSQL_PASSWORD");
         //Never log your credentials/secrets. Use debugger instead
         BasicDataSource basicDataSource = new BasicDataSource();
-        basicDataSource.setUrl(url);
-        basicDataSource.setUsername(user);
-        basicDataSource.setPassword(password);
+        basicDataSource.setUrl("jdbc:postgresql://localhost:5432/jrvstrading_test");
+        basicDataSource.setUsername("postgres");
+        basicDataSource.setPassword("password");
         return basicDataSource;
     }
 
