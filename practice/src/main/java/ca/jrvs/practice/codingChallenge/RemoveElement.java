@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class RemoveElement {
 
+
     /***
      * time complexity: O(array length)
      * space complexity: O(1)
@@ -24,4 +25,5 @@ public class RemoveElement {
         }
         return idx+1;
     }
+
 }
