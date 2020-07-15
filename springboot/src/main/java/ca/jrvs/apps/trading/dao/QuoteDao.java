@@ -15,9 +15,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-import javax.management.RuntimeErrorException;
 import javax.sql.DataSource;
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,25 +30,20 @@ public class QuoteDao implements CrudRepository<Quote, String> {
     private SimpleJdbcInsert simpleJdbcInsert;
 
     @Autowired
-    public QuoteDao(DataSource dataSource)
-    {
+    public QuoteDao(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
         simpleJdbcInsert = new SimpleJdbcInsert(dataSource).withTableName(TABLE_NAME);
-        System.out.println("x");
+        //System.out.println("x");
     }
 
     @Override
     public <S extends Quote> S save(S s) {
-        if(existsById(s.getId()))
-        {
-            int updatedRowNo= updateOne(s);
-            if(updatedRowNo != 1)
-            {
+        if (existsById(s.getTicker())) {
+            int updatedRowNo = updateOne(s);
+            if (updatedRowNo != 1) {
                 throw new DataRetrievalFailureException("Unable to update quote");
             }
-        }
-        else
-        {
+        } else {
             addOne(s);
         }
         return s;
@@ -58,8 +51,7 @@ public class QuoteDao implements CrudRepository<Quote, String> {
 
     //helper
 
-    private void addOne(Quote s)
-    {
+    private void addOne(Quote s) {
         SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(s);
         int row = simpleJdbcInsert.execute(parameterSource);
         if (row != 1) {
@@ -67,14 +59,12 @@ public class QuoteDao implements CrudRepository<Quote, String> {
         }
     }
 
-    public int updateOne(Quote s)
-    {
+    public int updateOne(Quote s) {
         String update_sql = "UPDATE quote SET last_price=?, bid_price=?, bid_size=?, ask_price=?, ask_size=? WHERE ticker=?";
-        return jdbcTemplate.update(update_sql,makeUpdateValues(s));
+        return jdbcTemplate.update(update_sql, makeUpdateValues(s));
     }
 
-    private Object[] makeUpdateValues(Quote s)
-    {
+    private Object[] makeUpdateValues(Quote s) {
         Object[] res = new Object[6];
         res[0] = s.getLastPrice();
         res[1] = s.getBidPrice();
@@ -96,12 +86,11 @@ public class QuoteDao implements CrudRepository<Quote, String> {
 
         Quote t = null;
         String selectSql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_COLUMN_NAME + " =?";
-        try{
+        try {
 
-            t = jdbcTemplate.queryForObject(selectSql, BeanPropertyRowMapper.newInstance(Quote.class),s);
-        } catch (EmptyResultDataAccessException ex)
-        {
-            logger.debug("Can't find quote id:" + s,ex);
+            t = jdbcTemplate.queryForObject(selectSql, BeanPropertyRowMapper.newInstance(Quote.class), s);
+        } catch (EmptyResultDataAccessException ex) {
+            logger.debug("Can't find quote id:" + s, ex);
         }
         return Optional.ofNullable(t);
     }
@@ -109,14 +98,14 @@ public class QuoteDao implements CrudRepository<Quote, String> {
     @Override
     public boolean existsById(String s) {
         String selectSql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_COLUMN_NAME + "=?";
-        List<Quote> res = jdbcTemplate.query(selectSql, BeanPropertyRowMapper.newInstance(Quote.class),s);
+        List<Quote> res = jdbcTemplate.query(selectSql, BeanPropertyRowMapper.newInstance(Quote.class), s);
         return !res.isEmpty();
     }
 
     @Override
     public Iterable<Quote> findAll() {
         String getAllSql = "SELECT * FROM " + TABLE_NAME;
-        return jdbcTemplate.query(getAllSql,BeanPropertyRowMapper.newInstance(Quote.class));
+        return jdbcTemplate.query(getAllSql, BeanPropertyRowMapper.newInstance(Quote.class));
     }
 
 
@@ -128,7 +117,7 @@ public class QuoteDao implements CrudRepository<Quote, String> {
     @Override
     public void deleteById(String s) {
         String deleteSql = "DELETE FROM " + TABLE_NAME + " WHERE " + ID_COLUMN_NAME + " =?";
-        jdbcTemplate.update(deleteSql,s);
+        jdbcTemplate.update(deleteSql, s);
     }
 
     @Override

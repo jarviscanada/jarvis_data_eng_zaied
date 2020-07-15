@@ -1,10 +1,8 @@
 package ca.jrvs.apps.trading.model.domain;
 
-import java.sql.Time;
-import java.time.LocalDate;
 import java.util.Date;
 
-public class Trader implements Entity<Integer>{
+public class Trader implements Entity<Integer> {
 
     private Integer id;
     private String firstName;
@@ -13,12 +11,11 @@ public class Trader implements Entity<Integer>{
     private String country;
     private String email;
 
-    public Trader()
-    {
-        new Trader("zaied","zaman","can",new Date(),"'zz");
+    public Trader() {
+        new Trader("zaied", "zaman", "can", new Date(), "'zz");
     }
-    public Trader(String firstName, String lastName, String country, Date dob, String email)
-    {
+
+    public Trader(String firstName, String lastName, String country, Date dob, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.country = country;

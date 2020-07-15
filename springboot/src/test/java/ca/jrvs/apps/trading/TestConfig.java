@@ -1,6 +1,5 @@
 package ca.jrvs.apps.trading;
 
-import ca.jrvs.apps.trading.model.domain.MarketDataConfig;
 import ca.jrvs.apps.trading.model.domain.Quote;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.http.conn.HttpClientConnectionManager;
@@ -12,11 +11,11 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan(basePackages = {"ca.jrvs.apps.trading.dao","ca.jrvs.apps.trading.service"})
+@ComponentScan(basePackages = {"ca.jrvs.apps.trading.dao", "ca.jrvs.apps.trading.service"})
 public class TestConfig {
 
     @Bean
-    public MarketDataConfig marketDataConfig(){
+    public MarketDataConfig marketDataConfig() {
         MarketDataConfig marketDataConfig = new MarketDataConfig();
         marketDataConfig.setHost("https://cloud.iexapis.com/v1/");
         marketDataConfig.setToken("pk_7d126699746b47089ffc453a938c1eb3");
@@ -45,7 +44,7 @@ public class TestConfig {
     }
 
     @Bean
-    public Quote quote(){
+    public Quote quote() {
         return new Quote();
     }
 }

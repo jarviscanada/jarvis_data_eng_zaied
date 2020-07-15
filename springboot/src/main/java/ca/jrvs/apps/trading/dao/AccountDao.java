@@ -1,7 +1,6 @@
 package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.domain.Account;
-import ca.jrvs.apps.trading.model.domain.Trader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -53,11 +52,10 @@ public class AccountDao extends JdbcCrudDao<Account> {
     @Override
     public int updateOne(Account entity) {
         String update_sql = "UPDATE account SET trader_id=?, amount=? WHERE id=?";
-        return jdbcTemplate.update(update_sql,makeUpdateValues(entity));
+        return jdbcTemplate.update(update_sql, makeUpdateValues(entity));
     }
 
-    private Object[] makeUpdateValues(Account entity)
-    {
+    private Object[] makeUpdateValues(Account entity) {
         Object[] res = new Object[3];
         res[0] = entity.getTrader_id();
         res[1] = entity.getAmount();
@@ -65,25 +63,23 @@ public class AccountDao extends JdbcCrudDao<Account> {
         return res;
     }
 
-    public Account findByTraderId(Integer Id)
-    {
-        String getSql = "SELECT * FROM "+ TABLE_NAME + " WHERE " + ID_COLUMN + "=?";
-        return jdbcTemplate.queryForObject(getSql, BeanPropertyRowMapper.newInstance(Account.class),Id);
+    public Account findByTraderId(Integer Id) {
+        String getSql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_COLUMN + "=?";
+        return jdbcTemplate.queryForObject(getSql, BeanPropertyRowMapper.newInstance(Account.class), Id);
     }
 
-    public Account updateAmountById(Integer Id, Double amount)
-    {
+    public Account updateAmountById(Integer Id, Double amount) {
         Account account = findByTraderId(Id);
         account.setId(Id);
-        account.setAmount(account.getAmount()+amount);
+        account.setAmount(account.getAmount() + amount);
         updateOne(account);
         return account;
     }
 
     @Override
     public void deleteById(Integer s) {
-        String deleteSql = "DELETE FROM " + TABLE_NAME +" WHERE "+ ID_COLUMN + " =?";
-        jdbcTemplate.update(deleteSql,s);
+        String deleteSql = "DELETE FROM " + TABLE_NAME + " WHERE " + ID_COLUMN + " =?";
+        jdbcTemplate.update(deleteSql, s);
 
     }
 

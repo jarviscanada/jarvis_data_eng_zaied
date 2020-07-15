@@ -10,11 +10,14 @@ public class Quote implements Entity<String> {
     private Long askSize;
 
     @Override
-    public String getId() {return null;}
+    public String getId() {
+        return null;
+    }
 
 
     @Override
-    public void setId(String s) {}
+    public void setId(String s) {
+    }
 
     public String getTicker() {
         return ticker;

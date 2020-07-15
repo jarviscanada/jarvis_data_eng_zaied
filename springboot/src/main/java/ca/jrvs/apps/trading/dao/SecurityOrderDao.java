@@ -1,12 +1,8 @@
 package ca.jrvs.apps.trading.dao;
 
-import ca.jrvs.apps.trading.model.domain.Quote;
 import ca.jrvs.apps.trading.model.domain.SecurityOrder;
-import ca.jrvs.apps.trading.model.domain.Trader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataRetrievalFailureException;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -33,24 +29,21 @@ public class SecurityOrderDao {
         this.simpleInsert = new SimpleJdbcInsert(dataSource).withTableName(TABLE_NAME).usingGeneratedKeyColumns("id");
     }
 
-    List<SecurityOrder> findAllByAccountId(Integer accountId)
-    {
-        String selectSql = "SELECT * FROM "+ TABLE_NAME +" WHERE " + ACCOUNT_ID_COLUMN +"=?";
-        return jdbcTemplate.queryForList(selectSql,SecurityOrder.class,accountId);
+    List<SecurityOrder> findAllByAccountId(Integer accountId) {
+        String selectSql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ACCOUNT_ID_COLUMN + "=?";
+        return jdbcTemplate.queryForList(selectSql, SecurityOrder.class, accountId);
     }
 
-    public void delete(SecurityOrder securityOrder)
-    {
-        String deleteSql = "DELETE FROM " + TABLE_NAME +" WHERE " + ACCOUNT_ID_COLUMN + "=? AND " + TICKER_COLUMN+ "=?";
-        jdbcTemplate.update(deleteSql,securityOrder.getAccount_id(),securityOrder.getTicker());
+    public void delete(SecurityOrder securityOrder) {
+        String deleteSql = "DELETE FROM " + TABLE_NAME + " WHERE " + ACCOUNT_ID_COLUMN + "=? AND " + TICKER_COLUMN + "=?";
+        jdbcTemplate.update(deleteSql, securityOrder.getAccount_id(), securityOrder.getTicker());
     }
-    public void  deleteAll(List<SecurityOrder> res)
-    {
+
+    public void deleteAll(List<SecurityOrder> res) {
         res.forEach(this::delete);
     }
 
-    public void deleteByAccountId(Integer accountId)
-    {
+    public void deleteByAccountId(Integer accountId) {
         List<SecurityOrder> res = findAllByAccountId(accountId);
         deleteAll(res);
     }
@@ -61,8 +54,7 @@ public class SecurityOrderDao {
         return s;
     }
 
-    private void addOne(SecurityOrder s)
-    {
+    private void addOne(SecurityOrder s) {
         SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(s);
         Integer new_id = simpleInsert.executeAndReturnKey(parameterSource).intValue();
         s.setId(new_id);

@@ -1,10 +1,5 @@
 package ca.jrvs.apps.trading;
 
-import ca.jrvs.apps.trading.controller.QuoteController;
-import ca.jrvs.apps.trading.dao.MarketDataDao;
-import ca.jrvs.apps.trading.dao.QuoteDao;
-import ca.jrvs.apps.trading.model.domain.MarketDataConfig;
-import ca.jrvs.apps.trading.service.QuoteService;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
@@ -21,10 +16,10 @@ public class AppConfig {
     private static final Logger logger = LoggerFactory.getLogger(AppConfig.class);
 
     @Bean
-    public MarketDataConfig marketDataConfig(){
+    public MarketDataConfig marketDataConfig() {
         MarketDataConfig marketDataConfig = new MarketDataConfig();
         marketDataConfig.setHost("https://cloud.iexapis.com/v1/");
-        marketDataConfig.setToken("pk_7d126699746b47089ffc453a938c1eb3");
+        marketDataConfig.setToken(System.getenv("IEX_PUB_TOKEN"));
         return marketDataConfig;
     }
 
@@ -40,9 +35,9 @@ public class AppConfig {
     public DataSource dataSource() {
         //Never log your credentials/secrets. Use debugger instead
         BasicDataSource basicDataSource = new BasicDataSource();
-        basicDataSource.setUrl("jdbc:postgresql://localhost:5432/jrvstrading_test");
-        basicDataSource.setUsername("postgres");
-        basicDataSource.setPassword("password");
+        basicDataSource.setUrl(System.getenv("PSQL_URL"));
+        basicDataSource.setUsername(System.getenv("PSQL_USER"));
+        basicDataSource.setPassword(System.getenv("PSQL_PASSWORD"));
         return basicDataSource;
     }
 

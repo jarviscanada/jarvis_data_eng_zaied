@@ -2,12 +2,10 @@ package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.domain.Quote;
 import ca.jrvs.apps.trading.model.domain.Trader;
-import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -65,15 +63,14 @@ public class TraderDao extends JdbcCrudDao<Trader> {
 
     @Override
     public int updateOne(Trader entity) {
-        String update_sql = "UPDATE "+TABLE_NAME+" SET "+
-                FIRST_NAME_COLUMN + "=?, " +LAST_NAME_COLUMN+ "=?, " + COUNTRY_COLUMN + "=?, " + DOB_COLUMN + "=?, "+
-                EMAIL_COLUMN + "=? WHERE "+ID_COLUMN+"=?";
-        return jdbcTemplate.update(update_sql,makeUpdateValues(entity));
+        String update_sql = "UPDATE " + TABLE_NAME + " SET " +
+                FIRST_NAME_COLUMN + "=?, " + LAST_NAME_COLUMN + "=?, " + COUNTRY_COLUMN + "=?, " + DOB_COLUMN + "=?, " +
+                EMAIL_COLUMN + "=? WHERE " + ID_COLUMN + "=?";
+        return jdbcTemplate.update(update_sql, makeUpdateValues(entity));
     }
 
     //helper
-    private Object[] makeUpdateValues(Trader entity)
-    {
+    private Object[] makeUpdateValues(Trader entity) {
         Object[] res = new Object[6];
         res[0] = entity.getFirstName();
         res[1] = entity.getLastName();
@@ -86,16 +83,12 @@ public class TraderDao extends JdbcCrudDao<Trader> {
 
     @Override
     public <S extends Trader> S save(S s) {
-        if(existsById(s.getId()))
-        {
-            int updatedRowNo= updateOne(s);
-            if(updatedRowNo != 1)
-            {
+        if (existsById(s.getId())) {
+            int updatedRowNo = updateOne(s);
+            if (updatedRowNo != 1) {
                 throw new DataRetrievalFailureException("Unable to update trader");
             }
-        }
-        else
-        {
+        } else {
             addOne(s);
         }
         return s;
@@ -117,12 +110,11 @@ public class TraderDao extends JdbcCrudDao<Trader> {
     public Optional<Trader> findById(Integer s) {
         Trader t = null;
         String selectSql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_COLUMN + " =?";
-        try{
+        try {
 
-            t = jdbcTemplate.queryForObject(selectSql, BeanPropertyRowMapper.newInstance(Trader.class),s);
-        } catch (EmptyResultDataAccessException ex)
-        {
-            logger.debug("Can't find trader id:" + s,ex);
+            t = jdbcTemplate.queryForObject(selectSql, BeanPropertyRowMapper.newInstance(Trader.class), s);
+        } catch (EmptyResultDataAccessException ex) {
+            logger.debug("Can't find trader id:" + s, ex);
         }
         return Optional.ofNullable(t);
     }
@@ -130,14 +122,14 @@ public class TraderDao extends JdbcCrudDao<Trader> {
     @Override
     public boolean existsById(Integer s) {
         String selectSql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_COLUMN + "=?";
-        List<Quote> res = jdbcTemplate.query(selectSql, BeanPropertyRowMapper.newInstance(Quote.class),s);
+        List<Quote> res = jdbcTemplate.query(selectSql, BeanPropertyRowMapper.newInstance(Quote.class), s);
         return !res.isEmpty();
     }
 
     @Override
     public Iterable<Trader> findAll() {
         String getAllSql = "SELECT * FROM " + TABLE_NAME;
-        return jdbcTemplate.query(getAllSql,BeanPropertyRowMapper.newInstance(Trader.class));
+        return jdbcTemplate.query(getAllSql, BeanPropertyRowMapper.newInstance(Trader.class));
     }
 
     @Override
@@ -148,7 +140,7 @@ public class TraderDao extends JdbcCrudDao<Trader> {
     @Override
     public void deleteById(Integer s) {
         String deleteSql = "DELETE FROM " + TABLE_NAME + " WHERE " + ID_COLUMN + "=?";
-        jdbcTemplate.update(deleteSql,s);
+        jdbcTemplate.update(deleteSql, s);
     }
 
     @Override

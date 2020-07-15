@@ -1,14 +1,12 @@
 package ca.jrvs.apps.trading.dao;
 
+import ca.jrvs.apps.trading.MarketDataConfig;
 import ca.jrvs.apps.trading.model.domain.IexQuote;
-import ca.jrvs.apps.trading.model.domain.MarketDataConfig;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpEntity;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -22,9 +20,7 @@ import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.parser.Entity;
 import java.io.IOException;
-import java.net.URI;
 import java.util.*;
 
 @Repository
@@ -37,12 +33,10 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
     private HttpClientConnectionManager httpClientConnectionManager;
 
     @Autowired
-    public MarketDataDao(HttpClientConnectionManager httpClientConnectionManager, MarketDataConfig marketDataConfig)
-    {
+    public MarketDataDao(HttpClientConnectionManager httpClientConnectionManager, MarketDataConfig marketDataConfig) {
         this.httpClientConnectionManager = httpClientConnectionManager;
         IEX_BATCH_URL = marketDataConfig.getHost() + IEX_BATCH_PATH + marketDataConfig.getToken();
     }
-
 
 
     @Override
@@ -51,17 +45,12 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
         Optional<IexQuote> iexQuote;
         List<IexQuote> quotes = findAllById(Collections.singletonList(s));
 
-        if(quotes.size() == 0)
-        {
+        if (quotes.size() == 0) {
             return Optional.empty();
-        }
-        else if(quotes.size() == 1)
-        {
+        } else if (quotes.size() == 1) {
             iexQuote = Optional.of(quotes.get(0));
             System.out.println(iexQuote.get().getSymbol());
-        }
-        else
-        {
+        } else {
             throw new DataRetrievalFailureException("unexpected number of quotes");
         }
         return iexQuote;
@@ -71,46 +60,44 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
     public List<IexQuote> findAllById(Iterable<String> iterable) {
         Iterator<String> it = iterable.iterator();
         List<IexQuote> res = new ArrayList<IexQuote>();
-        while(it.hasNext())
-        {
+        while (it.hasNext()) {
             String ticker = it.next();
-            String fullBatchPath = String.format(IEX_BATCH_URL,ticker);
+            String fullBatchPath = String.format(IEX_BATCH_URL, ticker);
             Optional<String> curr = executeHttpGet(fullBatchPath);
             JSONObject jsonObject = new JSONObject(curr.get());
             String res2 = jsonObject.getJSONObject(ticker).getJSONObject("quote").toString();
             ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             try {
                 IexQuote iexQuote = objectMapper.readValue(res2, IexQuote.class);
                 res.add(iexQuote);
             } catch (IOException ex) {
-                logger.error("findAllById failed",ex);
+                logger.error("findAllById failed", ex);
                 throw new RuntimeException("findAllById failed");
             }
         }
         return res;
     }
 
-    private Optional<String> executeHttpGet(String url)
-    {
+    private Optional<String> executeHttpGet(String url) {
         CloseableHttpClient closeableHttpClient = getHttpClient();
         HttpUriRequest postReq = new HttpGet(url);
         CloseableHttpResponse closeableHttpResponse = null;
         try {
             closeableHttpResponse = closeableHttpClient.execute(postReq);
         } catch (IOException ex) {
-            logger.error("quote post uri could not be built",ex);
+            logger.error("quote post uri could not be built", ex);
         }
         HttpEntity httpEntity = closeableHttpResponse.getEntity();
         try {
             return Optional.ofNullable(EntityUtils.toString(httpEntity));
         } catch (IOException ex) {
-            logger.error("quote http could not be converted to string",ex);
+            logger.error("quote http could not be converted to string", ex);
             throw new RuntimeException("in executeHttpGet method in marketDataDao");
         }
     }
-    private CloseableHttpClient getHttpClient()
-    {
+
+    private CloseableHttpClient getHttpClient() {
         return HttpClients.custom().setConnectionManager(httpClientConnectionManager).setConnectionManagerShared(true)
                 .build();
     }
@@ -127,6 +114,7 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
     public <S extends IexQuote> Iterable<S> saveAll(Iterable<S> iterable) {
         return null;
     }
+
     @Override
     public boolean existsById(String s) {
         return false;

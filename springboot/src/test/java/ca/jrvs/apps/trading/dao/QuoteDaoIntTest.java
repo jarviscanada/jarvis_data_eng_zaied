@@ -10,7 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {TestConfig.class})
@@ -23,7 +24,7 @@ public class QuoteDaoIntTest {
     private final Quote savedQuote = new Quote();
 
     @Before
-    public void insertOne(){
+    public void insertOne() {
         savedQuote.setTicker("aapl");
         savedQuote.setAskPrice(10d);
         savedQuote.setAskSize(10L);
@@ -34,18 +35,17 @@ public class QuoteDaoIntTest {
     }
 
     @Test
-    public void findOne(){
+    public void findOne() {
         quoteDao.findById("aapl");
     }
 
     @Test
-    public void updateTest()
-    {
-        assertEquals(quoteDao.updateOne(savedQuote),1);
+    public void updateTest() {
+        assertEquals(quoteDao.updateOne(savedQuote), 1);
     }
 
     @After
-    public void deleteOne(){
+    public void deleteOne() {
         quoteDao.deleteById("aapl");
     }
 }

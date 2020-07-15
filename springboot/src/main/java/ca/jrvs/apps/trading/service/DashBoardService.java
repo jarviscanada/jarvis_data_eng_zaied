@@ -4,7 +4,10 @@ import ca.jrvs.apps.trading.dao.AccountDao;
 import ca.jrvs.apps.trading.dao.PositionDao;
 import ca.jrvs.apps.trading.dao.QuoteDao;
 import ca.jrvs.apps.trading.dao.TraderDao;
-import ca.jrvs.apps.trading.model.domain.*;
+import ca.jrvs.apps.trading.model.domain.Position;
+import ca.jrvs.apps.trading.model.domain.SecurityRows;
+import ca.jrvs.apps.trading.model.view.PortfolioView;
+import ca.jrvs.apps.trading.model.view.TraderAccountView;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,32 +25,29 @@ public class DashBoardService {
     private QuoteDao quoteDao;
 
     public DashBoardService(TraderDao traderDao, PositionDao positionDao, AccountDao accountDao,
-                            QuoteDao quoteDao){
+                            QuoteDao quoteDao) {
         this.traderDao = traderDao;
         this.positionDao = positionDao;
         this.quoteDao = quoteDao;
         this.accountDao = accountDao;
     }
 
-    public TraderAccountView getTraderAccount(Integer trader_id)
-    {
+    public TraderAccountView getTraderAccount(Integer trader_id) {
         TraderAccountView traderAccountView = new TraderAccountView();
         traderAccountView.setTrader(traderDao.findById(trader_id).get());
         traderAccountView.setAccount(accountDao.findByTraderId(trader_id));
         return traderAccountView;
     }
 
-    public PortfolioView getProfileViewByTraderId(Integer trader_id)
-    {
+    public PortfolioView getProfileViewByTraderId(Integer trader_id) {
         HashSet<String> alreadySeen = new HashSet<>();
         List<Position> res = positionDao.positionsByTraderId(trader_id);
         PortfolioView portfolioView = new PortfolioView();
         List<SecurityRows> secRowsToAdd = new ArrayList<SecurityRows>();
 
-        for(int i=0;i<res.size();i++)
-        {
+        for (int i = 0; i < res.size(); i++) {
             String ticker = res.get(i).getTicker();
-            if(!alreadySeen.contains(ticker)) {
+            if (!alreadySeen.contains(ticker)) {
                 alreadySeen.add(ticker);
                 List<Position> curr = positionDao.positionsByTraderIdAndTicker(trader_id, ticker);
                 SecurityRows securityRows = new SecurityRows();

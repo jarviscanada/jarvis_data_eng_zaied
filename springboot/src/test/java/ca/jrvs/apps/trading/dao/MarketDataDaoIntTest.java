@@ -1,16 +1,16 @@
 package ca.jrvs.apps.trading.dao;
 
+import ca.jrvs.apps.trading.MarketDataConfig;
 import ca.jrvs.apps.trading.model.domain.IexQuote;
-import ca.jrvs.apps.trading.model.domain.MarketDataConfig;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class MarketDataDaoIntTest {
 
@@ -25,7 +25,7 @@ public class MarketDataDaoIntTest {
         marketDataConfig.setHost("https://cloud.iexapis.com/v1/");
         marketDataConfig.setToken("pk_7d126699746b47089ffc453a938c1eb3");
 
-        dao = new MarketDataDao(poolingHttpClientConnectionManager,marketDataConfig);
+        dao = new MarketDataDao(poolingHttpClientConnectionManager, marketDataConfig);
     }
 
     @Test
@@ -37,8 +37,8 @@ public class MarketDataDaoIntTest {
 
     @Test
     public void findAllById() {
-        List<IexQuote> res = dao.findAllById(Arrays.asList("AAPL","FB"));
+        List<IexQuote> res = dao.findAllById(Arrays.asList("AAPL", "FB"));
         //System.out.println(res.get(0).toString());
-        assertEquals(res.size(),2);
+        assertEquals(res.size(), 2);
     }
 }

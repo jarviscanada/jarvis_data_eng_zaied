@@ -4,11 +4,17 @@ package ca.jrvs.apps.trading.controller;
 import ca.jrvs.apps.trading.dao.MarketOrderDto;
 import ca.jrvs.apps.trading.model.domain.SecurityOrder;
 import ca.jrvs.apps.trading.service.OrderService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+@Api(value = "/order", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Controller
 @RequestMapping("/order")
 public class orderController {
@@ -16,20 +22,20 @@ public class orderController {
     private OrderService orderService;
 
     @Autowired
-    public orderController(OrderService orderService)
-    {
+    public orderController(OrderService orderService) {
         this.orderService = orderService;
     }
 
+    @ApiOperation(value = "Submit a market order", notes = "Submit a market order")
+    @ApiResponses({@ApiResponse(code = 404, message = "accountId or ticker is not found"),
+            @ApiResponse(code = 400, message = "unable to sublit due to user input")})
     @PostMapping(path = "/marketOrder")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public SecurityOrder postMarketOrder(@RequestBody MarketOrderDto orderDto)
-    {
-        try{
+    public SecurityOrder postMarketOrder(@RequestBody MarketOrderDto orderDto) {
+        try {
             return orderService.executeMarketOrder(orderDto);
-        }catch (Exception ex)
-        {
+        } catch (Exception ex) {
             throw ResponseExceptionUtil.getResponseException(ex);
         }
     }

@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -25,31 +24,26 @@ public class PositionDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public boolean getPositionsByAccountId(Integer account_id)
-    {
-        String existSql = "SELECT EXISTS (SELECT FROM "+ TABLE_NAME+" WHERE "+ACCOUNT_ID_COLUMN+"=?)";
-        return jdbcTemplate.queryForObject(existSql,Boolean.class,account_id);
+    public boolean getPositionsByAccountId(Integer account_id) {
+        String existSql = "SELECT EXISTS (SELECT FROM " + TABLE_NAME + " WHERE " + ACCOUNT_ID_COLUMN + "=?)";
+        return jdbcTemplate.queryForObject(existSql, Boolean.class, account_id);
     }
 
-    public Integer numberOfPositionsByAccountIdAndTickerId(Integer account_id, String ticker)
-    {
+    public Integer numberOfPositionsByAccountIdAndTickerId(Integer account_id, String ticker) {
         String selectSql = "SELECT position FROM position WHERE account_id=? AND ticker=?";
-        return jdbcTemplate.queryForObject(selectSql,Integer.class,new Object[]{account_id,ticker});
+        return jdbcTemplate.queryForObject(selectSql, Integer.class, new Object[]{account_id, ticker});
     }
 
-    public List<Position> positionsByTraderId(Integer account_id)
-    {
+    public List<Position> positionsByTraderId(Integer account_id) {
         String selectSql = "SELECT * FROM position WHERE account_id=?";
-        return jdbcTemplate.query(selectSql, BeanPropertyRowMapper.newInstance(Position.class),account_id);
+        return jdbcTemplate.query(selectSql, BeanPropertyRowMapper.newInstance(Position.class), account_id);
     }
 
-    public List<Position> positionsByTraderIdAndTicker(Integer account_id ,String ticker)
-    {
+    public List<Position> positionsByTraderIdAndTicker(Integer account_id, String ticker) {
         String selectSql = "SELECT * FROM position WHERE account_id=? AND ticker=?";
-        return jdbcTemplate.query(selectSql,BeanPropertyRowMapper.newInstance(Position.class),
-                new Object[]{account_id,ticker});
+        return jdbcTemplate.query(selectSql, BeanPropertyRowMapper.newInstance(Position.class),
+                new Object[]{account_id, ticker});
     }
-
 
 
 }

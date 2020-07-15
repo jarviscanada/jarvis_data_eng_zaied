@@ -2,10 +2,8 @@ package ca.jrvs.apps.trading.service;
 
 import ca.jrvs.apps.trading.TestConfig;
 import ca.jrvs.apps.trading.dao.QuoteDao;
-import ca.jrvs.apps.trading.model.domain.Quote;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +12,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {TestConfig.class})
@@ -37,22 +37,24 @@ public class QuoteServiceIntTest {
     }
 
     @Test
-    public void updateMarketData(){
+    public void updateMarketData() {
         assertNotNull(quoteService.updateMarketData());
     }
 
     @Test
-    public void saveQuotes(){
+    public void saveQuotes() {
         List<String> tickers = new ArrayList<>();
         tickers.add("MSFT");
         assertNotNull(quoteService.saveQuotes(tickers));
     }
+
     @Test
-    public void saveQuote(){
+    public void saveQuote() {
         assertNotNull(quoteService.saveQuote("AAPL"));
     }
+
     @Test
-    public void findAllQuotes(){
+    public void findAllQuotes() {
         assertNotNull(quoteService.findAllQuotes());
     }
 

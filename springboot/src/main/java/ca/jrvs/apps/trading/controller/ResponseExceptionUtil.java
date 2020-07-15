@@ -10,22 +10,21 @@ public class ResponseExceptionUtil {
     private static final Logger
             logger = LoggerFactory.getLogger(ResponseExceptionUtil.class);
 
-    public static ResponseStatusException getResponseException(Exception ex)
-    {
-        if(ex instanceof IllegalArgumentException)
-        {
-            logger.debug("Invalid input",ex);
-            return new ResponseStatusException(HttpStatus.BAD_REQUEST,ex.getMessage());
+    public static ResponseStatusException getResponseException(Exception ex) {
+        if (ex instanceof IllegalArgumentException) {
+            logger.debug("Invalid input", ex);
+            return new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
 
-        }
-        else
-        {
-            logger.error("Internal Error",ex);
+        } else {
+            logger.error("Internal Error", ex);
             return new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
                     "Internal Error: Please call admin");
         }
     }
 
-    private ResponseExceptionUtil(){};
+    private ResponseExceptionUtil() {
+    }
+
+    ;
 
 }

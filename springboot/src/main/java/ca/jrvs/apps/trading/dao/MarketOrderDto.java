@@ -6,11 +6,11 @@ public class MarketOrderDto {
     private String size;
     private String ticker;
 
-    public MarketOrderDto(){
+    public MarketOrderDto() {
 
     }
 
-    public MarketOrderDto(Integer accountId, String size, String ticker){
+    public MarketOrderDto(Integer accountId, String size, String ticker) {
         this.accountId = accountId;
         this.size = size;
         this.ticker = ticker;

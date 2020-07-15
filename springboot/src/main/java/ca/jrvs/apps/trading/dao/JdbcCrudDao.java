@@ -12,13 +12,18 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import java.util.Optional;
 
-public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepository<T,Integer> {
+public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepository<T, Integer> {
 
     private static final Logger logger = LoggerFactory.getLogger(JdbcCrudDao.class);
+
     public abstract JdbcTemplate getJdbcTemplate();
+
     public abstract SimpleJdbcInsert getSimpleJdbcInsert();
+
     public abstract String getTableName();
+
     public abstract String getIdColumnName();
+
     public abstract Class<T> getEntityClass();
 
     @Override
@@ -33,8 +38,7 @@ public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepo
         return entity;
     }
 
-    private <S extends T> void addOne(S entity)
-    {
+    private <S extends T> void addOne(S entity) {
         SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(entity);
         Number newId = getSimpleJdbcInsert().executeAndReturnKey(parameterSource);
         entity.setId(newId.intValue());

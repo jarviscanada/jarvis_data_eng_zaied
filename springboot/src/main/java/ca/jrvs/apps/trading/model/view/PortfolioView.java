@@ -1,4 +1,6 @@
-package ca.jrvs.apps.trading.model.domain;
+package ca.jrvs.apps.trading.model.view;
+
+import ca.jrvs.apps.trading.model.domain.SecurityRows;
 
 import java.util.List;
 

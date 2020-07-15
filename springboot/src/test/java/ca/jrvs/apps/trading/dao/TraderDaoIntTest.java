@@ -1,9 +1,7 @@
 package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.TestConfig;
-import ca.jrvs.apps.trading.model.domain.Quote;
 import ca.jrvs.apps.trading.model.domain.Trader;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,10 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.LocalDate;
 import java.util.Date;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {TestConfig.class})
@@ -28,7 +23,7 @@ public class TraderDaoIntTest {
     private final Trader savedTrader = new Trader();
 
     @Before
-    public void insertOne(){
+    public void insertOne() {
         //savedTrader.setId(1);
         savedTrader.setFirstName("zaied");
         savedTrader.setLastName("zaman");
@@ -39,12 +34,12 @@ public class TraderDaoIntTest {
     }
 
     @Test
-    public void findOne(){
+    public void findOne() {
         traderDao.findById(1);
     }
 
     //@After
-    public void deleteOne(){
+    public void deleteOne() {
         traderDao.deleteById(1);
     }
 }
