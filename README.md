@@ -1,52 +1,46 @@
 # Zaied Zaman . Jarvis Consulting
 
 Self-motivated problem-solver and strong collaborator who always strives for innovative and the most suitable solution. I have started working
-as a jarvis consultant after the completion of my Master's degree in Computer Science (Research-Based). Apart from my Master's research project,
+as a Jarvis consultant after the completion of my Master's degree in Computer Science (Research-Based). Apart from my Master's research project,
 I have collaborated with several labs to provide software solutions during my master's. These experiences grew interested and confidence inside
 me to contribute to the data engineering industry. Practicing programming problem-solving and participate in programming contests is one of
 my hobbies alongside reading books on different topics.    
- 
+
 ## Skills
- 
-**Proficient:** Java, Linux/Bash, RDBMS/SQL, Agile/Scrum, Git, Springboot, Maven
 
-**Competent:** C, C++, Algorithms & Data structures, Matlab, Image Processing
+**Proficient:** Algorithms & Data structures, Java, Linux/Bash, RDBMS/SQL, Agile/Scrum, Git, Springboot, Maven
 
-**Familiar:** Node.js, Javascript, HTML, CSS, Python, Express
+**Competent:** C, C++, Image Processing algorithms e.g. BM3D, Image processing tools e.g. Matlab, OpenCV
+
+**Familiar:** Python, JavaScript, Node.js, Express.js, HTML, CSS
 
 ## Development Projects
 
 Project source code: [https://github.com/jarviscanada/jarvis_data_eng_demo](https://github.com/jarviscanada/jarvis_data_eng_demo)
 
-- **[Cluster Monitor](./linux_sql)**: A Bash and PostgreSQL based Cluster monitor agent for distributed systems. The Node machines send continuos
-hardware usage and hardware specification data which is monitored and persisted by server machine in a Dockerized PostgreSQL database. Maven has
+- **[Cluster Monitor](./linux_sql)**: Developed a `Bash` and `PostgreSQL` based Cluster monitor agent for distributed systems. The Node machines send continuos hardware usage and hardware specification data which is monitored and persisted by server machine in a PostgreSQL database. The PostgreSQL database instance was hosted by a `docker` container. The container was created based on the PostgreSQL base image from the `docker registry`. `Maven` has
 been used to manage dependencies.
-- **[Core Java Apps](./core_java)**: A compilation of three Maven managed pure Java-based apps. The grep app recursively traverses directories and subdirectories
-and perform searching or text-processing. The JDBC app interacts with a Dockerized PostgreSQL database with pure java and JDBC driver. The Twitter
-app show, post, delete Tweet data using the Twitter API. Efficient exception handling, logging, and testing frameworks have been used in these apps. Annotations, appropriate
-design patterns, JSON parsing, HTTP connector libraries have been used for necessary reasons.
-- **[SpringBoot App](./springboot)**: A maven managed spring-boot based Java app. This app interacts with API and extracts stock Market data and show, update, delete and additionally persist them in a dockerized PostgreSQL database. This app itself is also dockerized. Springboot framework,
-Annotations and PostgreSQL have been extensively used alongside additional design patterns. PostMan and Swagger have been used extensively to
-test the app end-points.
+- **[Core Java Apps](./core_java)**: Developed three `Maven` managed pure `Java`-based apps. 
+    * The Twitter app show, post, delete Tweet data using the Twitter API. Efficient exception handling, logging, and testing frameworks have been used in these apps. `self4j` facade and as the implementation `log4j` was used for the logging purpose whereas `Mockito` framework was used for unit testing and `Junit 4` was used for Integration testing. `MVC` architecture is used where `Dao` pattern is used for data access and retrieval. `Jackson` API is used to parse and create `JSON` objects to `POJO` objects or vice versa.
+    * The JDBC app interacts with the `PostgreSQL` database with pure `Java` and JDBC driver. The `PostgreSQL` database instance is hosted by a docker container that was created from the `PostgreSQL` base image.
+    * The grep app recursively traverses directories and subdirectories
+and perform searching or text-processing
+- **[SpringBoot App](./springboot)**: Developed this `maven` packaged `springboot` managed Java app. This is an `MVC` architecture driven `three-tier` `Microservice` REST API web app which can be consumed by any REST API client or browser. It responses back JSON object. It interacts with API and extracts stock Market data and show, updates, delete and additionally persist them in a dockerized PostgreSQL database. This app itself is also dockerized. Springboot annotations were used to facilitate the `IoC` container creation, bean creation, and `Dependency Injection`.
+Springboot embedded `Tomcat` server serves as a web servlet API implementation to handle `HTTP` requests. `Repository` pattern is used as a data layer and `IEX API` is used as a source of market data `PostMan` and `Swagger` have been used extensively to
+test the app end-points. The decoupling of data and app make it fault-tolerant.
 - **[Cloud & DevOps](./cloud_devops)**: Not started
 - **[Hadoop](./hadoop)**: Not started
 - **[Spark/Scala](./spark)**:  Not started
 
 ## Professional Experiences
 
-**Software Developer,  Jarvis, Toronto (2020-Present):** Developed Java, BASH/SQL, Springboot based apps. Working in this position made me a 
-better team collaborator by practicing agile methodologies and professionally handle and deliver projects individually. 
+**Software Developer,  Jarvis, Toronto (2020-Present):** Primary Responsibility was to develop `Java`, `BASH/SQL`, `Springboot` based services and architectures utilizing `GitFlow` and other industry-recognized tools and best practices,  and collaborating with the team and other team members maintaining standard agile practices. Working in this role made me a better team player and gave me invaluable work environment experience to solve problems individually with minimal supervision.
 
-**Research Assistant, Western University, London, ON (February, 2020-April, 2020):** Developed a framework to integrate Quantum computing with Computer networking.
-Finding scopes to utilize newer methods to existing problems improved my problem-solving ability.
+**Research Assistant, Western University, London, ON (February, 2020-April, 2020):** Primary responsibility was to develop a framework to integrate Quantum computing with Computer networking. Worked with `QCL` and `Python` to perform experiments. Finding scopes to utilize newer methods to existing problems improved my problem-solving ability.
 
-**Research Assistant, Western University, London, ON (September 2019 - January 2020):** Mentored the current lab students and collaborated with
-labs to deliver automation software solutions. This experience grew leadership and increased my collaboration abilities with clients.
+**Research Assistant, Western University, London, ON (September 2019 - January 2020):** Mentored the current lab students and collaborated with labs to deliver an automation software solution. It was a medical imaging software that provides an efficient way to track and count blood cells from dyed brain images of rats. The solution was adaptable with different dyes and several image scenarios and distractions. The solution was written in `C++` and `iopng` library was used to read and write images to reduce latency. However, the solution was packaged as a `Mex` file to be invoked from `Matlab` for user convenience. This experience grew leadership and increased my collaboration abilities with clients.
 
-**Research Assistant, Western University, London, ON (September 2017 - August 2019):** Designed and implemented my proposed algorithm
-to improve image processing (denoising) performance which was my master's research and helped me to achieve the degree. I have also implemented
-software solutions for collaborating labs during this time. Designing and implementing software solutions with minimal supervision made me
-confident in working individually.
+**Research Assistant, Western University, London, ON (September 2017 - August 2019):** Designed and implemented my proposed algorithm to improve image processing (denoising) performance which was my master's research and helped me to achieve the degree. `BM3D` is the state-of-the-art algorithm for image denoising. The proposed algorithm works on top of `BM3D` and improves the overall denoising performance. The proposed algorithm beat the performance of `BM3D` significantly in all noise levels and varieties of images. The codebase was written in `C++`. To reduce the time complexity approaches like `Dynamic programming` was used while designing and low latency `C` libraries like `iopng` were used to read and write the image. Designing and implementing algorithms with minimal supervision made me confident in working individually.
 
 **Teaching Assistant, Western University, London, ON (September 2017 - August 2019):** Designed and conducted labs, tutorials and assignments.
 I worked as a TA for Introduction to Computer Organization and Architecture course. Collaboration and mentoring are the primary improvements that I gained from this experience.
@@ -63,8 +57,7 @@ I worked as a TA for Introduction to Computer Organization and Architecture cour
 
 **Islamic University of Technology (2017-2019)**, B.Sc. in Electrical and Electronic Engineering
 
-- **MRI Imaging Software:** The publication title was “Inpainting multiple sclerosis lesions for improving registration performance with brain atlas” published in 2016 International Conference on Medical Engineering, Health Informatics and Technology (MediTec). The implemented codebase was in Matlab and C++. Several open-source brain imaging tools and data formats have been used here. Collaborated with a remote
-    team in this project.
+- **MRI Imaging Software:** Published a paper on improving `Multiple Sclerosis (MS)` lesions recognition. The title was [“Inpainting multiple sclerosis lesions for improving registration performance with brain atlas” published in 2016 International Conference on Medical Engineering, Health Informatics and Technology (Meditec).](https://ieeexplore.ieee.org/document/7835363)“Inpainting multiple sclerosis lesions for improving registration performance with brain atlas” published in 2016 International Conference on Medical Engineering, Health Informatics and Technology (Meditec). White lesions are usually seen in the MRI images of `MS` patients and accurate differentiation is needed between actual lesion areas and other white areas which can occur for various reasons. The paper provides an efficient approach to solve the problem and later reconstruct the non-necessary regions. The implemented codebase was in `Matlab` and `C++`. Several open-source brain imaging tools and data formats have been used here. Collaborated with a remote team in this project. 
 
 **Weather Forecasting API:** Implemented a weather forecasting API using the OpenWeather API data. Node.js and Express framework is used
 in this app.
