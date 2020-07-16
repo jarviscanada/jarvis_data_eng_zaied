@@ -16,7 +16,7 @@ my hobbies alongside reading books on different topics.
 
 ## Development Projects
 
-Project source code: [https://github.com/jarviscanada/jarvis_data_eng_demo](https://github.com/jarviscanada/jarvis_data_eng_demo)
+Project source code: [https://github.com/jarviscanada/jarvis_data_eng_zaied](https://github.com/jarviscanada/jarvis_data_eng_zaied)
 
 - **[Cluster Monitor](./linux_sql)**: Developed a `Bash` and `PostgreSQL` based cluster monitoring agent for distributed systems. The Node machines send continuous hardware usage and hardware specification data which is monitored and persisted by server machine in a PostgreSQL database. The PostgreSQL database instance was hosted by a `docker` container. The container was created based on the PostgreSQL base image from the `docker registry`. `Maven` was
 been used to manage dependencies.
