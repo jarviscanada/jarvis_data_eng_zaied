@@ -55,13 +55,13 @@ test the app end-points. The decoupling of data and app makes it fault-tolerant.
 
 **Islamic University of Technology (December, 2011- December, 2015)**, B.Sc. in Electrical and Electronic Engineering
 
-- **MRI Imaging Software:** Published a paper on improving `Multiple Sclerosis (MS)` lesions recognition. Publication title was [“Inpainting multiple sclerosis lesions for improving registration performance with brain atlas” published in 2016 International Conference on Medical Engineering, Health Informatics and Technology (Meditec).](https://ieeexplore.ieee.org/document/7835363) White lesions are usually seen in the MRI images of `MS` patients and accurate differentiation is needed between actual lesion areas and other white areas which can occur for various reasons. The paper provides an efficient approach to solve the problem and later reconstruct the non-necessary regions. The implemented codebase was in `Matlab` and `C++`. Several open-source brain imaging tools and data formats have been used here. Collaborated with a remote team in this project. 
+- **MRI Imaging Software:** Published a paper on improving `Multiple Sclerosis (MS)` lesions recognition. Publication title was [“Inpainting multiple sclerosis lesions for improving registration performance with brain atlas” published in 2016 International Conference on Medical Engineering, Health Informatics and Technology (Meditec).](https://ieeexplore.ieee.org/document/7835363) White lesions are usually seen in the MRI images of `MS` patients and accurate differentiation is needed between actual lesion areas and other white areas which can occur for various reasons. The paper provides an efficient approach to solve the problem and later reconstruct the non-necessary regions. The implemented codebase was in `Matlab` and `C++`. Several open-source brain imaging tools and data formats was used. Collaborated with a remote team in this project. 
 
-**Weather Forecasting API:** Implemented a weather forecasting API using the OpenWeather API data. Node.js and Express framework is used
+**Weather Forecasting API:** Implemented a weather forecasting API using the OpenWeather API data. Node.js and Express framework was used
 in this app.
 
 **Inventory System:** Implemented Inventory system and web page routing to render static and dynamic webpages. Node.js, HTML, CSS, and 
-client-side javascript is used extensively. Integrated the native C++ code into the Node.js framework using N-API library.
+client-side javascript was used extensively. Integrated the native C++ code into the Node.js framework using N-API library.
 
 
 ## Certificates & Awards & Activities
