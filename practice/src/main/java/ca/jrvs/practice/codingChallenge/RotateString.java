@@ -1,5 +1,7 @@
 package ca.jrvs.practice.codingChallenge;
 
+import java.math.BigInteger;
+
 /**
  * AUTHOR: zaied
  * DATE: 2020-07-16
@@ -52,5 +54,39 @@ public class RotateString {
         String testStr = A+A;
         return testStr.contains(B);
     }
-    
+
+    public static boolean rotateStringRolling(String A, String B) {
+
+        if(A.length() != B.length()) return false;
+        if(A.equals(B)) return true;
+        long mod = 1000000009;
+        long p = 53;
+        long hashB = 0;
+        long power = 1;
+        for(int i=0;i<B.length();i++)
+        {
+            hashB = (hashB + (B.charAt(i)  * power)%mod) % mod;
+            power = (power * p) % mod;
+        }
+
+        long hashA = 0;
+        power = 1;
+        for(int i=0;i<A.length();i++)
+        {
+            hashA = (hashA + (A.charAt(i) * power) %mod)% mod;
+            power = (power * p) % mod;
+        }
+        int pinv = BigInteger.valueOf(p).modInverse(BigInteger.valueOf(mod)).intValue();
+        int n = A.length();
+        for(int i=0;i<n;i++)
+        {
+            char x = A.charAt(i);
+            hashA += (power * x) - x;
+            hashA %= mod;
+            hashA *= pinv;
+            hashA %= mod;
+            if(hashA == hashB) return true;
+        }
+        return false;
+    }
 }
