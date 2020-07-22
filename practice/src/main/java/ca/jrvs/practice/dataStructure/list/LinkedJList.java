@@ -1,5 +1,7 @@
 package ca.jrvs.practice.dataStructure.list;
 
+import java.util.HashSet;
+
 public class LinkedJList<E> implements JList<E> {
 
   transient int size = 0;
@@ -173,6 +175,32 @@ public class LinkedJList<E> implements JList<E> {
     }
     first = last = null;
     size = 0;
+  }
+
+  /**
+   * Removes duplicate nodes in an unsorted linked list
+   * Time complexity: O(nodes)
+   */
+  public void duplicateLinkedListNode()
+  {
+    Node<E> curr = first;
+    Node<E> dummy = first;
+    HashSet<E> hs = new HashSet<>();
+    while(curr != null)
+    {
+      if(hs.contains(curr.item))
+      {
+        curr.prev.next = curr.next;
+        size--;
+      }
+      else
+      {
+        hs.add(curr.item);
+        dummy = curr;
+      }
+      curr = curr.next;
+    }
+    last = dummy;
   }
 
   /**
