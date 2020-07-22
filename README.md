@@ -10,9 +10,9 @@ my hobbies alongside reading books on different topics.
 
 **Proficient:** Algorithms & Data structures, Java, Linux/Bash, RDBMS/SQL, Agile/Scrum, Git, Springboot, Maven
 
-**Competent:** C, C++, Image Processing algorithms e.g. BM3D, Image processing tools e.g. Matlab, OpenCV
+**Competent:** Python, C, C++, Image Processing algorithms e.g. BM3D, Image processing tools e.g. Matlab, OpenCV
 
-**Familiar:** Python, JavaScript, Node.js, Express.js, HTML, CSS
+**Familiar:** JavaScript, Node.js, Express.js, HTML, CSS
 
 ## Development Projects
 
