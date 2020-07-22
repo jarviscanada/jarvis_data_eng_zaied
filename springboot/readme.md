@@ -78,7 +78,7 @@ The `trading_app_dev` will listen on `port:5000`. Now, we can use the endpoints 
 
 
 ## Architecture
-![Architecture](./assets/trading_app_arch.jpg)
+![Architecture](./assets/trading_app_new.jpg)
 
 We have utilized the MVC architecture. In other words, this architecture can be termed as three-tier-architecture as well. We have the following aspects of our design architecture.
 
