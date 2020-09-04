@@ -1,0 +1,232 @@
+# Preffered name (Characters only)
+name: "Zaied Zaman"
+# Your github repo root URL
+github_repo_root_url: https://github.com/jarviscanada/jarvis_data_eng_zaied           
+
+# Introduce yourself, your academic and professional background.
+# What excites you about the software industry and your passion. At least 80 words
+summary: Self-motivated problem-solver and strong collaborator who always strives for innovative and most suitable solution. I have started working as a Jarvis consultant after the completion of my Master's degree in Computer Science (Research-Based). Apart from my Master's research project, I have collaborated with several labs to provide software solutions during my master's. These experiences grew interest and confidence inside me to contribute to the data engineering industry. Practicing programming problem-solving is one of my hobbies alongside reading books on different topics.
+
+# Group your skills by level.
+# Your skills can be anything software related (e.g. language, frameworks, methodologies, software, etc.).
+skills:
+  # At least 5 skills                                                                        a s d  as                                                                                                                                       
+  proficient:
+    - Algorithms & Data structures
+    - Java
+    - Linux/Bash
+    - RDBMS/SQL
+    - Agile
+    - Git
+    - Springboot
+    - Maven
+  # At least 5 skills
+  competent:
+    - Python
+    - C/C++
+    - Matlab
+    - OpenCV
+    - Image Processing
+    - Hadoop & Hive
+  # At least 5 skills
+  familiar:
+    - Javascript
+    - Node.js
+    - Express.js
+    - Machine Learning & Computer Vision
+    - Pytorch, scikit-learn, Pandas
+
+# List of Jarvis projects
+jarvis_projects:
+  - name: "Cluster Monitor"
+    git_url: "/linux_sql"
+    # The project description allows hiring managers to understand your project and technologies you used(e.g. programing langauge, libraries, algorithms, hardwards, tools, etc.).
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    description: "Developed a Bash and PostgreSQL based cluster monitoring agent 
+    for distributed systems. The Node machines send continuous 
+    hardware usage and hardware specification data which is 
+    monitored and persisted by server machine in a PostgreSQL database. The PostgreSQL database instance was hosted by a docker container. The container was created based on the PostgreSQL base image from the docker registry. Maven was been used to manage dependencies."
+  - name: "Core Java Apps"
+    git_url: "/core_java"
+    description:
+      - "Twitter App: Developed this Java based Maven managed app. 
+      This app shows, posts, deletes tweet data 
+      using the Twitter API. Efficient exception handling, logging, 
+      and testing frameworks were used in these apps. self4j facade 
+      and as the implementation log4j was used for the 
+      logging purpose whereas Mockito framework was used 
+      for unit testing and Junit 4 was used for Integration testing. 
+      MVC architecture was used where Dao pattern was used for data 
+      access and retrieval. Jackson API was used to parse and create 
+      JSON objects to POJO objects or vice versa." 
+      - "JDBC App: Developed this dockerized Java based JDBC app which
+      interacts with the PostgreSQL database with pure Java and JDBC 
+      driver. The PostgreSQL database instance is hosted by a docker 
+      container that was created from the PostgreSQL base image."
+      - "Grep App: Developed this Java based command-line-app that 
+      recursively traverses directories and subdirectories and 
+      perform searching or text-processing."
+  - name: "Springboot App"
+    git_url: "/springboot"
+    description: "Developed this maven packaged springboot managed 
+    Java app. This is an MVC architecture driven three-tier 
+    Microservice REST API web app which can be consumed by any 
+    REST API client or browser. It responses back JSON object. 
+    It interacts with market data provider API, extracts stock Market 
+    data and shows, updates, deletes and additionally persists them 
+    in a dockerized PostgreSQL database. This app itself is also 
+    dockerized. Springboot annotations were used to facilitate 
+    the IoC container creation, bean creation, and Dependency 
+    Injection. Springboot embedded Tomcat server serves as a 
+    web servlet API implementation to handle HTTP requests. 
+    Repository pattern was used as the data layer and IEX API 
+    was used as the market data provider API.PostMan and Swagger 
+    were used extensively to test the app end-points. The 
+    decoupling of data and app makes it fault-tolerant."
+  - name: "Hadoop"
+    git_url: "/hadoop"
+    description: ""
+  - name: "Spark"
+    git_url: "/spark"
+    description: ""
+  - name: "Cloud/DevOps"
+    git_url: "/cloud_devops"
+    description: ""
+
+# List of personal or academic projects
+# Feel free to add more projects
+highlighted_projects:
+    #project name
+  - name: "Improved Image Denoising Algorithm using Matlab and C++ (M.Sc. Research Algorithm)."
+    #URL is optional
+    git_url: "https://ieeexplore.ieee.org/document/7835363"
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    description:  "My research field was Image Processing and Computer vision. 
+    Publication title was Optimizing the usage of 2D and 3D transformations 
+    to improve the BM3D image denoising algorithm. The implemented codebase 
+    was in C++. Optimization techniques like Dynamic Programming was utilized 
+    to reduce time complexity. Exception handling and efficient memory usage 
+    were kept in mind during the implementation. The efficient usage of 
+    several STL data structures had been done as well. Achieving this 
+    target gave me experience on how to manage a large codebase and add 
+    features compatible with it in a time and memory-efficient way"
+  - name: "Automated Data Extraction from OMR using Python and OpenCV"
+    git_url:
+    description: "Developed an automated software for extracting student data
+    from OMR. It can also find out attained marks from the OMR sheet. As
+    Python offers a huge exosystem for Image processing related tasks, used 
+    Python and OpenCV to develop the software. Worked under this project 
+    assigned by Bangladesh Education Ministry."
+  - name: "MRI Image Inpainting Software using NIFTI and Matlab"
+    git_url:
+    description: "Published a paper on improving Multiple Sclerosis (MS) lesions recognition. 
+    Publication title was “Inpainting multiple sclerosis lesions for improving registration performance with brain atlas” 
+    published in 2016 International Conference on Medical Engineering, Health 
+    Informatics and Technology (Meditec).\" White lesions are usually seen in 
+    the MRI images of MS patients and accurate differentiation is needed 
+    between actual lesion areas and other white areas which can occur for 
+    various reasons. The paper provides an efficient approach to solve the 
+    problem and later reconstruct the non-necessary regions. The implemented 
+    codebase was in Matlab and C++. Several open-source brain imaging tools 
+    and data formats was used. Collaborated with a remote team in this 
+    project."
+
+#List of professional expereince
+#The job description allows hiring managers to understand your job and technologies you used(e.g. programing langauge, libraries, algorithms, hardwards, tools, etc.).
+#The description must be more than 25 words. If your experience is not software related, please focus on soft skills and achievements (e.g. team collaboration, problem solving, improvements, communication).
+professional_experience:
+  #Write your Jarvis role as a professional expereince rather than training.
+  - title: "Software Developer"
+    company: "Jarvis"
+    duration: "April,2020-present"
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    description: "Primary Responsibility was to develop Java, BASH/SQL, 
+    Springboot based services and architectures utilizing GitFlow and other 
+    industry-recognized tools and best practices, and collaborating with 
+    the team and other team members maintaining standard agile practices. 
+    Working in this role made me a better team player and gave me invaluable 
+    work environment experience to solve problems individually with minimal 
+    supervision."
+  - title: "Research Assistant"
+    company: "Western University"
+    duration: "February,2020-March,2020"
+    description: "Primary responsibility was to develop a framework to 
+    integrate Quantum computing with Computer networking. Worked with QCL 
+    and Python to perform experiments. Finding scopes to utilize newer 
+    methods to existing problems improved my problem-solving ability."
+  - title: "Remote Work"
+    company: "Bangladesh Education Ministry"
+    duration: "January,2020-March,2020"
+    description: "Primary responsibility was to develop an automated software 
+    that extracts student data and calculate marks from OMR exam sheet using
+    Image Processing. Working in this role gave me invaluable experience of
+    collaborating with a remote team towards building softwares."
+  - title: "Research Assistant"
+    company: "Western University"
+    duration: "September,2019-January,2020"
+    description:  "Mentored the current lab students and collaborated with 
+    labs to deliver an automation software solution. It was a medical 
+    imaging software that provides an efficient way to track and count 
+    blood cells from dyed brain images of rats. The solution was adaptable 
+    with different dyes and several image scenarios and distractions. The 
+    solution was written in C++ and iopng library was used to read and write 
+    images to reduce latency. However, the solution was packaged as a Mex 
+    file to be invoked from Matlab for user convenience. This experience 
+    grew leadership and increased my collaboration abilities with clients"
+  - title: "Research Assistant"
+    company: "Western University"
+    duration: "September,2017-August,2019"
+    description:  "Designed and implemented an algorithm to improve image 
+    processing (denoising) performance which was my master's research topic. 
+    BM3D is the state-of-the-art algorithm for image denoising. My proposed 
+    algorithm works on top of BM3D and improves the overall denoising 
+    performance. The proposed algorithm beat the performance of BM3D 
+    significantly in all noise levels and varieties of images. The 
+    codebase was written in C++. To reduce the time complexity approaches 
+    like Dynamic programming was used while designing and low latency C 
+    libraries like iopng were used to read and write the image. Designing 
+    and implementing algorithms with minimal supervision made me confident 
+    to work individually."
+  - title: "Teaching Assistant"
+    company: "Western University"
+    duration: "September,2017-August,2019"
+    description:  "Designed and conducted labs, tutorials and assignments. 
+    Worked as a TA for Introduction to Computer Organization and Architecture 
+    course and Python course. Collaboration and mentoring are the primary improvements that I 
+    gained from this experience."
+
+#List of edcuation
+education: 
+  - school_name: "Western university"
+    duration: "September,2017-September,2019"
+    degree: "M.Sc (Research-based)"
+    department: "Computer Science"
+    # optional
+    awards_achievements: 
+      - "Western Graduate Research Scholarship (WGRS)"
+      - "GPA: 3.9/4.0"
+      - "courses: Advanced Analysis of Algorithms, Image Compression"
+  - school_name: "Islamic University of Technology"
+    duration: "December,2011-December,2015"
+    degree: "B.Sc"
+    department: "Electrical and Electronic Engineering"
+    awards_achievements: 
+      - "Full free studentship for complete 4 years"
+      - "GPA: 3.89/4.0"
+
+#Optional section
+others:
+    #category
+  - title: "Certificates"
+    #list of items
+    bullets:
+      - "Parallel and Concurrent Programming in Java (2020)"
+  - title: "Awards"
+    bullets:
+      - "Achieved 3rd place in B.Sc. result in my Department"
+  - title: "Activities/Hobbies"
+    bullets:
+      - "Soccer player"
+      - "Highly Interested about wild animals"
+      - "Reading books"
+      
