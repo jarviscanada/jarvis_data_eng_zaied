@@ -32,7 +32,7 @@ public class stackUsingTwoQueue<T> {
     /***
      * time complexity: 0(1)
      * space complexity: 0(1)
-     * @return
+     * @return T
      */
     public T pop() {
         return q1.remove();
@@ -41,7 +41,7 @@ public class stackUsingTwoQueue<T> {
     /***
      * time complexity: 0(1)
      * space complexity: 0(1)
-     * @return
+     * @return T
      */
     public T top() {
         return q1.peek();
@@ -50,7 +50,7 @@ public class stackUsingTwoQueue<T> {
     /***
      * time complexity: 0(1)
      * space complexity: 0(1)
-     * @return
+     * @return boolean
      */
     public boolean empty() {
         return q1.isEmpty();
