@@ -5,7 +5,11 @@ github_repo_root_url: https://github.com/jarviscanada/jarvis_data_eng_zaied
 
 # Introduce yourself, your academic and professional background.
 # What excites you about the software industry and your passion. At least 80 words
-summary: Self-motivated problem-solver and strong collaborator who always strives for innovative and most suitable solution. I have started working as a Jarvis consultant after the completion of my Master's degree in Computer Science (Research-Based). Apart from my Master's research project, I have collaborated with several labs to provide software solutions during my master's. These experiences grew interest and confidence inside me to contribute to the data engineering industry. Practicing programming problem-solving is one of my hobbies alongside reading books on different topics.
+summary: "Self-motivated problem-solver and strong collaborator who always strives for an innovative and most suitable solution. 
+I have started working as a Jarvis consultant after the completion of my Master's degree in Computer Science (Research-Based). 
+Apart from my Master's research project, I have collaborated with several labs to provide software solutions during my master's. 
+These experiences grew interest and confidence inside me to contribute to the data engineering industry. 
+Practicing programming problem-solving is one of my hobbies alongside reading books on different topics."
 
 # Group your skills by level.
 # Your skills can be anything software related (e.g. language, frameworks, methodologies, software, etc.).
@@ -45,25 +49,29 @@ jarvis_projects:
     description: "Developed a Bash and PostgreSQL based cluster monitoring agent 
     for distributed systems. The Node machines send continuous 
     hardware usage and hardware specification data which is 
-    monitored and persisted by server machine in a PostgreSQL database. The PostgreSQL database instance was hosted by a docker container. The container was created based on the PostgreSQL base image from the docker registry. Maven was been used to manage dependencies."
+    monitored and persisted by the server machine in a PostgreSQL 
+    database. The PostgreSQL database instance was hosted by a 
+    docker container. The container was created based on the 
+    PostgreSQL base image from the docker registry. Maven was 
+    used to managing dependencies."
   - name: "Core Java Apps"
     git_url: "/core_java"
     description:
-      - "Twitter App: Developed this Java based Maven managed app. 
+      - "Twitter App: Developed this Java-based Maven managed app. 
       This app shows, posts, deletes tweet data 
       using the Twitter API. Efficient exception handling, logging, 
       and testing frameworks were used in these apps. self4j facade 
       and as the implementation log4j was used for the 
-      logging purpose whereas Mockito framework was used 
+      logging purpose whereas the Mockito framework was used 
       for unit testing and Junit 4 was used for Integration testing. 
-      MVC architecture was used where Dao pattern was used for data 
+      MVC architecture was used where the Dao pattern was used for data 
       access and retrieval. Jackson API was used to parse and create 
       JSON objects to POJO objects or vice versa." 
-      - "JDBC App: Developed this dockerized Java based JDBC app which
+      - "JDBC App: Developed this dockerized Java-based JDBC app that
       interacts with the PostgreSQL database with pure Java and JDBC 
       driver. The PostgreSQL database instance is hosted by a docker 
       container that was created from the PostgreSQL base image."
-      - "Grep App: Developed this Java based command-line-app that 
+      - "Grep App: Developed this Java-based command-line-app that 
       recursively traverses directories and subdirectories and 
       perform searching or text-processing."
   - name: "Springboot App"
@@ -73,7 +81,7 @@ jarvis_projects:
     Microservice REST API web app which can be consumed by any 
     REST API client or browser. It responses back JSON object. 
     It interacts with market data provider API, extracts stock Market 
-    data and shows, updates, deletes and additionally persists them 
+    data and shows, updates, deletes, and additionally persists them 
     in a dockerized PostgreSQL database. This app itself is also 
     dockerized. Springboot annotations were used to facilitate 
     the IoC container creation, bean creation, and Dependency 
@@ -101,34 +109,38 @@ highlighted_projects:
     #URL is optional
     git_url: "https://ieeexplore.ieee.org/document/7835363"
     # The project description must start with an action verb (https://bit.ly/3guO98u)
-    description:  "My research field was Image Processing and Computer vision. 
-    Publication title was Optimizing the usage of 2D and 3D transformations 
-    to improve the BM3D image denoising algorithm. The implemented codebase 
-    was in C++. Optimization techniques like Dynamic Programming was utilized 
-    to reduce time complexity. Exception handling and efficient memory usage 
+    description:  "My research field was Image Processing and Computer vision.
+    Noises affect images in an unpredictable way. Specifically, my research was
+    to design an algorithm that will efficiently remove those noises. BM3D was 
+    one of the state-of-the-arts of such algorithms. As my M.Sc. thesis, I
+    developed an algorithm which works on top of BM3D and produced almost 40%
+    improved results for all images and all noise levels. The publication title 
+    was \"Optimizing the usage of 2D and 3D transformations 
+    to improve the BM3D image denoising algorithm.\" The implemented 
+    final codebase 
+    was in C++. Most of the Experiments were done in Matlab and Python. 
+    Exception handling and efficient memory usage 
     were kept in mind during the implementation. The efficient usage of 
     several STL data structures had been done as well. Achieving this 
     target gave me experience on how to manage a large codebase and add 
     features compatible with it in a time and memory-efficient way"
   - name: "Automated Data Extraction from OMR using Python and OpenCV"
     git_url:
-    description: "Developed an automated software for extracting student data
-    from OMR. It can also find out attained marks from the OMR sheet. As
-    Python offers a huge exosystem for Image processing related tasks, used 
+    description: "Developed automated software for extracting student data
+    from OMR. It can also find out attained marks from the OMR sheet.
+    Python offers a convenient ecosystem for Image processing related tasks, used 
     Python and OpenCV to develop the software. Worked under this project 
-    assigned by Bangladesh Education Ministry."
+    assigned by the Bangladesh Education Ministry."
   - name: "MRI Image Inpainting Software using NIFTI and Matlab"
     git_url:
-    description: "Published a paper on improving Multiple Sclerosis (MS) lesions recognition. 
-    Publication title was “Inpainting multiple sclerosis lesions for improving registration performance with brain atlas” 
-    published in 2016 International Conference on Medical Engineering, Health 
-    Informatics and Technology (Meditec).\" White lesions are usually seen in 
-    the MRI images of MS patients and accurate differentiation is needed 
-    between actual lesion areas and other white areas which can occur for 
-    various reasons. The paper provides an efficient approach to solve the 
-    problem and later reconstruct the non-necessary regions. The implemented 
+    description: "Multiple sclerosis is a well-known disease that can be diagnosed by MRI images. White lesions are usually seen 
+    in the MRI images of MS patients and accurate differentiation is needed between actual lesion areas and other white areas 
+    which can occur for various reasons. Developed an algorithm that can identify the actual lesion and inpaints the extraneous ones.
+    Published the algorithm in 2016 International Conference on Medical Engineering, Health 
+    Informatics, and Technology (Meditec).
+    The publication title was \"Inpainting multiple sclerosis lesions for improving registration performance with brain atlas\" The implemented 
     codebase was in Matlab and C++. Several open-source brain imaging tools 
-    and data formats was used. Collaborated with a remote team in this 
+    and data formats were used. Collaborated with a remote team in this 
     project."
 
 #List of professional expereince
@@ -142,8 +154,7 @@ professional_experience:
     # The project description must start with an action verb (https://bit.ly/3guO98u)
     description: "Primary Responsibility was to develop Java, BASH/SQL, 
     Springboot based services and architectures utilizing GitFlow and other 
-    industry-recognized tools and best practices, and collaborating with 
-    the team and other team members maintaining standard agile practices. 
+    industry-recognized tools and best practices, and collaborating with other team members maintaining standard agile practices. 
     Working in this role made me a better team player and gave me invaluable 
     work environment experience to solve problems individually with minimal 
     supervision."
@@ -160,14 +171,14 @@ professional_experience:
     description: "Primary responsibility was to develop an automated software 
     that extracts student data and calculate marks from OMR exam sheet using
     Image Processing. Working in this role gave me invaluable experience of
-    collaborating with a remote team towards building softwares."
+    collaborating with a remote team towards building software."
   - title: "Research Assistant"
     company: "Western University"
     duration: "September,2019-January,2020"
     description:  "Mentored the current lab students and collaborated with 
     labs to deliver an automation software solution. It was a medical 
     imaging software that provides an efficient way to track and count 
-    blood cells from dyed brain images of rats. The solution was adaptable 
+    blood cells from dyed brain images of rats. The solution was adaptive 
     with different dyes and several image scenarios and distractions. The 
     solution was written in C++ and iopng library was used to read and write 
     images to reduce latency. However, the solution was packaged as a Mex 
@@ -190,14 +201,14 @@ professional_experience:
   - title: "Teaching Assistant"
     company: "Western University"
     duration: "September,2017-August,2019"
-    description:  "Designed and conducted labs, tutorials and assignments. 
+    description:  "Designed and conducted labs, tutorials, and assignments. 
     Worked as a TA for Introduction to Computer Organization and Architecture 
     course and Python course. Collaboration and mentoring are the primary improvements that I 
     gained from this experience."
 
 #List of edcuation
 education: 
-  - school_name: "Western university"
+  - school_name: "Western University"
     duration: "September,2017-September,2019"
     degree: "M.Sc (Research-based)"
     department: "Computer Science"
@@ -227,6 +238,6 @@ others:
   - title: "Activities/Hobbies"
     bullets:
       - "Soccer player"
-      - "Highly Interested about wild animals"
+      - "Highly Interested in wild animals"
       - "Reading books"
       
