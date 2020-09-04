@@ -107,7 +107,7 @@ highlighted_projects:
     #project name
   - name: "Improved Image Denoising Algorithm using Matlab and C++ (M.Sc. Research Algorithm)."
     #URL is optional
-    git_url: "https://ieeexplore.ieee.org/document/7835363"
+    git_url: "http://ir.lib.uwo.ca/etd/6523"
     # The project description must start with an action verb (https://bit.ly/3guO98u)
     description:  "My research field was Image Processing and Computer vision.
     Noises affect images in an unpredictable way. Specifically, my research was
@@ -132,7 +132,7 @@ highlighted_projects:
     Python and OpenCV to develop the software. Worked under this project 
     assigned by the Bangladesh Education Ministry."
   - name: "MRI Image Inpainting Software using NIFTI and Matlab"
-    git_url:
+    git_url: "https://ieeexplore.ieee.org/document/7835363"
     description: "Multiple sclerosis is a well-known disease that can be diagnosed by MRI images. White lesions are usually seen 
     in the MRI images of MS patients and accurate differentiation is needed between actual lesion areas and other white areas 
     which can occur for various reasons. Developed an algorithm that can identify the actual lesion and inpaints the extraneous ones.
