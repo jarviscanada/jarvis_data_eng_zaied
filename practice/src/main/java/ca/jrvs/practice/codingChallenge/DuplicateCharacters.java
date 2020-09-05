@@ -24,13 +24,10 @@ public class DuplicateCharacters {
             {
                 if(mark[ch - 'A'] == 1)
                 {
-                    mark[ch - 'A']++;
                     res.add(ch);
                 }
-                else
-                {
-                    mark[ch-'A']++;
-                }
+                mark[ch - 'A']++;
+
             }
         }
         return res;
